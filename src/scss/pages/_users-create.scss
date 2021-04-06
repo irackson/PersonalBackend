@@ -1,0 +1,31 @@
+@use '../abstracts' as *;
+
+.users-create {
+    text-align-last: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+
+    h2 {
+        color: $brand-color;
+    }
+
+    ul {
+        text-align-last: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    li > * {
+        margin-right: 1.5rem;
+    }
+
+    input[type='submit'] {
+        margin-top: 2rem;
+    }
+}

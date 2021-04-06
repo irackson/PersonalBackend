@@ -1,0 +1,114 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+/// Event wrapper
+/// @author Harry Roberts
+/// @param {Bool} $self [false] - Whether or not to include current selector
+/// @link https://twitter.com/csswizardry/status/478938530342006784 Original tweet from Harry Roberts
+@mixin on-event($self: false) {
+    @if $self {
+        &,
+        &:hover,
+        &:active,
+        &:focus {
+            @content;
+        }
+    } @else {
+        &:hover,
+        &:active,
+        &:focus {
+            @content;
+        }
+    }
+}
+
+/// Make a context based selector a little more friendly
+/// @author Kitty Giraudel
+/// @param {String} $context
+@mixin when-inside($context) {
+    #{$context} & {
+        @content;
+    }
+}
+
+/// Responsive breakpoint manager
+/// @access public
+/// @param {String} $breakpoint - Breakpoint
+/// @requires $breakpoints
+@mixin respond-to($breakpoint) {
+    $raw-query: map.get($breakpoints, $breakpoint);
+
+    @if $raw-query {
+        $query: if(
+            meta.type-of($raw-query) == 'string',
+            string.unquote($raw-query),
+            meta.inspect($raw-query)
+        );
+
+        @media #{$query} {
+            @content;
+        }
+    } @else {
+        @error 'No value found for `#{$breakpoint}`. '
+         + 'Please make sure it is defined in `$breakpoints` map.';
+    }
+}
+
+// Sizing stuff
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+/*
+example usage
+.element {
+    @include size(100%);
+}
+
+.other-element {
+    @include size(100%, 1px);
+}
+*/
+
+// Positioning stuff (https://www.sitepoint.com/sass-mixins-kickstart-project/)
+@mixin position($position, $args) {
+    @each $o in top right bottom left {
+        $i: list.index($args, $o);
+
+        @if $i and
+            $i +
+            1 <=
+            list.length($args) and
+            meta.type-of(list.nth($args, $i + 1)) ==
+            number
+        {
+            #{$o}: list.nth($args, $i + 1);
+        }
+    }
+
+    position: $position;
+}
+
+@mixin absolute($args) {
+    @include position('absolute', $args);
+}
+
+@mixin fixed($args) {
+    @include position('fixed', $args);
+}
+
+@mixin relative($args) {
+    @include position('relative', $args);
+}
+
+/* example use
+.element {
+    @include absolute(top 0 left 1em);
+}
+
+.other-element {
+    @include fixed(top 1em left 'WAT? A STRING?!' right 10% bottom);
+}
+ */

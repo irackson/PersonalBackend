@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head.ejs') %>
+
+        <title>User Login</title>
+    </head>
+    <body>
+        <main class="users-login">
+            <h2>Login Below!</h2>
+            <form action="/users/login" method="POST">
+                <ul>
+                    <li>
+                        <label for="username">Username:</label>
+                        <input
+                            class="input"
+                            type="text"
+                            name="username"
+                            placeholder="username"
+                        />
+                    </li>
+                    <li>
+                        <label for="password">Password:</label>
+                        <input
+                            class="input"
+                            type="password"
+                            name="password"
+                            placeholder="password"
+                        />
+                    </li>
+                    <input
+                        class="button"
+                        id="login-button"
+                        type="submit"
+                        value="login"
+                    />
+                </ul>
+            </form>
+        </main>
+
+        <%- include("../partials/footer") %>
+    </body>
+</html>

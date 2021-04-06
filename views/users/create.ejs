@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head.ejs') %>
+        <title>Create User</title>
+    </head>
+    <body>
+        <main class="users-create">
+            <h2>Sign up Below!</h2>
+            <div class="users-create__flex-container">
+                <form action="/users/create" method="POST" autocomplete="off">
+                    <ul class="user-create__user-list">
+                        <li>
+                            <label for="username">Username:</label>
+                            <input
+                                class="input"
+                                type="text"
+                                name="username"
+                                id="username"
+                                placeholder="username"
+                                autocomplete="username"
+                                required="required"
+                                pattern="[A-Za-z0-9]{1,20}"
+                            />
+                        </li>
+                        <li>
+                            <label for="username">Password:</label>
+                            <input
+                                class="input"
+                                type="password"
+                                name="password"
+                                placeholder="password"
+                                id="password"
+                                autocomplete="new-password"
+                                required="required"
+                                pattern="[A-Za-z0-9]{1,20}"
+                            />
+                        </li>
+                        <li>
+                            <!-- use <li style="display: none"> if no admin accounts -->
+                            <label for="admin" id="admin-aside"
+                                >check this box to enable admin
+                                permissions</label
+                            >
+                            <input
+                                type="checkbox"
+                                name="admin"
+                                id="admin"
+                                onclick="clickHandler('<%= true %>')"
+                            />
+                        </li>
+                    </ul>
+                    <ul class="user-create__admin-list">
+                        <li>
+                            <label
+                                for="admin_code"
+                                id="admin_code_label"
+                                style="display: none"
+                                >Admin Code:</label
+                            >
+                            <input
+                                type="password"
+                                name="admin_code"
+                                id="admin_code"
+                                autocomplete="new-password"
+                                placeholder="what's my name?"
+                                style="display: none"
+                            />
+                        </li>
+                    </ul>
+
+                    <script>
+                        var lastToggle = false;
+                        function clickHandler() {
+                            lastToggle = !lastToggle;
+                            if (lastToggle) {
+                                document.getElementById(
+                                    'admin_code'
+                                ).style.display = 'block';
+                                document.getElementById(
+                                    'admin_code_label'
+                                ).style.display = 'block';
+                            } else {
+                                document.getElementById(
+                                    'admin_code'
+                                ).style.display = 'none';
+                                document.getElementById(
+                                    'admin_code_label'
+                                ).style.display = 'none';
+                            }
+                        }
+                    </script>
+                    <input
+                        type="submit"
+                        class="button"
+                        value="create account"
+                    />
+                </form>
+            </div>
+        </main>
+        <%- include("../partials/footer") %>
+    </body>
+</html>

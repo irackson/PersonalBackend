@@ -1,0 +1,24 @@
+@use '../abstracts' as *;
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the header of the site/application.
+// -----------------------------------------------------------------------------
+
+.header {
+    padding-top: 1rem;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+
+    &__info-container {
+        display: flex;
+        justify-content: space-between;
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+        }
+    }
+
+    &__title-container {
+        text-align: center;
+    }
+}

@@ -1,0 +1,45 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run dev startup",
+            "type": "shell",
+            "command": "npm run dev",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "group": "develop"
+            },
+            "runOptions": { "runOn": "folderOpen" }
+        },
+        {
+            "label": "Run gulp startup",
+            "type": "shell",
+            "command": "gulp",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "group": "develop"
+            },
+            "runOptions": { "runOn": "folderOpen" }
+        },
+        {
+            "type": "process",
+            "label": "terminal",
+            "command": "/bin/bash", // <-- your shell here
+            "args": [
+                "-l" // login shell for bash
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "echo": false, // silence "Executing task ..."
+                "focus": true,
+                "group": "develop", // some arbitrary name for the group
+                "panel": "dedicated"
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        }
+    ]
+}

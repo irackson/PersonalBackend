@@ -1,0 +1,63 @@
+@use '../abstracts' as *;
+
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+:root {
+    --input-border: $inputBorder;
+    --input-focus-h: 245;
+    --input-focus-s: 100%;
+    --input-focus-l: 42%;
+}
+
+/**
+ * Set up a decent box model on the root element
+ */
+html {
+    box-sizing: border-box;
+}
+
+/**
+ * Make all elements from the DOM inherit from the parent box-sizing
+ * Since `*` has a specificity of 0, it does not override the `html` value
+ * making all elements inheriting from the root box-sizing value
+ * See: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+ */
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    min-height: 100vh;
+    background-color: $backgroundColor;
+
+    @if ($footerBottomMethod == 'flexbox') {
+        // Flexbox method
+        display: flex;
+        flex-direction: column;
+    } @else {
+        // Grid method
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+    }
+}
+
+main {
+    margin: 0 auto;
+    align-self: center;
+    max-width: 80ch;
+}
+
+/**
+ * Basic styles for links
+ */
+a {
+    text-decoration: none;
+
+    @include on-event {
+        text-decoration: underline;
+    }
+}
