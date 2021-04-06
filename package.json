@@ -1,5 +1,5 @@
 {
-    "name": "express-supreme",
+    "name": "portfolio-website",
     "version": "1.0.0",
     "description": "boilerplate with auth, express, mongoose and sass",
     "main": "server.js",
