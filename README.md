@@ -2,7 +2,7 @@ https://trello.com/b/VVhnA2Ep/porfoliowebsite
 
 <!-- //! boilerplate readme -->
 
-# Project Name
+# My Portfolio Website [![wakatime](https://wakatime.com/badge/github/irackson/PortfolioWebsite.svg)](https://wakatime.com/badge/github/irackson/PortfolioWebsite)
 
 -   **Author:** dfadfadfadfsfa
 -   **Link to Live Site:** fdfadadfadfsdfadfadf
