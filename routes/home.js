@@ -1,7 +1,7 @@
 //! import router
 const router = require('express').Router();
 const UsersRouter = require('./users');
-const { buildNav } = require('../modules/nav-builder');
+const { buildNav } = require('../utils/nav');
 
 ///////////////////////////////
 //! Router Specific Middleware
@@ -14,8 +14,10 @@ router.use('/users', UsersRouter);
 ////////////////////////////////
 
 router.get('/', async (req, res) => {
-    const pageList = await buildNav('home');
+    const pageName = 'home';
+    const pageList = await buildNav(pageName);
     res.render('home', {
+        pageName: pageName.toUpperCase(),
         pages: pageList,
     });
 });

@@ -2,13 +2,12 @@
 <html lang="en">
     <head>
         <%- include('./partials/head.ejs') %>
-
-        <title>Ian Rackson</title>
+        <title>Ian Rackson | <%= pageName %></title>
     </head>
     <body>
         <header><%- include("./partials/nav") %></header>
         <main class="home">
-            <h4>IAN RACKSON</h4>
+            <h1 class="pageName"><%= pageName %></h1>
             <h5>
                 expect: HOME, PROJECTS, SERVICES, ABOUT, RESUME, METRICS, BLOG
             </h5>
