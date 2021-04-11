@@ -16,7 +16,6 @@ const seed = async () => {
     // await Nav.deleteMany({}); // to clear cross-site linkage
     // await User.deleteMany({}); // to clear accounts
     //--------------------
-    // expect: HOME, PROJECTS, SERVICES, ABOUT, RESUME, METRICS, BLOG
     await Nav.create([
         {
             name: 'home',
