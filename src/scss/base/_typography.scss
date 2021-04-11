@@ -7,7 +7,7 @@
 // Learn more about what's going on here:
 // @link https://moderncss.dev/generating-font-size-css-rules-and-creating-a-fluid-type-scale/
 
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@900&display=swap');
 
 // Select a ratio to preview
 // Default is "perfectFourth"
@@ -27,10 +27,10 @@ $type-ratios: (
 }
 
 // Recommended
-$type-base-size: 62.5%;
+$type-base-size: 125%;
 
 // Select by key of map, or use a custom value
-$type-size-ratio: type-ratio('goldenRatio');
+$type-size-ratio: type-ratio('perfectFourth');
 
 // List in descending order to prevent extra sort function
 // Limited to high-touch heading styles
@@ -119,6 +119,6 @@ h4 {
 body {
     // Ensure base applied as default for all other elements
     font-size: $type-base-size;
-    line-height: 1.5;
+    line-height: 1.25;
     font-family: $text-font-stack;
 }
