@@ -42,7 +42,8 @@
         "terminal.ansiRed": "#CF6A4C",
         "terminal.ansiWhite": "#A7A7A7",
         "terminal.ansiYellow": "#F9EE98",
-        "editorCursor.foreground": "#dddd0fb6"
+        "editorCursor.foreground": "#dddd0fb6",
+        "tab.activeBorder": "#268cf2"
     },
     "files.exclude": {
         "**/.git": true,
