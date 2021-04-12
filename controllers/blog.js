@@ -1,5 +1,4 @@
 const { buildNavbar, getNav } = require('../utils/nav');
-
 ////////////////////////
 //! Import Models
 ////////////////////////
@@ -26,11 +25,28 @@ const renderIndex = async (req, res) => {
 
 const renderCreate = async (req, res) => {
     const page = await getNav(pageName);
-    const existingTags = await Blog.find({ tags: { $ne: ['other'] } }, 'tags');
+    const blogsWithTags = await Blog.find(
+        { tags: { $ne: ['other'] } },
+        'tags -_id'
+    );
+    let existingTags = [];
+    for (let b = 0; b < blogsWithTags.length; b++) {
+        console.log(blogsWithTags[b]);
+        blogsWithTags[b]['tags'].forEach((t) => {
+            if (!existingTags.includes(t)) {
+                existingTags.push(t);
+            }
+        });
+    }
+
+    console.log(`existingTags before: ${existingTags}`);
+    console.log(typeof existingTags);
+
+    console.log(`existingTags: ${existingTags}`);
     res.render(`${page.dir}/create`, {
         page,
         pages: await buildNavbar(pageName),
-        existingTags: existingTags.tags ? existingTags.tags : [],
+        existingTags,
     });
 };
 

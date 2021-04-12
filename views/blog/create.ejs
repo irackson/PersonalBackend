@@ -32,17 +32,13 @@
                         <fieldset>
                             <legend>Tags</legend>
                             <ul>
-                                <% for( let i = 0; i < existingTags.length; i++
+                                <% for (let i = 0; i < existingTags.length; i++
                                 ) { %>
                                 <li>
                                     <label for="<%= existingTags[i] %>"
                                         ><%= existingTags[i] %></label
                                     >
-                                    <input
-                                        type="checkbox"
-                                        name="<%= [i] %>"
-                                        checked
-                                    />
+                                    <input type="checkbox" name="<%= [i] %>" />
                                 </li>
                                 <% } %>
                                 <li>
