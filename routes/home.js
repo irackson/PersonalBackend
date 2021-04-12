@@ -1,6 +1,7 @@
 //! import router
 const router = require('express').Router();
 const UsersRouter = require('./users');
+const BlogRouter = require('./blog');
 
 const { buildNav } = require('../utils/nav');
 
@@ -8,6 +9,7 @@ const { buildNav } = require('../utils/nav');
 //! Router Specific Middleware
 ////////////////////////////////
 
+router.use('/blog', BlogRouter);
 router.use('/users', UsersRouter);
 
 ////////////////////////////////

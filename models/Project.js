@@ -9,6 +9,7 @@ const slugify = require('slugify');
 
 const ProjectSchema = new Schema(
     {
+        visible: { type: Boolean, default: true },
         title: { type: String, required: true },
         codeLink: { type: String, default: 'https://github.com/irackson' },
         liveLink: { type: String, required: true },

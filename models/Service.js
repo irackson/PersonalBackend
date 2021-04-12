@@ -7,6 +7,7 @@ const { Schema, model } = require('../db/connection');
 
 const ServiceSchema = new Schema(
     {
+        visible: { type: Boolean, default: true },
         title: { type: String, required: true },
         description: { type: String, required: true },
         availability: { type: Boolean, default: true },

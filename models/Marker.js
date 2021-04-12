@@ -9,6 +9,7 @@ const { Schema, model } = require('../db/connection');
 
 const MarkerSchema = new Schema(
     {
+        visible: { type: Boolean, default: true },
         heading: { type: String, required: true },
         content: { type: String, required: true },
         presentation: { type: String, required: true }, // 'ordered list', 'unordered list', 'paragraph'

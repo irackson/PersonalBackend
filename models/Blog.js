@@ -9,6 +9,7 @@ const slugify = require('slugify');
 
 const BlogSchema = new Schema(
     {
+        visible: { type: Boolean, default: true },
         title: { type: String, required: true },
         description: { type: String },
         markdown: { type: String, required: true },
