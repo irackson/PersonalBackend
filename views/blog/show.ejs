@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head.ejs') %> <%-
+        include('../partials/title.ejs') %>
+    </head>
+    <body>
+        <header><%- include("../partials/nav") %></header>
+        <main class="blog-show">
+            <h1 class="pageName"><%= page.name %></h1>
+            <% if (admin) { %>
+            <section>
+                <a href="/<%= page.dir %>/<%= blog.slug %>/edit">Update</a>
+                <form
+                    action="/<%= page.dir %>/<%= blog.slug %>?_method=DELETE"
+                    method="POST"
+                >
+                    <button type="submit">Delete</button>
+                </form>
+            </section>
+            <% } %>
+            <section>
+                <article>
+                    <div>
+                        <img src="<%= blog.thumbnail %>" alt="thumbnail" />
+                    </div>
+                    <div>
+                        <a href="/<%= page.dir %>/<%= blog.slug %>">
+                            <%= blog.title %>
+                        </a>
+                        <h4><%= blog.description %></h4>
+                    </div>
+                    <div>
+                        <p>
+                            <%= (new
+                            Date(blog.createdAt)).toISOString().substring(0, 10)
+                            %>
+                        </p>
+                    </div>
+                </article>
+            </section>
+        </main>
+        <%- include("../partials/footer") %>
+    </body>
+</html>

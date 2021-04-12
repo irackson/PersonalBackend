@@ -18,7 +18,7 @@
             </section>
             <section>
                 <% for (blog of blogs) { %>
-                <article>
+                <article class="<%= blog.visible ? 'visible' : 'invisible' %>">
                     <div>
                         <img src="<%= blog.thumbnail %>" alt="thumbnail" />
                     </div>
