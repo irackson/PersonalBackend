@@ -6,8 +6,86 @@
     </head>
     <body>
         <header><%- include("../partials/nav") %></header>
-        <main class="home">
+        <main>
             <h1 class="pageName">create new <%= page.name %></h1>
+            <form action="/<%= page.dir %>" method="POST" autocomplete="off">
+                <ul>
+                    <li>
+                        <label for="title">title:</label>
+                        <input
+                            type="text"
+                            name="title"
+                            required="required"
+                            class="input input--long"
+                        />
+                    </li>
+                    <li>
+                        <label for="description">description:</label>
+                        <input
+                            type="text"
+                            name="description"
+                            required="required"
+                            class="input input--long"
+                        />
+                    </li>
+                    <li>
+                        <fieldset>
+                            <legend>Tags</legend>
+                            <ul>
+                                <% for( let i = 0; i < existingTags.length; i++
+                                ) { %>
+                                <li>
+                                    <label for="<%= existingTags[i] %>"
+                                        ><%= existingTags[i] %></label
+                                    >
+                                    <input
+                                        type="checkbox"
+                                        name="<%= [i] %>"
+                                        checked
+                                    />
+                                </li>
+                                <% } %>
+                                <li>
+                                    <label for="tags">new tags:</label>
+                                    <input
+                                        type="text"
+                                        name="tags"
+                                        placeholder="new1, new2, etc."
+                                        class="input"
+                                    />
+                                </li>
+                            </ul>
+                        </fieldset>
+                    </li>
+                    <li>
+                        <label for="markdown">markdown:</label>
+                        <textarea
+                            name="markdown"
+                            required="required"
+                            placeholder="copy and paste markdown here"
+                        ></textarea>
+                    </li>
+                    <li>
+                        <label for="thumbnail">thumbnail url:</label>
+                        <input
+                            type="text"
+                            name="thumbnail"
+                            class="input input--long"
+                            placeholder="stock blog icon"
+                        />
+                    </li>
+                    <li>
+                        <label for="visible">visible</label>
+                        <input type="checkbox" name="visible" />
+                    </li>
+                    <li>
+                        <label for="featured">featured</label>
+                        <input type="checkbox" name="featured" />
+                    </li>
+                </ul>
+
+                <button class="button" type="submit">CREATE BLOG</button>
+            </form>
         </main>
 
         <%- include("../partials/footer") %>

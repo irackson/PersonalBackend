@@ -26,9 +26,11 @@ const renderIndex = async (req, res) => {
 
 const renderCreate = async (req, res) => {
     const page = await getNav(pageName);
+    const existingTags = await Blog.find({ tags: { $ne: ['other'] } }, 'tags');
     res.render(`${page.dir}/create`, {
         page,
         pages: await buildNavbar(pageName),
+        existingTags: existingTags.tags ? existingTags.tags : [],
     });
 };
 
@@ -58,15 +60,38 @@ const renderUpdate = async (req, res) => {
 
 const processCreate = async (req, res) => {
     const page = await getNav(pageName);
-
     const blog = req.body;
+    blog.tags = blog.tags ? blog.tags.split(',').map((e) => e.trim()) : [];
+
+    console.log(blog);
     for (property in blog) {
+        if (parseInt(property)) {
+            blog.tags.push(blog[property]);
+            continue;
+        }
+        if (blog[property] === 'on') {
+            console.log(property);
+            blog[property] = true;
+            continue;
+        }
         if (blog[property] === '') {
-            blog[property] = null;
+            blog[property] = undefined;
+            continue;
         }
     }
-    await Blog.create(blog);
-    res.redirect(`${page.dir}`);
+    console.log(blog);
+    try {
+        const newBlog = await Blog.create(blog);
+        console.log('success');
+        console.log(newBlog);
+        res.redirect(`${page.dir}/${newBlog.slug}`);
+    } catch (e) {
+        res.json({
+            message: 'failed to create post',
+            attempt: blog,
+            format: new Blog(),
+        });
+    }
 };
 
 const processUpdate = async (req, res) => {
