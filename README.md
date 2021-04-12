@@ -33,3 +33,9 @@ Sample Model:
 ## Challenges
 
 ## Existing Bugs
+
+## Notes
+
+to render code in markdown properly with prism, you must use this pattern:
+
+`<pre><code class="language-css">p { color: red }</code></pre>`
