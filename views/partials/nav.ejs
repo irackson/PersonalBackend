@@ -1,8 +1,13 @@
 <nav>
     <ul>
-        <% for ( page of pages ) { %>
-        <li>
-            <a href="<%= page.dir %>"><%= page.name.toUpperCase() %> </a>
+        <% for ( let i = 0; i < pages.length; i++ ) { %>
+        <!-- class=currentPage if true -->
+        <li
+            class="<%= pages[i].name === page.name ? 'navlink--focused' : 'navlink' %>"
+        >
+            <a href="<%= pages[i].dir %>"
+                ><%= pages[i].name.toUpperCase() %>
+            </a>
         </li>
         <% } %>
     </ul>

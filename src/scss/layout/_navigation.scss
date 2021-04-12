@@ -1,0 +1,11 @@
+@use '../abstracts' as *;
+
+nav {
+    .navlink {
+        color: currentColor;
+
+        &--focused {
+            text-decoration: underline;
+        }
+    }
+}
