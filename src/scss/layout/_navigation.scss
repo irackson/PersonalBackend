@@ -1,9 +1,22 @@
 @use '../abstracts' as *;
 
 nav {
-    .navlink {
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        // gap: 1rem;
         color: currentColor;
+    }
 
+    a {
+        color: currentcolor;
+
+        text-transform: uppercase;
+    }
+    .navlink {
         &--focused {
             text-decoration: underline;
         }

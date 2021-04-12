@@ -104,6 +104,7 @@ const processDestroy = async (req, res) => {
 //! Export Controller
 //////////////////////////////
 module.exports = {
+    pageName,
     renderIndex,
     renderCreate,
     renderShow,

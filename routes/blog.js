@@ -1,6 +1,7 @@
 //! create our new router
 const router = require('express').Router();
 const {
+    pageName,
     renderIndex,
     renderCreate,
     renderShow,
@@ -30,24 +31,24 @@ router.get('/create', isAuthorized, renderCreate);
 router.get('/:slug', renderShow);
 
 //* RENDER UPDATE
-router.get('/:slug/edit', isAuthorized, renderUpdate);
+// router.get('/:slug/update', isAuthorized, renderUpdate);
 
 //* PROCESS CREATE
 router.post('/', isAuthorized, processCreate);
 
 //* PROCESS UPDATE
-router.put('/:slug', isAuthorized, processUpdate);
+// router.put('/:slug', isAuthorized, processUpdate);
 
 //* PROCESS TOGGLE
-router.patch('/:slug', isAuthorized, processToggle);
+// router.patch('/:slug', isAuthorized, processToggle);
 
 //* PROCESS DESTROY
-router.delete('/:slug', isAuthorized, processDestroy);
+// router.delete('/:slug', isAuthorized, processDestroy);
 
 //! CATCHALL
-/* router.get('/*', (req, res) => {
-    res.redirect('/blog');
-}); */
+router.get('*', (req, res) => {
+    res.redirect(`/${pageName}`);
+});
 ////////////////////////////////
 //! Export the Router
 ////////////////////////////////

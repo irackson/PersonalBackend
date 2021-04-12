@@ -61,18 +61,3 @@ a {
         text-decoration: underline;
     }
 }
-
-nav {
-    ul {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        // gap: 1rem;
-        color: currentColor;
-    }
-
-    a {
-        text-transform: uppercase;
-    }
-}
