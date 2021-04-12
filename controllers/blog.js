@@ -1,4 +1,4 @@
-const { buildNav } = require('../utils/nav');
+const { buildNavbar, getNav } = require('../utils/nav');
 
 ////////////////////////
 //! Import Models
@@ -10,47 +10,55 @@ const Blog = require('../models/Blog');
 //! Controller Functions
 ///////////////////////////
 const pageName = 'blog';
-const pageDir = pageName;
 
 const renderIndex = async (req, res) => {
+    const page = await getNav(pageName);
     const blogs = req.session.admin
         ? await Blog.find({})
         : await Blog.find({ visible: true });
-    res.render(`${pageDir}/index`, {
-        pageName: pageName.toUpperCase(),
-        pages: await buildNav(pageName),
+    res.render(`${page.dir}/index`, {
+        page,
+        pages: await buildNavbar(pageName),
         admin: req.session.admin,
         blogs,
     });
 };
 
 const renderCreate = async (req, res) => {
-    res.render(`${pageDir}/create`, {
-        pageName: `New ${pageName.toUpperCase()}`,
+    const page = await getNav(pageName);
+    res.render(`${page.dir}/create`, {
+        page,
+        pages: await buildNavbar(pageName),
     });
 };
 
 const renderShow = async (req, res) => {
+    const page = await getNav(pageName);
+
     const blog = await Blog.findOne({ slug: req.params.slug });
 
-    res.render(`${pageDir}/show`, {
-        pageName: pageName.toUpperCase(),
-        pages: await buildNav(pageName),
+    res.render(`${page.dir}/show`, {
+        page,
+        pages: await buildNavbar(pageName),
         admin: req.session.admin,
         blog,
     });
 };
 
 const renderUpdate = async (req, res) => {
+    const page = await getNav(pageName);
+
     const blog = await Blog.findOne({ slug: req.params.slug });
 
-    res.render(`${pageDir}/update`, {
-        pageName: `Update ${pageName.toUpperCase()}`,
+    res.render(`${page.dir}/update`, {
+        page,
         blog,
     });
 };
 
 const processCreate = async (req, res) => {
+    const page = await getNav(pageName);
+
     const blog = req.body;
     for (property in blog) {
         if (blog[property] === '') {
@@ -58,10 +66,12 @@ const processCreate = async (req, res) => {
         }
     }
     await Blog.create(blog);
-    res.redirect(`${pageDir}`);
+    res.redirect(`${page.dir}`);
 };
 
 const processUpdate = async (req, res) => {
+    const page = await getNav(pageName);
+
     const blog = await Blog.findOne({ slug: req.params.slug });
     const edits = req.body;
     for (const property in edits) {
@@ -74,16 +84,20 @@ const processUpdate = async (req, res) => {
 };
 
 const processToggle = async (req, res) => {
+    const page = await getNav(pageName);
+
     const blog = await Blog.findOne({ slug: req.params.slug });
     blog.visible = !blog.visible;
 
     await Blog.findOneAndUpdate({ slug: req.params.slug }, blog); //? or blog.save?
-    res.redirect(`${pageDir}`);
+    res.redirect(`${page.dir}`);
 };
 
 const processDestroy = async (req, res) => {
+    const page = await getNav(pageName);
+
     await Blog.findOneAndDelete({ slug: req.params.slug });
-    res.redirect(`${pageDir}`);
+    res.redirect(`${page.dir}`);
 };
 
 //////////////////////////////

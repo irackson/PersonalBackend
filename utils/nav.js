@@ -1,6 +1,6 @@
 const Nav = require('../models/Nav');
 
-const buildNav = async (currentPage) => {
+const buildNavbar = async (currentPage) => {
     let navs = await Nav.find({});
     navs.sort((p1, p2) => p1.position - p2.position);
     navs = navs.filter((nav) => nav.visible && nav.name !== currentPage);
@@ -10,4 +10,11 @@ const buildNav = async (currentPage) => {
     });
 };
 
-module.exports = { buildNav };
+const getNav = async (currentPageName) => {
+    const page = await Nav.findOne({ name: currentPageName });
+    return new Promise(function (myResolve) {
+        myResolve(page);
+    });
+};
+
+module.exports = { buildNavbar, getNav };

@@ -1,9 +1,9 @@
+const { buildNavbar, getNav } = require('../utils/nav');
+
 //! import router
 const router = require('express').Router();
 const UsersRouter = require('./users');
 const BlogRouter = require('./blog');
-
-const { buildNav } = require('../utils/nav');
 
 ///////////////////////////////
 //! Router Specific Middleware
@@ -15,13 +15,14 @@ router.use('/users', UsersRouter);
 ////////////////////////////////
 //! Router Specific Routes
 ////////////////////////////////
+const pageName = 'home';
 
 router.get('/', async (req, res) => {
-    const pageName = 'home';
-    const pageList = await buildNav(pageName);
+    const page = await getNav(pageName);
+    const pages = await buildNavbar(pageName);
     res.render('home', {
-        pageName: pageName.toUpperCase(),
-        pages: pageList,
+        page,
+        pages,
     });
 });
 

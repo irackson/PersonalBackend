@@ -2,7 +2,7 @@
     <ul>
         <% for ( page of pages ) { %>
         <li>
-            <a href="<%= page.dir %>"><%= page.name %> </a>
+            <a href="<%= page.dir %>"><%= page.name.toUpperCase() %> </a>
         </li>
         <% } %>
     </ul>

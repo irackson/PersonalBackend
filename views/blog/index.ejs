@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <%- include('../partials/head.ejs') %>
-        <title>Ian Rackson | <%= pageName %></title>
+        <%- include('../partials/head.ejs') %> <%-
+        include('../partials/title.ejs') %>
     </head>
     <body>
         <header><%- include("../partials/nav") %></header>
         <main class="home">
-            <h1 class="pageName"><%= pageName %></h1>
+            <h1 class="pageName"><%= page.name %></h1>
+            <% if (admin) { %>
+            <a href="/<%= page.dir %>/create">Create New <%= page.name %> </a>
+            <% } %>
         </main>
 
         <%- include("../partials/footer") %>

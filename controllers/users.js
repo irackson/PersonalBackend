@@ -1,10 +1,9 @@
 require('dotenv').config();
 
-const { log } = require('mercedlogger');
-
 const bcrypt = require('bcryptjs');
 const saltRounds = parseInt(process.env.SALT_ROUNDS) || 10;
 const adminCode = process.env.ADMIN_CODE || '';
+
 ////////////////////////
 //! Import Models
 ////////////////////////
@@ -90,9 +89,7 @@ const loginSubmit = async (req, res) => {
 const logout = (req, res) => {
     req.session.user = undefined;
     req.session.admin = undefined;
-    res.render('home', {
-        loggedIn: req.session.user,
-    });
+    res.redirect('/');
 };
 
 //////////////////////////////

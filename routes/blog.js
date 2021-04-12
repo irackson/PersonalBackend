@@ -23,8 +23,8 @@ const { isAuthorized } = require('../utils/auth');
 //* RENDER ALL
 router.get('/', renderIndex);
 
-//* RENDER NEW
-router.get('/new', isAuthorized, renderCreate);
+//* RENDER CREATE
+router.get('/create', isAuthorized, renderCreate);
 
 //* RENDER ONE
 router.get('/:slug', renderShow);
