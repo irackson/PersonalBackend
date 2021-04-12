@@ -9,6 +9,7 @@ const Blog = require('../models/Blog');
 //! Controller Functions
 ///////////////////////////
 const pageName = 'blog';
+const repeatPrefix = 'repeat=';
 
 const renderIndex = async (req, res) => {
     const page = await getNav(pageName);
@@ -47,6 +48,7 @@ const renderCreate = async (req, res) => {
         page,
         pages: await buildNavbar(pageName),
         existingTags,
+        repeatPrefix,
     });
 };
 
@@ -78,11 +80,12 @@ const processCreate = async (req, res) => {
     const page = await getNav(pageName);
     const blog = req.body;
     blog.tags = blog.tags ? blog.tags.split(',').map((e) => e.trim()) : [];
-
     console.log(blog);
     for (property in blog) {
-        if (parseInt(property)) {
-            blog.tags.push(blog[property]);
+        console.log(property);
+        if (property.substring(0, repeatPrefix.length) === repeatPrefix) {
+            blog.tags.push(property.split('=').pop());
+            blog[property] = undefined;
             continue;
         }
         if (blog[property] === 'on') {

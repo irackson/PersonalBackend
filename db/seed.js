@@ -6,6 +6,7 @@ const mongoose = require('./connection');
 /////////////////////////////////
 
 const Nav = require('../models/Nav');
+const Blog = require('../models/Blog');
 
 /////////////////////////////////
 // Do your Database Operations in Below Function
@@ -14,6 +15,7 @@ const seed = async () => {
     //--- CODE GOES HERE
     //clear collections before seeding
     await Nav.deleteMany({}); // to clear cross-site linkage
+    await Blog.deleteMany({}); // to clear all blogs
     // await User.deleteMany({}); // to clear accounts
     //--------------------
     await Nav.create([
@@ -62,7 +64,9 @@ const seed = async () => {
 };
 
 // run seed function
-mongoose.connection.on('open', () => {
+mongoose.connection.on('open', async () => {
     // Run Seed Function
-    seed();
+    await seed();
+    console.log('done seeding');
+    mongoose.connection.close();
 });

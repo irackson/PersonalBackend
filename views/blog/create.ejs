@@ -35,10 +35,14 @@
                                 <% for (let i = 0; i < existingTags.length; i++
                                 ) { %>
                                 <li>
-                                    <label for="<%= existingTags[i] %>"
+                                    <label
+                                        for="<%= repeatPrefix + existingTags[i] %>"
                                         ><%= existingTags[i] %></label
                                     >
-                                    <input type="checkbox" name="<%= [i] %>" />
+                                    <input
+                                        type="checkbox"
+                                        name="repeat=<%= existingTags[i] %>"
+                                    />
                                 </li>
                                 <% } %>
                                 <li>
