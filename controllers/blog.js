@@ -1,4 +1,6 @@
+//! Import Utilities
 const { buildNavbar, getNav } = require('../utils/nav');
+const { getExistingTags } = require('../utils/filter');
 ////////////////////////
 //! Import Models
 ////////////////////////
@@ -16,29 +18,22 @@ const renderIndex = async (req, res) => {
     const blogs = req.session.admin
         ? await Blog.find({})
         : await Blog.find({ visible: true });
+
+    const filters = await getExistingTags(Blog);
+
     res.render(`${page.dir}/index`, {
         page,
         pages: await buildNavbar(pageName),
         admin: req.session.admin,
         blogs,
+        filters,
     });
 };
 
 const renderCreate = async (req, res) => {
     const page = await getNav(pageName);
-    const blogsWithTags = await Blog.find(
-        { tags: { $ne: ['other'] } },
-        'tags -_id'
-    );
-    let existingTags = [];
-    for (let b = 0; b < blogsWithTags.length; b++) {
-        console.log(blogsWithTags[b]);
-        blogsWithTags[b]['tags'].forEach((t) => {
-            if (!existingTags.includes(t)) {
-                existingTags.push(t);
-            }
-        });
-    }
+
+    const existingTags = await getExistingTags(Blog);
 
     console.log(`existingTags before: ${existingTags}`);
     console.log(typeof existingTags);

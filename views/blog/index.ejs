@@ -6,11 +6,38 @@
     </head>
     <body>
         <header><%- include("../partials/nav") %></header>
-        <main>
+        <main class="blog-index">
             <h1 class="pageName"><%= page.name %></h1>
             <% if (admin) { %>
             <a href="/<%= page.dir %>/create">Create New <%= page.name %> </a>
             <% } %>
+            <section id="blogFiltersContainer">
+                <% for( let i = 0; i < filters.length; i++ ) { %>
+                <button><%= filters[i] %></button>
+                <% } %>
+            </section>
+            <section>
+                <% for (blog of blogs) { %>
+                <article>
+                    <div>
+                        <img src="<%= blog.thumbnail %>" alt="thumbnail" />
+                    </div>
+                    <div>
+                        <a href="/<%= page.dir %>/<%= blog.slug %>">
+                            <%= blog.title %>
+                        </a>
+                        <h4><%= blog.description %></h4>
+                    </div>
+                    <div>
+                        <p>
+                            <%= (new
+                            Date(blog.createdAt)).toISOString().substring(0, 10)
+                            %>
+                        </p>
+                    </div>
+                </article>
+                <% } %>
+            </section>
         </main>
 
         <%- include("../partials/footer") %>
