@@ -12,8 +12,6 @@ const Blog = require('../models/Blog');
 ///////////////////////////
 const pageName = 'blog';
 const repeatPrefix = 'repeat=';
-const visiblePrefix = 'visible=';
-const featuredPrefix = 'featured=';
 
 const renderIndex = async (req, res) => {
     const page = await getNav(pageName);
@@ -80,7 +78,6 @@ const renderUpdate = async (req, res) => {
     const page = await getNav(pageName);
     const blog = await Blog.findOne({ slug: req.params.slug });
     const existingTags = await getExistingTags(Blog);
-
     res.render(`${page.dir}/update`, {
         page,
         pages: await buildNavbar(pageName),
@@ -91,8 +88,9 @@ const renderUpdate = async (req, res) => {
 };
 
 const processCreate = async (req, res) => {
-    const page = await getNav(pageName);
+    /*     const page = await getNav(pageName);
     const blog = req.body;
+    console.log(blog);
     blog.tags = blog.tags ? blog.tags.split(',').map((e) => e.trim()) : [];
     for (property in blog) {
         if (property.substring(0, repeatPrefix.length) === repeatPrefix) {
@@ -110,7 +108,7 @@ const processCreate = async (req, res) => {
         }
     }
     try {
-        const newBlog = await Blog.create(blog);
+        const newBlog = await blog.create(blog);
 
         res.redirect(`${page.dir}/${newBlog.slug}`);
     } catch (e) {
@@ -119,6 +117,47 @@ const processCreate = async (req, res) => {
             attempt: blog,
             format: new Blog(),
         });
+    } */
+    const page = await getNav(pageName);
+
+    let blog = await Blog.create(
+        new Blog({
+            title: 'temp',
+            description: 'temp',
+            tags: ['temp'],
+            markdown: 'temp',
+        })
+    );
+    blog = await Blog.findOne({ slug: blog.slug });
+    console.log(blog);
+
+    const edits = req.body;
+    edits.tags = edits.tags ? edits.tags.split(',').map((e) => e.trim()) : [];
+    for (property in edits) {
+        if (property.substring(0, repeatPrefix.length) === repeatPrefix) {
+            edits.tags.push(property.split('=').pop());
+            edits[property] = undefined;
+            continue;
+        }
+        if (edits[property] === '') {
+            edits[property] = undefined;
+            continue;
+        }
+    }
+    edits.visible = edits.visible ? true : false;
+    edits.featured = edits.featured ? true : false;
+
+    for (const property in edits) {
+        if (typeof edits[property] !== 'undefined') {
+            blog[property] = edits[property];
+        }
+    }
+    try {
+        blog = await blog.save();
+        res.redirect(`${page.dir}/${blog.slug}`);
+    } catch (error) {
+        console.log(error);
+        res.redirect(`${page.dir}/create`);
     }
 };
 
@@ -138,9 +177,6 @@ const processUpdate = async (req, res) => {
             continue;
         }
     }
-    console.log(edits);
-    console.log(blog);
-    console.log(`edits: ${edits.visible}`);
     edits.visible = edits.visible ? true : false;
     edits.featured = edits.featured ? true : false;
 
