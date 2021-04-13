@@ -12,6 +12,8 @@ const Blog = require('../models/Blog');
 ///////////////////////////
 const pageName = 'blog';
 const repeatPrefix = 'repeat=';
+const visiblePrefix = 'visible=';
+const featuredPrefix = 'featured=';
 
 const renderIndex = async (req, res) => {
     const page = await getNav(pageName);
@@ -32,7 +34,6 @@ const renderIndex = async (req, res) => {
 
 const renderCreate = async (req, res) => {
     const page = await getNav(pageName);
-
     const existingTags = await getExistingTags(Blog);
 
     res.render(`${page.dir}/create`, {
@@ -77,11 +78,14 @@ const renderShow = async (req, res) => {
 
 const renderUpdate = async (req, res) => {
     const page = await getNav(pageName);
-
     const blog = await Blog.findOne({ slug: req.params.slug });
+    const existingTags = await getExistingTags(Blog);
 
     res.render(`${page.dir}/update`, {
         page,
+        pages: await buildNavbar(pageName),
+        existingTags,
+        repeatPrefix,
         blog,
     });
 };
@@ -119,17 +123,36 @@ const processCreate = async (req, res) => {
 };
 
 const processUpdate = async (req, res) => {
-    const page = await getNav(pageName);
-
     const blog = await Blog.findOne({ slug: req.params.slug });
+
     const edits = req.body;
+    edits.tags = edits.tags ? edits.tags.split(',').map((e) => e.trim()) : [];
+    for (property in edits) {
+        if (property.substring(0, repeatPrefix.length) === repeatPrefix) {
+            edits.tags.push(property.split('=').pop());
+            edits[property] = undefined;
+            continue;
+        }
+        if (edits[property] === '') {
+            edits[property] = undefined;
+            continue;
+        }
+    }
+    console.log(edits);
+    console.log(blog);
+    console.log(`edits: ${edits.visible}`);
+    edits.visible = edits.visible ? true : false;
+    edits.featured = edits.featured ? true : false;
+
     for (const property in edits) {
-        if (edits[property] !== '') {
+        if (typeof edits[property] !== 'undefined') {
             blog[property] = edits[property];
         }
     }
-    await Blog.findOneAndUpdate({ slug: req.params.slug }, blog); //? or blog.save?
-    res.redirect(`${req.params.slug}`);
+
+    await blog.save();
+    console.log(await Blog.findOne({ slug: req.params.slug }));
+    res.redirect(`${blog.slug}`);
 };
 
 const processToggle = async (req, res) => {

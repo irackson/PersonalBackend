@@ -17,7 +17,7 @@ const BlogSchema = new Schema(
         tags: { type: [String], required: true },
         visible: { type: Boolean, default: false },
         markdown: { type: String, required: true },
-        featured: { type: Boolean, default: false },
+        featured: { type: Boolean, default: false, unique: true },
         thumbnail: {
             type: String,
             default:

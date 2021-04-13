@@ -13,10 +13,10 @@
     <body>
         <header><%- include("../partials/nav") %></header>
         <main class="blog-show">
-            <h1 class="pageName"><%= page.name %></h1>
+            <h1 class="pageName"><%= blog.title %></h1>
             <% if (admin) { %>
             <section>
-                <a href="/<%= page.dir %>/<%= blog.slug %>/edit">Update</a>
+                <a href="/<%= page.dir %>/<%= blog.slug %>/update">Update</a>
                 <div>
                     <p>Visible: <%= blog.visible %></p>
                 </div>
@@ -28,15 +28,10 @@
             <section>
                 <div>
                     <div>
-                        <img src="<%= blog.thumbnail %>" alt="thumbnail" />
-                    </div>
-                    <div>
-                        <a href="/<%= page.dir %>/<%= blog.slug %>">
-                            <%= blog.title %>
-                        </a>
-                    </div>
-                    <div>
                         <h4><%= blog.description %></h4>
+                    </div>
+                    <div>
+                        <img src="<%= blog.thumbnail %>" alt="thumbnail" />
                     </div>
                     <div>
                         <p>Tags:</p>
@@ -57,7 +52,7 @@
                         </p>
                         <% if (blog.updatedAt) { %>
                         <p>
-                            Created:
+                            Updated:
                             <span>
                                 <%= (new
                                 Date(blog.updatedAt)).toISOString().substring(0,

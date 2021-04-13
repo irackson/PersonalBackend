@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head.ejs') %> <%-
+        include('../partials/title.ejs') %>
+    </head>
+    <body>
+        <header><%- include("../partials/nav") %></header>
+        <main>
+            <h1 class="pageName">
+                Update <%= page.name %>: "<%= blog.title %>"
+            </h1>
+            <form
+                action="/<%= page.dir %>/<%= blog.slug %>?_method=PUT"
+                method="POST"
+                autocomplete="off"
+            >
+                <ul>
+                    <li>
+                        <label for="description">description:</label>
+                        <input
+                            type="text"
+                            name="description"
+                            class="input input--long"
+                            placeholder="<%= blog.description %>"
+                        />
+                    </li>
+                    <li>
+                        <fieldset>
+                            <legend>Tags</legend>
+                            <ul>
+                                <% for (let i = 0; i < existingTags.length; i++
+                                ) { %>
+                                <li>
+                                    <label
+                                        for="<%= repeatPrefix + existingTags[i] %>"
+                                        ><%= existingTags[i] %></label
+                                    >
+
+                                    <% if (blog.tags.includes(existingTags[i]))
+                                    { %>
+                                    <input
+                                        type="checkbox"
+                                        checked
+                                        name="repeat=<%= existingTags[i] %>"
+                                    />
+                                    <% } else { %>
+
+                                    <input
+                                        type="checkbox"
+                                        name="repeat=<%= existingTags[i] %>"
+                                    />
+                                    <% } %>
+                                </li>
+                                <% } %>
+                                <li>
+                                    <label for="tags">new tags:</label>
+                                    <input
+                                        type="text"
+                                        name="tags"
+                                        class="input"
+                                    />
+                                </li>
+                            </ul>
+                        </fieldset>
+                    </li>
+                    <li>
+                        <label for="markdown">markdown:</label>
+                        <textarea
+                            name="markdown"
+                            placeholder="<%= blog.markdown %>"
+                        ></textarea>
+                    </li>
+                    <li>
+                        <label for="thumbnail">thumbnail url:</label>
+                        <input
+                            type="text"
+                            name="thumbnail"
+                            class="input input--long"
+                            placeholder="<%= blog.thumbnail %>"
+                        />
+                    </li>
+                    <li>
+                        <label for="visible">visible</label>
+                        <% if (blog.visible) { %>
+                        <input type="checkbox" checked name="visible" />
+                        <% } else { %>
+                        <input type="checkbox" name="visible" />
+                        <% }%>
+                    </li>
+                    <li>
+                        <label for="featured">featured</label>
+
+                        <% if (blog.featured) { %>
+                        <input type="checkbox" checked name="featured" />
+                        <% } else { %>
+                        <input type="checkbox" name="featured" />
+                        <% }%>
+                    </li>
+                </ul>
+                <button class="button" type="submit">UPDATE BLOG</button>
+            </form>
+        </main>
+
+        <%- include("../partials/footer") %>
+    </body>
+</html>

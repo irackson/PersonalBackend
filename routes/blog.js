@@ -26,11 +26,11 @@ const { isAuthorized } = require('../utils/auth');
 //* RENDER ALL
 router.get('/', renderIndex);
 
-//* RENDER ONE
-router.get('/:slug', renderShow);
-
 //* RENDER CREATE
 router.get('/create', isAuthorized, renderCreate);
+
+//* RENDER ONE
+router.get('/:slug', renderShow);
 
 //* PROCESS CREATE
 router.post('/', isAuthorized, processCreate);
