@@ -27,7 +27,7 @@ const renderIndex = async (req, res) => {
     });
     res.render(`${page.dir}/index`, {
         page,
-        pages: await buildNavbar(pageName),
+        pages: await buildNavbar(pageName, req.session.admin),
         admin: req.session.admin,
         blogs,
         filters,
@@ -40,7 +40,7 @@ const renderCreate = async (req, res) => {
 
     res.render(`${page.dir}/create`, {
         page,
-        pages: await buildNavbar(pageName),
+        pages: await buildNavbar(pageName, req.session.admin),
         existingTags,
         repeatPrefix,
     });
@@ -57,9 +57,8 @@ const renderShow = async (req, res) => {
                 'the page you are trying to access exists, but is currently under construction',
         });
     } else {
-        console.log(`created: ${blog.createdAt.getTime()}`);
-        console.log(`updated: ${blog.updatedAt.getTime()}`);
         let displayUpdated = undefined;
+        //* show updated if a day or more has passed
         if (
             Math.abs(blog.createdAt.getTime() - blog.updatedAt.getTime()) >=
             8.64 * Math.pow(7, 10)
@@ -70,7 +69,7 @@ const renderShow = async (req, res) => {
 
         res.render(`${page.dir}/show`, {
             page,
-            pages: await buildNavbar(pageName),
+            pages: await buildNavbar(pageName, req.session.admin),
             admin: req.session.admin,
             blog,
             displayPublished,
@@ -86,7 +85,7 @@ const renderUpdate = async (req, res) => {
 
     res.render(`${page.dir}/update`, {
         page,
-        pages: await buildNavbar(pageName),
+        pages: await buildNavbar(pageName, req.session.admin),
         existingTags,
         repeatPrefix,
         blog,

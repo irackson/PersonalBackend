@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head.ejs') %> <%-
+        include('../partials/title.ejs') %>
+    </head>
+    <body>
+        <header><%- include("../partials/nav") %></header>
+        <main>
+            <h1 class="pageName"><%= page.name %> settings</h1>
+            <!-- <form
+                action="/<#%= page.dir %>/<#%= blog.slug %>?_method=PUT"
+                method="POST"
+                autocomplete="off"
+            >
+                <button class="button" type="submit">TOGGLE VISIBILITY</button>
+            </form> -->
+        </main>
+
+        <%- include("../partials/footer") %>
+    </body>
+</html>

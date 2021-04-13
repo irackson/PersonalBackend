@@ -1,9 +1,11 @@
 const Nav = require('../models/Nav');
 
-const buildNavbar = async (currentPage) => {
+const buildNavbar = async (currentPage, admin) => {
     let navs = await Nav.find({});
     navs.sort((p1, p2) => p1.position - p2.position);
-    navs = navs.filter((nav) => nav.visible);
+    if (!admin) {
+        navs = navs.filter((nav) => nav.visible);
+    }
 
     return new Promise(function (myResolve) {
         myResolve(navs);

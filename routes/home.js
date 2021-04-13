@@ -2,13 +2,14 @@ const { buildNavbar, getNav } = require('../utils/nav');
 
 //! import router
 const router = require('express').Router();
+const WebmasterRouter = require('./webmaster');
 const UsersRouter = require('./users');
 const BlogRouter = require('./blog');
 
 ///////////////////////////////
 //! Router Specific Middleware
 ////////////////////////////////
-
+router.use('/webmaster', WebmasterRouter);
 router.use('/blog', BlogRouter);
 router.use('/users', UsersRouter);
 
@@ -19,7 +20,7 @@ const pageName = 'home';
 
 router.get('/', async (req, res) => {
     const page = await getNav(pageName);
-    const pages = await buildNavbar(pageName);
+    const pages = await buildNavbar(pageName, req.session.admin);
     res.render('home', {
         page,
         pages,

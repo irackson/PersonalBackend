@@ -43,7 +43,7 @@
         "terminal.ansiWhite": "#A7A7A7",
         "terminal.ansiYellow": "#F9EE98",
         "editorCursor.foreground": "#dddd0fb6",
-        "tab.activeBorder": "#ebeaea"
+        "tab.activeBorder": "#f96c1f"
     },
     "files.exclude": {
         "**/.git": true,

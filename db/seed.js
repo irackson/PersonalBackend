@@ -60,6 +60,11 @@ const seed = async () => {
             dir: 'metrics',
             position: 5,
         },
+        {
+            name: 'webmaster',
+            dir: 'webmaster',
+            position: 99,
+        },
     ]);
 
     //* if seeding multiple blog posts, make sure that only one is featured

@@ -4,15 +4,9 @@ const { getNav } = require('../utils/nav');
 const router = require('express').Router();
 const {
     pageName,
-    renderIndex,
-    renderCreate,
-    renderShow,
     renderUpdate,
-    processCreate,
     processUpdate,
-    processToggle,
-    processDestroy,
-} = require('../controllers/blog');
+} = require('../controllers/webmaster');
 const { isAuthorized } = require('../utils/auth');
 
 ///////////////////////////////
@@ -23,33 +17,15 @@ const { isAuthorized } = require('../utils/auth');
 //! Router Specific Routes
 ////////////////////////////////
 
-//* RENDER ALL
-router.get('/', renderIndex);
-
-//* RENDER CREATE
-router.get('/create', isAuthorized, renderCreate);
-
-//* RENDER ONE
-router.get('/:slug', renderShow);
-
-//* PROCESS CREATE
-router.post('/', isAuthorized, processCreate);
-
 //* RENDER UPDATE
-router.get('/:slug/update', isAuthorized, renderUpdate);
+router.get('/', isAuthorized, renderUpdate);
 
 //* PROCESS UPDATE
-router.put('/:slug', isAuthorized, processUpdate);
-
-//* PROCESS TOGGLE
-router.patch('/:id', isAuthorized, processToggle);
-
-//* PROCESS DESTROY
-router.delete('/:slug', isAuthorized, processDestroy);
+router.put('/:id', isAuthorized, processUpdate);
 
 //! CATCHALL
 router.get('/*', async (req, res) => {
-    console.log('blog catchall invoked');
+    console.log('webmaster catchall invoked');
     const page = await getNav(pageName);
     res.redirect(`/${page.dir}`);
 });
