@@ -21,7 +21,7 @@ const { isAuthorized } = require('../utils/auth');
 router.get('/', isAuthorized, renderUpdate);
 
 //* PROCESS UPDATE
-router.put('/:id', isAuthorized, processUpdate);
+router.put('/', isAuthorized, processUpdate);
 
 //! CATCHALL
 router.get('/*', async (req, res) => {

@@ -8,13 +8,62 @@
         <header><%- include("../partials/nav") %></header>
         <main>
             <h1 class="pageName"><%= page.name %> settings</h1>
-            <!-- <form
-                action="/<#%= page.dir %>/<#%= blog.slug %>?_method=PUT"
+            <form
+                action="/<%= page.dir %>?_method=PUT"
                 method="POST"
                 autocomplete="off"
             >
-                <button class="button" type="submit">TOGGLE VISIBILITY</button>
-            </form> -->
+                <ol>
+                    <% for( let i = 1; i < pages.length - 1; i++ ) { %>
+                    <li>
+                        <fieldset>
+                            <legend><%= pages[i].dir %></legend>
+                            <ul>
+                                <li>
+                                    <label for="name">display name</label>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        class="input"
+                                        placeholder="<%= pages[i].name %>"
+                                    />
+                                </li>
+                                <li>
+                                    <label for="<%= pages[i].dir %>"
+                                        >visible</label
+                                    >
+                                    <% if (pages[i].visible) { %>
+                                    <input
+                                        type="checkbox"
+                                        checked
+                                        name="<%= pages[i].dir %>"
+                                    />
+                                    <% } else { %>
+                                    <input
+                                        type="checkbox"
+                                        checked
+                                        name="<%= pages[i].dir %>"
+                                    />
+                                    <% } %>
+                                </li>
+                                <li>
+                                    <label for="position">position</label>
+                                    <input
+                                        type="number"
+                                        name="position"
+                                        min="1"
+                                        max="98"
+                                        step="1"
+                                        value="<%= pages[i].position %>"
+                                    />
+                                </li>
+                            </ul>
+                        </fieldset>
+                    </li>
+                    <% } %>
+                </ol>
+                <button class="button" type="submit">MIND FUCK</button>
+            </form>
         </main>
 
         <%- include("../partials/footer") %>
