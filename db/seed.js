@@ -62,6 +62,7 @@ const seed = async () => {
         },
     ]);
 
+    //* if seeding multiple blog posts, make sure that only one is featured
     await Blog.create([
         {
             title: 'My First Blog Post!',

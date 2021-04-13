@@ -37,11 +37,7 @@
                         <h4><%= blog.description %></h4>
                     </div>
                     <div>
-                        <p>
-                            <%= (new
-                            Date(blog.updatedAt)).toISOString().substring(0, 10)
-                            %>
-                        </p>
+                        <p><%= blog.displayUpdated %></p>
                     </div>
                 </article>
                 <% } %>

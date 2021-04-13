@@ -2,6 +2,7 @@
 const { buildNavbar, getNav } = require('../utils/nav');
 const { getExistingTags } = require('../utils/filter');
 const { editsToBlog } = require('../utils/blog');
+const { formatDate } = require('../utils/format');
 ////////////////////////
 //! Import Models
 ////////////////////////
@@ -16,11 +17,14 @@ const repeatPrefix = 'repeat=';
 
 const renderIndex = async (req, res) => {
     const page = await getNav(pageName);
-    const blogs = req.session.admin
+    let blogs = req.session.admin
         ? await Blog.find({})
         : await Blog.find({ visible: true });
     const filters = await getExistingTags(Blog);
-
+    blogs.forEach((blog) => {
+        blog.displayUpdated = formatDate(blog.updatedAt);
+        return blog;
+    });
     res.render(`${page.dir}/index`, {
         page,
         pages: await buildNavbar(pageName),
@@ -53,22 +57,24 @@ const renderShow = async (req, res) => {
                 'the page you are trying to access exists, but is currently under construction',
         });
     } else {
-        if (blog.updatedAt - blog.createdAt < 8.64 * (10 ^ 7)) {
-            blog.updatedAt = null;
-        } else {
-            blog.updatedAt = new Date(blog.updatedAt)
-                .toISOString()
-                .substring(0, 10);
+        console.log(`created: ${blog.createdAt.getTime()}`);
+        console.log(`updated: ${blog.updatedAt.getTime()}`);
+        let displayUpdated = undefined;
+        if (
+            Math.abs(blog.createdAt.getTime() - blog.updatedAt.getTime()) >=
+            8.64 * Math.pow(7, 10)
+        ) {
+            displayUpdated = formatDate(blog.updatedAt);
         }
-        blog.createdAt = new Date(blog.createdAt)
-            .toISOString()
-            .substring(0, 10);
+        displayPublished = formatDate(blog.createdAt);
 
         res.render(`${page.dir}/show`, {
             page,
             pages: await buildNavbar(pageName),
             admin: req.session.admin,
             blog,
+            displayPublished,
+            displayUpdated,
         });
     }
 };

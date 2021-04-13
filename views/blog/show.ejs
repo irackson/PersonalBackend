@@ -44,20 +44,12 @@
                     <div>
                         <p>
                             Published:
-                            <span>
-                                <%= (new
-                                Date(blog.createdAt)).toISOString().substring(0,
-                                10) %>
-                            </span>
+                            <span> <%= displayPublished %></span>
                         </p>
-                        <% if (blog.updatedAt) { %>
+                        <% if (displayUpdated) { %>
                         <p>
                             Updated:
-                            <span>
-                                <%= (new
-                                Date(blog.updatedAt)).toISOString().substring(0,
-                                10) %>
-                            </span>
+                            <span> <%= displayUpdated %></span>
                         </p>
                         <% } %>
                     </div>
