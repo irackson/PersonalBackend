@@ -55,6 +55,17 @@ const renderShow = async (req, res) => {
                 'the page you are trying to access exists, but is currently under construction',
         });
     } else {
+        if (blog.updatedAt - blog.createdAt < 8.64 * (10 ^ 7)) {
+            blog.updatedAt = null;
+        } else {
+            blog.updatedAt = new Date(blog.updatedAt)
+                .toISOString()
+                .substring(0, 10);
+        }
+        blog.createdAt = new Date(blog.createdAt)
+            .toISOString()
+            .substring(0, 10);
+
         res.render(`${page.dir}/show`, {
             page,
             pages: await buildNavbar(pageName),
@@ -133,7 +144,6 @@ const processToggle = async (req, res) => {
 
 const processDestroy = async (req, res) => {
     const page = await getNav(pageName);
-    console.log('hi');
     await Blog.findOneAndDelete({ slug: req.params.slug });
     res.redirect(`/${page.dir}`);
 };
