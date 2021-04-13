@@ -1,6 +1,7 @@
 //! Import Utilities
 const { buildNavbar, getNav } = require('../utils/nav');
 const { getExistingTags } = require('../utils/filter');
+const { editsToBlog } = require('../utils/blog');
 ////////////////////////
 //! Import Models
 ////////////////////////
@@ -88,36 +89,6 @@ const renderUpdate = async (req, res) => {
 };
 
 const processCreate = async (req, res) => {
-    /*     const page = await getNav(pageName);
-    const blog = req.body;
-    console.log(blog);
-    blog.tags = blog.tags ? blog.tags.split(',').map((e) => e.trim()) : [];
-    for (property in blog) {
-        if (property.substring(0, repeatPrefix.length) === repeatPrefix) {
-            blog.tags.push(property.split('=').pop());
-            blog[property] = undefined;
-            continue;
-        }
-        if (blog[property] === 'on') {
-            blog[property] = true;
-            continue;
-        }
-        if (blog[property] === '') {
-            blog[property] = undefined;
-            continue;
-        }
-    }
-    try {
-        const newBlog = await blog.create(blog);
-
-        res.redirect(`${page.dir}/${newBlog.slug}`);
-    } catch (e) {
-        res.json({
-            message: 'failed to create post',
-            attempt: blog,
-            format: new Blog(),
-        });
-    } */
     const page = await getNav(pageName);
 
     let blog = await Blog.create(
@@ -128,67 +99,36 @@ const processCreate = async (req, res) => {
             markdown: 'temp',
         })
     );
-    blog = await Blog.findOne({ slug: blog.slug });
-    console.log(blog);
+
+    blog = await Blog.findOne({ title: 'temp' });
 
     const edits = req.body;
-    edits.tags = edits.tags ? edits.tags.split(',').map((e) => e.trim()) : [];
-    for (property in edits) {
-        if (property.substring(0, repeatPrefix.length) === repeatPrefix) {
-            edits.tags.push(property.split('=').pop());
-            edits[property] = undefined;
-            continue;
-        }
-        if (edits[property] === '') {
-            edits[property] = undefined;
-            continue;
-        }
-    }
-    edits.visible = edits.visible ? true : false;
-    edits.featured = edits.featured ? true : false;
+    blog = await editsToBlog(edits, blog, repeatPrefix);
 
-    for (const property in edits) {
-        if (typeof edits[property] !== 'undefined') {
-            blog[property] = edits[property];
-        }
-    }
     try {
         blog = await blog.save();
         res.redirect(`${page.dir}/${blog.slug}`);
     } catch (error) {
-        console.log(error);
         res.redirect(`${page.dir}/create`);
     }
 };
 
 const processUpdate = async (req, res) => {
-    const blog = await Blog.findOne({ slug: req.params.slug });
+    const page = await getNav(pageName);
+
+    let blog = await Blog.findOne({ slug: req.params.slug });
 
     const edits = req.body;
-    edits.tags = edits.tags ? edits.tags.split(',').map((e) => e.trim()) : [];
-    for (property in edits) {
-        if (property.substring(0, repeatPrefix.length) === repeatPrefix) {
-            edits.tags.push(property.split('=').pop());
-            edits[property] = undefined;
-            continue;
-        }
-        if (edits[property] === '') {
-            edits[property] = undefined;
-            continue;
-        }
-    }
-    edits.visible = edits.visible ? true : false;
-    edits.featured = edits.featured ? true : false;
 
-    for (const property in edits) {
-        if (typeof edits[property] !== 'undefined') {
-            blog[property] = edits[property];
-        }
-    }
+    blog = await editsToBlog(edits, blog, repeatPrefix);
 
-    await blog.save();
-    console.log(await Blog.findOne({ slug: req.params.slug }));
-    res.redirect(`${blog.slug}`);
+    try {
+        blog = await blog.save();
+        res.redirect(`${blog.slug}`);
+    } catch (error) {
+        console.log('error');
+        res.redirect(`${blog.slug}/update`);
+    }
 };
 
 const processToggle = async (req, res) => {
