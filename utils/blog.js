@@ -1,4 +1,4 @@
-const editsToBlog = async (edits, blog, repeatPrefix) => {
+const editsToBlog = async (Model, edits, blog, repeatPrefix) => {
     edits.tags = edits.tags ? edits.tags.split(',').map((e) => e.trim()) : [];
     for (property in edits) {
         if (property.substring(0, repeatPrefix.length) === repeatPrefix) {
@@ -12,7 +12,16 @@ const editsToBlog = async (edits, blog, repeatPrefix) => {
         }
     }
     edits.visible = edits.visible ? true : false;
-    edits.featured = edits.featured ? true : false;
+
+    if (edits.featured) {
+        await Model.updateMany(
+            { slug: { $ne: blog.slug } },
+            { featured: false }
+        );
+        edits.featured = true;
+    } else {
+        edits.featured = false;
+    }
 
     for (property in edits) {
         if (typeof edits[property] !== 'undefined') {

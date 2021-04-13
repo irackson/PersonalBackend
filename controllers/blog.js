@@ -19,7 +19,6 @@ const renderIndex = async (req, res) => {
     const blogs = req.session.admin
         ? await Blog.find({})
         : await Blog.find({ visible: true });
-
     const filters = await getExistingTags(Blog);
 
     res.render(`${page.dir}/index`, {
@@ -45,7 +44,6 @@ const renderCreate = async (req, res) => {
 
 const renderShow = async (req, res) => {
     const page = await getNav(pageName);
-
     const blog = await Blog.findOne({ slug: req.params.slug });
     if (blog === null) {
         res.redirect(`/${page.dir}`);
@@ -79,6 +77,7 @@ const renderUpdate = async (req, res) => {
     const page = await getNav(pageName);
     const blog = await Blog.findOne({ slug: req.params.slug });
     const existingTags = await getExistingTags(Blog);
+
     res.render(`${page.dir}/update`, {
         page,
         pages: await buildNavbar(pageName),
@@ -99,34 +98,32 @@ const processCreate = async (req, res) => {
             markdown: 'temp',
         })
     );
-
     blog = await Blog.findOne({ title: tempTitle });
-
     const edits = req.body;
-    blog = await editsToBlog(edits, blog, repeatPrefix);
-
+    blog = await editsToBlog(Blog, edits, blog, repeatPrefix);
     try {
         blog = await blog.save();
+
         res.redirect(`${page.dir}/${blog.slug}`);
     } catch (error) {
+        console.log(error);
+
         res.redirect(`${page.dir}/create`);
     }
 };
 
 const processUpdate = async (req, res) => {
     const page = await getNav(pageName);
-
     let blog = await Blog.findOne({ slug: req.params.slug });
-
     const edits = req.body;
-
-    blog = await editsToBlog(edits, blog, repeatPrefix);
-
+    blog = await editsToBlog(Blog, edits, blog, repeatPrefix);
     try {
         blog = await blog.save();
+
         res.redirect(`${blog.slug}`);
     } catch (error) {
         console.log('error');
+
         res.redirect(`${blog.slug}/update`);
     }
 };
@@ -138,12 +135,14 @@ const processToggle = async (req, res) => {
     blog.visible = !blog.visible;
 
     await Blog.findOneAndUpdate({ slug: req.params.slug }, blog); //? or blog.save?
+
     res.redirect(`${page.dir}`);
 };
 
 const processDestroy = async (req, res) => {
     const page = await getNav(pageName);
     await Blog.findOneAndDelete({ slug: req.params.slug });
+
     res.redirect(`/${page.dir}`);
 };
 

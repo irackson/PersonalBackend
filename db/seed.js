@@ -61,6 +61,19 @@ const seed = async () => {
             position: 5,
         },
     ]);
+
+    await Blog.create([
+        {
+            title: 'My First Blog Post!',
+            description:
+                'this blog post is intended to test the blog creation mechanism',
+            tags: ['test'],
+            markdown:
+                '### <pre><code class="language-js">console.log("hello world")</code></pre>',
+            thumbnail:
+                'https://cdn3.iconfinder.com/data/icons/software-development-filled-line/2048/5414_-_Hello_World_Program-512.png',
+        },
+    ]);
 };
 
 // run seed function
