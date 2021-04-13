@@ -90,17 +90,17 @@ const renderUpdate = async (req, res) => {
 
 const processCreate = async (req, res) => {
     const page = await getNav(pageName);
-
+    const tempTitle = Math.random().toString();
     let blog = await Blog.create(
         new Blog({
-            title: 'temp',
+            title: tempTitle,
             description: 'temp',
             tags: ['temp'],
             markdown: 'temp',
         })
     );
 
-    blog = await Blog.findOne({ title: 'temp' });
+    blog = await Blog.findOne({ title: tempTitle });
 
     const edits = req.body;
     blog = await editsToBlog(edits, blog, repeatPrefix);
