@@ -35,10 +35,6 @@ const renderCreate = async (req, res) => {
 
     const existingTags = await getExistingTags(Blog);
 
-    console.log(`existingTags before: ${existingTags}`);
-    console.log(typeof existingTags);
-
-    console.log(`existingTags: ${existingTags}`);
     res.render(`${page.dir}/create`, {
         page,
         pages: await buildNavbar(pageName),
@@ -51,13 +47,21 @@ const renderShow = async (req, res) => {
     const page = await getNav(pageName);
 
     const blog = await Blog.findOne({ slug: req.params.slug });
-
-    res.render(`${page.dir}/show`, {
-        page,
-        pages: await buildNavbar(pageName),
-        admin: req.session.admin,
-        blog,
-    });
+    if (blog === null) {
+        res.redirect(`/${page.dir}`);
+    } else if (!blog.visible && !req.session.admin) {
+        res.json({
+            message:
+                'the page you are trying to access exists, but is currently under construction',
+        });
+    } else {
+        res.render(`${page.dir}/show`, {
+            page,
+            pages: await buildNavbar(pageName),
+            admin: req.session.admin,
+            blog,
+        });
+    }
 };
 
 const renderUpdate = async (req, res) => {
@@ -75,16 +79,13 @@ const processCreate = async (req, res) => {
     const page = await getNav(pageName);
     const blog = req.body;
     blog.tags = blog.tags ? blog.tags.split(',').map((e) => e.trim()) : [];
-    console.log(blog);
     for (property in blog) {
-        console.log(property);
         if (property.substring(0, repeatPrefix.length) === repeatPrefix) {
             blog.tags.push(property.split('=').pop());
             blog[property] = undefined;
             continue;
         }
         if (blog[property] === 'on') {
-            console.log(property);
             blog[property] = true;
             continue;
         }
@@ -93,11 +94,9 @@ const processCreate = async (req, res) => {
             continue;
         }
     }
-    console.log(blog);
     try {
         const newBlog = await Blog.create(blog);
-        console.log('success');
-        console.log(newBlog);
+
         res.redirect(`${page.dir}/${newBlog.slug}`);
     } catch (e) {
         res.json({
@@ -134,9 +133,9 @@ const processToggle = async (req, res) => {
 
 const processDestroy = async (req, res) => {
     const page = await getNav(pageName);
-
+    console.log('hi');
     await Blog.findOneAndDelete({ slug: req.params.slug });
-    res.redirect(`${page.dir}`);
+    res.redirect(`/${page.dir}`);
 };
 
 //////////////////////////////

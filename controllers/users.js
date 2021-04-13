@@ -28,8 +28,6 @@ async function usernameFree(attempt) {
 }
 
 const createSubmit = async (req, res) => {
-    //TODO: DEAL WITH TAKEN USERNAME (MUST BE  UNIQUE)
-
     if (await usernameFree(req.body.username)) {
         if (req.body.admin === 'on') {
             if (req.body.admin_code.toLowerCase() === adminCode.toLowerCase()) {
@@ -50,7 +48,6 @@ const createSubmit = async (req, res) => {
         const user = await User.create(req.body);
         res.redirect('/users/login');
     } else {
-        console.log('not making account');
         res.json({
             message:
                 'An account already exists with this username. Account creation failed. Use the back button to create an account with a different username.',

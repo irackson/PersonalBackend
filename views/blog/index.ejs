@@ -17,7 +17,15 @@
                 <% } %>
             </section>
             <section>
-                <% for (blog of blogs) { %>
+                <% for (blog of blogs) { %> <% if (admin) { %>
+                <form
+                    action="/<%= page.dir %>/<%= blog.slug %>?_method=DELETE"
+                    method="POST"
+                >
+                    <button type="submit">Delete</button>
+                </form>
+                <% } %>
+
                 <article class="<%= blog.visible ? 'visible' : 'invisible' %>">
                     <div>
                         <img src="<%= blog.thumbnail %>" alt="thumbnail" />

@@ -17,12 +17,6 @@
             <% if (admin) { %>
             <section>
                 <a href="/<%= page.dir %>/<%= blog.slug %>/edit">Update</a>
-                <form
-                    action="/<%= page.dir %>/<%= blog.slug %>?_method=DELETE"
-                    method="POST"
-                >
-                    <button type="submit">Delete</button>
-                </form>
             </section>
             <% } %>
             <section>
