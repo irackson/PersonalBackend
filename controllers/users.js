@@ -58,7 +58,6 @@ const createSubmit = async (req, res) => {
 const getLogin = async (req, res) => {
     req.session.user = undefined;
     req.session.admin = false;
-    req.session.vip = false;
     res.render('users/login');
 };
 
@@ -88,7 +87,6 @@ const loginSubmit = async (req, res) => {
 const logout = (req, res) => {
     req.session.user = undefined;
     req.session.admin = false;
-    req.session.vip = false;
     res.redirect('/');
 };
 
