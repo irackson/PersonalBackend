@@ -6,7 +6,7 @@
     </head>
     <body>
         <header><%- include("../partials/nav") %></header>
-        <main>
+        <main class="webmaster-settings">
             <h1 class="pageName"><%= page.name %> settings</h1>
             <form
                 action="/<%= page.dir %>?_method=PUT"
@@ -20,7 +20,7 @@
                             <legend><%= pages[i].dir %></legend>
                             <ul>
                                 <li>
-                                    <label for="name">display name</label>
+                                    <label for="name">name</label>
                                     <input
                                         type="text"
                                         name="name"
@@ -41,7 +41,6 @@
                                     <% } else { %>
                                     <input
                                         type="checkbox"
-                                        checked
                                         name="<%= pages[i].dir %>"
                                     />
                                     <% } %>
@@ -66,6 +65,7 @@
             </form>
 
             <form
+                style="display: none"
                 action="/<%= page.dir %>/create"
                 method="POST"
                 autocomplete="off"

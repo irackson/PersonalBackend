@@ -1,0 +1,32 @@
+@use '../abstracts' as *;
+
+.webmaster-settings {
+    text-align-last: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+
+    h2 {
+        color: $brand-color;
+    }
+
+    legend {
+        text-align: center;
+        font-size: 2rem;
+    }
+
+    ol {
+        text-align-last: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    button {
+        margin-top: 2rem;
+    }
+}
