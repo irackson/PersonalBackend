@@ -6,17 +6,33 @@
     </head>
     <body>
         <header><%- include("../partials/nav") %></header>
-        <main class="blog-create">
-            <h1 class="pageName">create new <%= page.name %></h1>
-            <form action="/<%= page.dir %>" method="POST" autocomplete="off">
+        <main class="projects-update">
+            <h1 class="pageName">
+                Update <%= page.name.substring(0, page.name.length - 1) %>: "<%=
+                project.title %>"
+            </h1>
+            <form
+                action="/<%= page.dir %>/<%= project.slug %>?_method=PUT"
+                method="POST"
+                autocomplete="off"
+            >
                 <ul>
                     <li>
-                        <label for="title">title:</label>
+                        <label for="liveLink">live url:</label>
                         <input
                             type="text"
-                            name="title"
-                            required="required"
+                            name="liveLink"
                             class="input input--long"
+                            placeholder="<%= project.liveLink %>"
+                        />
+                    </li>
+                    <li>
+                        <label for="codeLink">repo url:</label>
+                        <input
+                            type="text"
+                            name="codeLink"
+                            class="input input--long"
+                            placeholder="<%= project.codeLink %>"
                         />
                     </li>
                     <li>
@@ -24,8 +40,8 @@
                         <input
                             type="text"
                             name="description"
-                            required="required"
                             class="input input--long"
+                            placeholder="<%= project.description %>"
                         />
                     </li>
                     <li>
@@ -39,10 +55,22 @@
                                         for="<%= repeatPrefix + existingTags[i] %>"
                                         ><%= existingTags[i] %></label
                                     >
+
+                                    <% if
+                                    (project.tags.includes(existingTags[i])) {
+                                    %>
+                                    <input
+                                        type="checkbox"
+                                        checked
+                                        name="repeat=<%= existingTags[i] %>"
+                                    />
+                                    <% } else { %>
+
                                     <input
                                         type="checkbox"
                                         name="repeat=<%= existingTags[i] %>"
                                     />
+                                    <% } %>
                                 </li>
                                 <% } %>
                                 <li>
@@ -50,7 +78,6 @@
                                     <input
                                         type="text"
                                         name="tags"
-                                        placeholder="new1, new2, etc."
                                         class="input"
                                     />
                                 </li>
@@ -61,8 +88,7 @@
                         <label for="markdown">markdown:</label>
                         <textarea
                             name="markdown"
-                            required="required"
-                            placeholder="copy and paste markdown here"
+                            placeholder="<%= project.markdown %>"
                         ></textarea>
                     </li>
                     <li>
@@ -71,20 +97,28 @@
                             type="text"
                             name="thumbnail"
                             class="input input--long"
-                            placeholder="stock blog icon"
+                            placeholder="<%= project.thumbnail %>"
                         />
                     </li>
                     <li>
                         <label for="visible">visible</label>
+                        <% if (project.visible) { %>
+                        <input type="checkbox" checked name="visible" />
+                        <% } else { %>
                         <input type="checkbox" name="visible" />
+                        <% }%>
                     </li>
                     <li>
                         <label for="featured">featured</label>
+
+                        <% if (project.featured) { %>
+                        <input type="checkbox" checked name="featured" />
+                        <% } else { %>
                         <input type="checkbox" name="featured" />
+                        <% }%>
                     </li>
                 </ul>
-
-                <button class="button" type="submit">CREATE BLOG</button>
+                <button class="button" type="submit">UPDATE PROJECT</button>
             </form>
         </main>
 

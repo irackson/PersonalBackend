@@ -5,8 +5,10 @@ const mongoose = require('./connection');
 // Import Your Models Below
 /////////////////////////////////
 
+const User = require('../models/User');
 const Nav = require('../models/Nav');
 const Blog = require('../models/Blog');
+const Project = require('../models/Project');
 
 /////////////////////////////////
 // Do your Database Operations in Below Function
@@ -16,6 +18,8 @@ const seed = async () => {
     //clear collections before seeding
     await Nav.deleteMany({}); // to clear cross-site linkage
     await Blog.deleteMany({}); // to clear all blogs
+    await Project.deleteMany({}); // to clear all blogs
+
     // await User.deleteMany({}); // to clear accounts
     //--------------------
     await Nav.create([
@@ -79,6 +83,25 @@ const seed = async () => {
                 '### <pre><code class="language-js">console.log("hello world")</code></pre>',
             thumbnail:
                 'https://cdn3.iconfinder.com/data/icons/software-development-filled-line/2048/5414_-_Hello_World_Program-512.png',
+            featured: 'true',
+            visible: 'true',
+        },
+    ]);
+
+    //* if seeding multiple project posts, make sure that only one is featured
+    await Project.create([
+        {
+            title: 'Boilerplate Store',
+            liveLink: 'https://irackson-boilerplate-store.herokuapp.com/',
+            codeLink: 'https://github.com/irackson/BoilerplateStore',
+            description:
+                'an online store ready to ship, where store owners can full CRUD products and manage customer orders',
+            tags: ['test', 'auth', 'MongoDB', 'back-end'],
+            markdown:
+                '### <pre><code class="language-js">console.log("Welcome to the Boilerplate Store!")</code></pre>',
+            thumbnail: 'https://i.imgur.com/OsYK1u2.png',
+            featured: 'true',
+            visible: 'true',
         },
     ]);
 };

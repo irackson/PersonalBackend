@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head.ejs') %> <%-
+        include('../partials/title.ejs') %>
+    </head>
+    <body>
+        <header><%- include("../partials/nav") %></header>
+        <main class="projects-index">
+            <h1 class="pageName"><%= page.name %></h1>
+            <% if (admin) { %>
+            <a href="/<%= page.dir %>/create"
+                >Create New <%= page.name.substring(0, page.name.length - 1) %>
+            </a>
+            <% } %>
+            <section id="projectsFiltersContainer">
+                <% for( let i = 0; i < filters.length; i++ ) { %>
+                <button><%= filters[i] %></button>
+                <% } %>
+            </section>
+            <section>
+                <% for (project of projects) { %> <% if (admin) { %>
+                <form
+                    action="/<%= page.dir %>/<%= project.slug %>?_method=DELETE"
+                    method="POST"
+                >
+                    <button type="submit">Delete</button>
+                </form>
+                <% } %>
+
+                <article
+                    class="<%= project.visible ? 'visible' : 'invisible' %>"
+                >
+                    <div>
+                        <a
+                            href="<%= project.liveLink %> "
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <img src="<%= project.thumbnail %>" alt="thumbnail"
+                        /></a>
+                    </div>
+                    <div>
+                        <a href="/<%= page.dir %>/<%= project.slug %>">
+                            <%= project.title %>
+                        </a>
+                        <h4><%= project.description %></h4>
+                    </div>
+                    <div>
+                        <p><%= project.displayUpdated %></p>
+                    </div>
+                </article>
+                <% } %>
+            </section>
+        </main>
+
+        <%- include("../partials/footer") %>
+    </body>
+</html>

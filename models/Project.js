@@ -13,6 +13,8 @@ const dompurify = createDomPurify(new JSDOM().window);
 const ProjectSchema = new Schema(
     {
         title: { type: String, required: true },
+        liveLink: { type: String, required: true },
+        codeLink: { type: String, default: 'https://github.com/irackson' },
         description: { type: String, required: true },
         tags: { type: [String], required: true },
         visible: { type: Boolean, default: false },
@@ -23,8 +25,6 @@ const ProjectSchema = new Schema(
             default:
                 'https://www.clipartmax.com/png/middle/317-3174648_web-programming-icon-clipart-website-development-computer-web-programming-icon.png',
         },
-        codeLink: { type: String, default: 'https://github.com/irackson' },
-        liveLink: { type: String, required: true },
         slug: {
             type: String,
             required: true,

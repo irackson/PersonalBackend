@@ -6,6 +6,7 @@ const router = require('express').Router();
 const WebmasterRouter = require('./webmaster');
 const UsersRouter = require('./users');
 const BlogRouter = require('./blog');
+const ProjectsRouter = require('./projects');
 
 ///////////////////////////////
 //! Router Specific Middleware
@@ -13,6 +14,7 @@ const BlogRouter = require('./blog');
 
 router.use('/webmaster', WebmasterRouter);
 router.use('/blog', BlogRouter);
+router.use('/projects', ProjectsRouter);
 router.use('/users', UsersRouter);
 
 ////////////////////////////////

@@ -1,7 +1,7 @@
 //! Import Utilities
 const { buildNavbar, getNav } = require('../utils/nav');
 const { getExistingTags } = require('../utils/filter');
-const { editsToBlog } = require('../utils/blog');
+const { editsToPost } = require('../utils/crud');
 const { formatDate } = require('../utils/format');
 ////////////////////////
 //! Import Models
@@ -108,7 +108,7 @@ const processCreate = async (req, res) => {
     );
     blog = await Blog.findOne({ title: tempTitle });
     const edits = req.body;
-    blog = await editsToBlog(Blog, edits, blog, repeatPrefix);
+    blog = await editsToPost(Blog, edits, blog, repeatPrefix);
     try {
         blog = await blog.save();
 
@@ -124,7 +124,7 @@ const processUpdate = async (req, res) => {
     const page = await getNav(pageDir);
     let blog = await Blog.findOne({ slug: req.params.slug });
     const edits = req.body;
-    blog = await editsToBlog(Blog, edits, blog, repeatPrefix);
+    blog = await editsToPost(Blog, edits, blog, repeatPrefix);
     try {
         blog = await blog.save();
 

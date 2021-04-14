@@ -1,4 +1,4 @@
-const editsToBlog = async (Model, edits, blog, repeatPrefix) => {
+const editsToPost = async (Model, edits, post, repeatPrefix) => {
     edits.tags = edits.tags ? edits.tags.split(',').map((e) => e.trim()) : [];
     for (property in edits) {
         if (property.substring(0, repeatPrefix.length) === repeatPrefix) {
@@ -15,7 +15,7 @@ const editsToBlog = async (Model, edits, blog, repeatPrefix) => {
 
     if (edits.featured) {
         await Model.updateMany(
-            { slug: { $ne: blog.slug } },
+            { slug: { $ne: post.slug } },
             { featured: false }
         );
         edits.featured = true;
@@ -25,13 +25,13 @@ const editsToBlog = async (Model, edits, blog, repeatPrefix) => {
 
     for (property in edits) {
         if (typeof edits[property] !== 'undefined') {
-            blog[property] = edits[property];
+            post[property] = edits[property];
         }
     }
 
     return new Promise(function (myResolve) {
-        myResolve(blog);
+        myResolve(post);
     });
 };
 
-module.exports = { editsToBlog };
+module.exports = { editsToPost };

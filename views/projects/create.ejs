@@ -6,7 +6,7 @@
     </head>
     <body>
         <header><%- include("../partials/nav") %></header>
-        <main class="blog-create">
+        <main class="projects-create">
             <h1 class="pageName">create new <%= page.name %></h1>
             <form action="/<%= page.dir %>" method="POST" autocomplete="off">
                 <ul>
@@ -17,6 +17,24 @@
                             name="title"
                             required="required"
                             class="input input--long"
+                        />
+                    </li>
+                    <li>
+                        <label for="liveLink">live url:</label>
+                        <input
+                            type="text"
+                            name="liveLink"
+                            required="required"
+                            class="input input--long"
+                        />
+                    </li>
+                    <li>
+                        <label for="codeLink">repo url:</label>
+                        <input
+                            type="text"
+                            name="codeLink"
+                            class="input input--long"
+                            placeholder="irackson personal github"
                         />
                     </li>
                     <li>
@@ -71,7 +89,7 @@
                             type="text"
                             name="thumbnail"
                             class="input input--long"
-                            placeholder="stock blog icon"
+                            placeholder="stock project icon"
                         />
                     </li>
                     <li>
@@ -84,7 +102,7 @@
                     </li>
                 </ul>
 
-                <button class="button" type="submit">CREATE BLOG</button>
+                <button class="button" type="submit">CREATE PROJECT</button>
             </form>
         </main>
 
