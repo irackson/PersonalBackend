@@ -22,7 +22,7 @@ const pageName = 'home';
 
 router.get('/', async (req, res) => {
     const page = await getNav(pageName);
-    const pages = await buildNavbar(pageName, req.session.admin);
+    const pages = await buildNavbar(req.session.admin);
     res.render('home', {
         page,
         pages,

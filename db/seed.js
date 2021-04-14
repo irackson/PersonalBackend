@@ -63,6 +63,7 @@ const seed = async () => {
         {
             name: 'webmaster',
             dir: 'webmaster',
+            visible: false,
             position: 99,
         },
     ]);

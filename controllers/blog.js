@@ -27,7 +27,7 @@ const renderIndex = async (req, res) => {
     });
     res.render(`${page.dir}/index`, {
         page,
-        pages: await buildNavbar(pageName, req.session.admin),
+        pages: await buildNavbar(req.session.admin),
         admin: req.session.admin,
         blogs,
         filters,
@@ -40,7 +40,7 @@ const renderCreate = async (req, res) => {
 
     res.render(`${page.dir}/create`, {
         page,
-        pages: await buildNavbar(pageName, req.session.admin),
+        pages: await buildNavbar(req.session.admin),
         existingTags,
         repeatPrefix,
     });
@@ -69,7 +69,7 @@ const renderShow = async (req, res) => {
 
         res.render(`${page.dir}/show`, {
             page,
-            pages: await buildNavbar(pageName, req.session.admin),
+            pages: await buildNavbar(req.session.admin),
             admin: req.session.admin,
             blog,
             displayPublished,
@@ -85,7 +85,7 @@ const renderUpdate = async (req, res) => {
 
     res.render(`${page.dir}/update`, {
         page,
-        pages: await buildNavbar(pageName, req.session.admin),
+        pages: await buildNavbar(req.session.admin),
         existingTags,
         repeatPrefix,
         blog,

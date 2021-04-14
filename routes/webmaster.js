@@ -13,15 +13,17 @@ const { isAuthorized } = require('../utils/auth');
 //! Router Specific Middleware
 ////////////////////////////////
 
+router.use('/', isAuthorized);
+
 ////////////////////////////////
 //! Router Specific Routes
 ////////////////////////////////
 
 //* RENDER UPDATE
-router.get('/', isAuthorized, renderUpdate);
+router.get('/', renderUpdate);
 
 //* PROCESS UPDATE
-router.put('/', isAuthorized, processUpdate);
+router.put('/', processUpdate);
 
 //! CATCHALL
 router.get('/*', async (req, res) => {

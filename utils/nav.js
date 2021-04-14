@@ -1,6 +1,6 @@
 const Nav = require('../models/Nav');
 
-const buildNavbar = async (currentPage, admin) => {
+const buildNavbar = async (admin) => {
     let navs = await Nav.find({});
     navs.sort((p1, p2) => p1.position - p2.position);
     if (!admin) {

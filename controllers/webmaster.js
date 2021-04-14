@@ -14,7 +14,7 @@ const pageName = 'webmaster';
 
 const renderUpdate = async (req, res) => {
     const page = await getNav(pageName);
-    const pages = await buildNavbar(pageName, req.session.admin);
+    const pages = await buildNavbar(req.session.admin);
 
     res.render(`${page.dir}/update`, {
         page,
