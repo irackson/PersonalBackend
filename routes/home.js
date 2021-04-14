@@ -26,6 +26,7 @@ router.get('/', async (req, res) => {
     res.render('home', {
         page,
         pages,
+        admin: req.session.admin,
     });
 });
 

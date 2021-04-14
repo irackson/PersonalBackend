@@ -19,6 +19,7 @@ const renderUpdate = async (req, res) => {
     res.render(`${page.dir}/update`, {
         page,
         pages,
+        admin: req.session.admin,
     });
 };
 

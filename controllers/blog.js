@@ -41,6 +41,7 @@ const renderCreate = async (req, res) => {
     res.render(`${page.dir}/create`, {
         page,
         pages: await buildNavbar(req.session.admin),
+        admin: req.session.admin,
         existingTags,
         repeatPrefix,
     });
@@ -86,6 +87,8 @@ const renderUpdate = async (req, res) => {
     res.render(`${page.dir}/update`, {
         page,
         pages: await buildNavbar(req.session.admin),
+        admin: req.session.admin,
+
         existingTags,
         repeatPrefix,
         blog,

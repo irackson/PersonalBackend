@@ -1,4 +1,7 @@
 <footer>
     <!-- load script at end of body -->
+    <% if (admin) { %>
+    <a href="/users/logout">logout</a>
+    <% } %>
     <script src="/all.js"></script>
 </footer>

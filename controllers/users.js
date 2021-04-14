@@ -56,8 +56,8 @@ const createSubmit = async (req, res) => {
 };
 
 const getLogin = async (req, res) => {
-    req.session.user = undefined;
-    req.session.admin = false;
+    // req.session.user = undefined;
+    // req.session.admin = false;
     res.render('users/login');
 };
 
