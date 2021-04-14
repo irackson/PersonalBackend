@@ -19,12 +19,16 @@
                             href="<%= project.liveLink %> "
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label="live link to <%= project.title %>"
                         >
                             <img src="<%= project.thumbnail %>" alt="thumbnail"
                         /></a>
                     </div>
                     <div>
-                        <a href="/projects/<%= project.slug %>">
+                        <a
+                            href="/projects/<%= project.slug %>"
+                            aria-label="read more about <%= project.title %>"
+                        >
                             <%= project.title %>
                         </a>
                     </div>
@@ -37,7 +41,12 @@
                         <img src="<%= blog.thumbnail %>" alt="thumbnail" />
                     </div>
                     <div>
-                        <a href="/blog/<%= blog.slug %>"> <%= blog.title %> </a>
+                        <a
+                            href="/blog/<%= blog.slug %>"
+                            aria-label="read more about <%= blog.title %>"
+                        >
+                            <%= blog.title %>
+                        </a>
                     </div>
                 </article>
             </div>

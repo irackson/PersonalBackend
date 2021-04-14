@@ -32,7 +32,8 @@
                     </div>
                     <div>
                         <a
-                            href="<%= project.liveLink %> "
+                            href="<%= project.liveLink %>"
+                            aria-label="live link to <%= project.title %>"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
@@ -43,6 +44,7 @@
                         </a>
                         <a
                             href="<%= project.codeLink %> "
+                            aria-label="see code for <%= project.title %>"
                             target="_blank"
                             rel="noopener noreferrer"
                             >link to code</a

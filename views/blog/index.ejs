@@ -31,7 +31,10 @@
                         <img src="<%= blog.thumbnail %>" alt="thumbnail" />
                     </div>
                     <div>
-                        <a href="/<%= page.dir %>/<%= blog.slug %>">
+                        <a
+                            href="/<%= page.dir %>/<%= blog.slug %>"
+                            aria-label="read more about <%= blog.title %>"
+                        >
                             <%= blog.title %>
                         </a>
                         <h4><%= blog.description %></h4>

@@ -5,7 +5,7 @@
         <li
             class="<%= pages[i].name === page.name ? 'navlink--focused' : 'navlink' %>"
         >
-            <a href="<%= pages[i].dir %>"
+            <a href="<%= pages[i].dir %>" aria-label="<%= pages[i].dir %>">
                 ><%= pages[i].name.toUpperCase() %>
             </a>
         </li>
