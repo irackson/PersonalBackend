@@ -6,6 +6,7 @@ const {
     pageDir,
     renderUpdate,
     processUpdate,
+    processCreate,
 } = require('../controllers/webmaster');
 const { isAuthorized } = require('../utils/auth');
 
@@ -22,7 +23,10 @@ router.use('/', isAuthorized);
 //* RENDER UPDATE
 router.get('/', renderUpdate);
 
-//* PROCESS UPDATE
+//* PROCESS CREATE (add new page to website)
+router.post('/create', isAuthorized, processCreate);
+
+//* PROCESS UPDATE (change nav visibility and/or order)
 router.put('/', processUpdate);
 
 //! CATCHALL

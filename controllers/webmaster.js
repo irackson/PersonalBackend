@@ -16,7 +16,7 @@ const renderUpdate = async (req, res) => {
     const page = await getNav(pageDir);
     const pages = await buildNavbar(req.session.admin);
 
-    res.render(`${page.dir}/update`, {
+    res.render(`${page.dir}/settings`, {
         page,
         pages,
         admin: req.session.admin,
@@ -38,6 +38,11 @@ const processUpdate = async (req, res) => {
     res.json(req.body);
 };
 
+const processCreate = async (req, res) => {
+    console.log(req.body);
+    res.redirect('back');
+};
+
 //////////////////////////////
 //! Export Controller
 //////////////////////////////
@@ -45,4 +50,5 @@ module.exports = {
     pageDir,
     renderUpdate,
     processUpdate,
+    processCreate,
 };

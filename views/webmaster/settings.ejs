@@ -62,7 +62,40 @@
                     </li>
                     <% } %>
                 </ol>
-                <button class="button" type="submit">MIND FUCK</button>
+                <button class="button" type="submit">MIND FUQ</button>
+            </form>
+
+            <form
+                action="/<%= page.dir %>/create"
+                method="POST"
+                autocomplete="off"
+            >
+                <ul>
+                    <li>
+                        <label for="dir">stable directory route</label>
+                        <input type="text" name="dir" class="input" required />
+                    </li>
+                    <li>
+                        <label for="name">display name</label>
+                        <input type="text" name="name" class="input" required />
+                    </li>
+                    <li>
+                        <label for="visible">visible</label>
+                        <input type="checkbox" name="visible" />
+                    </li>
+                    <li>
+                        <label for="position">position</label>
+                        <input
+                            type="number"
+                            name="position"
+                            min="1"
+                            max="98"
+                            step="1"
+                            required
+                        />
+                    </li>
+                </ul>
+                <button class="button" type="submit">CREATE PAGE</button>
             </form>
         </main>
 
