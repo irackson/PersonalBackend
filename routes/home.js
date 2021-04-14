@@ -1,4 +1,5 @@
 const { buildNavbar, getNav } = require('../utils/nav');
+const { isAuthorized } = require('../utils/auth');
 
 //! import router
 const router = require('express').Router();
@@ -9,6 +10,7 @@ const BlogRouter = require('./blog');
 ///////////////////////////////
 //! Router Specific Middleware
 ////////////////////////////////
+
 router.use('/webmaster', WebmasterRouter);
 router.use('/blog', BlogRouter);
 router.use('/users', UsersRouter);

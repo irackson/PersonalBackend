@@ -1,4 +1,5 @@
 const { getNav } = require('../utils/nav');
+const { isActive, isAuthorized } = require('../utils/auth');
 
 //! create our new router
 const router = require('express').Router();
@@ -13,11 +14,12 @@ const {
     processToggle,
     processDestroy,
 } = require('../controllers/blog');
-const { isAuthorized } = require('../utils/auth');
 
 ///////////////////////////////
 //! Router Specific Middleware
 ////////////////////////////////
+
+router.use('/', isActive);
 
 ////////////////////////////////
 //! Router Specific Routes
