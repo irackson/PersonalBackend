@@ -50,7 +50,7 @@ const seed = async () => {
             position: 3,
         },
         {
-            name: 'resume',
+            name: 'résumé',
             dir: 'resume',
             position: 4,
         },
@@ -107,9 +107,11 @@ const seed = async () => {
 };
 
 // run seed function
-mongoose.connection.on('open', async () => {
+/* mongoose.connection.on('open', async () => {
     // Run Seed Function
     await seed();
     console.log('done seeding');
     mongoose.connection.close();
-});
+}); */
+
+module.exports = { seed };

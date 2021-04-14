@@ -97,6 +97,13 @@
                 </ul>
                 <button class="button" type="submit">CREATE PAGE</button>
             </form>
+            <form
+                action="/<%= page.dir %>/seed"
+                method="POST"
+                autocomplete="off"
+            >
+                <button class="button" type="submit">Reseed Database</button>
+            </form>
         </main>
 
         <%- include("../partials/footer") %>

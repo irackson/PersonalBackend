@@ -1,6 +1,6 @@
 //! Import Utilities
 const { buildNavbar, getNav } = require('../utils/nav');
-
+const { seed } = require('../db/seed');
 ////////////////////////
 //! Import Models
 ////////////////////////
@@ -62,6 +62,11 @@ const processCreate = async (req, res) => {
     res.redirect('back');
 };
 
+const processSeed = async (req, res) => {
+    await seed();
+    res.redirect('back');
+};
+
 //////////////////////////////
 //! Export Controller
 //////////////////////////////
@@ -70,4 +75,5 @@ module.exports = {
     renderUpdate,
     processUpdate,
     processCreate,
+    processSeed,
 };

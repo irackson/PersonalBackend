@@ -1,7 +1,14 @@
+//! Import Utilities
 const { buildNavbar, getNav } = require('../utils/nav');
 const { isAuthorized } = require('../utils/auth');
 
-//! import router
+////////////////////////
+//! Import Models
+////////////////////////
+const Blog = require('../models/Blog');
+const Project = require('../models/Project');
+
+//! import routers
 const router = require('express').Router();
 const WebmasterRouter = require('./webmaster');
 const UsersRouter = require('./users');
@@ -25,10 +32,16 @@ const pageDir = '/';
 router.get('/', async (req, res) => {
     const page = await getNav(pageDir);
     const pages = await buildNavbar(req.session.admin);
+
+    const featuredBlog = await Blog.findOne({ featured: true });
+    const featuredProject = await Project.findOne({ featured: true });
+
     res.render('home', {
         page,
         pages,
         admin: req.session.admin,
+        featuredBlog,
+        featuredProject,
     });
 });
 
