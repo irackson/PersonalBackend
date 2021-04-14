@@ -21,7 +21,7 @@ const ProjectSchema = new Schema(
         thumbnail: {
             type: String,
             default:
-                'https://www.clipartmax.com/png/middle/105-1054200_summary-of-the-post-blog-icon-png.png',
+                'https://www.clipartmax.com/png/middle/317-3174648_web-programming-icon-clipart-website-development-computer-web-programming-icon.png',
         },
         codeLink: { type: String, default: 'https://github.com/irackson' },
         liveLink: { type: String, required: true },
