@@ -9,6 +9,39 @@
         <header><%- include("./partials/nav") %></header>
         <main class="home">
             <h1 class="pageName"><%= page.name %></h1>
+            <% if (project && (project.visible || admin)) { %>
+            <div>
+                <article
+                    class="<%= project.visible ? 'visible' : 'invisible' %>"
+                >
+                    <div>
+                        <a
+                            href="<%= project.liveLink %> "
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <img src="<%= project.thumbnail %>" alt="thumbnail"
+                        /></a>
+                    </div>
+                    <div>
+                        <a href="/projects/<%= project.slug %>">
+                            <%= project.title %>
+                        </a>
+                    </div>
+                </article>
+            </div>
+            <% } %> <% if (blog && (blog.visible || admin)) { %>
+            <div>
+                <article class="<%= blog.visible ? 'visible' : 'invisible' %>">
+                    <div>
+                        <img src="<%= blog.thumbnail %>" alt="thumbnail" />
+                    </div>
+                    <div>
+                        <a href="/blog/<%= blog.slug %>"> <%= blog.title %> </a>
+                    </div>
+                </article>
+            </div>
+            <% } %>
         </main>
 
         <%- include("./partials/footer") %>
