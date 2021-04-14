@@ -19,23 +19,42 @@ const renderUpdate = async (req, res) => {
     res.render(`${page.dir}/settings`, {
         page,
         pages,
+        editableNavs: pages.filter(
+            (e) => e.dir !== '/' && e.dir !== 'webmaster'
+        ),
         admin: req.session.admin,
     });
 };
 
 const processUpdate = async (req, res) => {
-    // const page = await getNav(pageDir);
-    // let blog = await Blog.findOne({ slug: req.params.slug });
-    // const edits = req.body;
-    // blog = await editsToBlog(Blog, edits, blog, repeatPrefix);
-    // try {
-    //     blog = await blog.save();
-    //     res.redirect(`${blog.slug}`);
-    // } catch (error) {
-    //     console.log('error');
-    //     res.redirect(`${blog.slug}/update`);
-    // }
-    res.json(req.body);
+    const page = await getNav(pageDir);
+    const navs = await Nav.find({ dir: { $nin: ['/', 'webmaster'] } });
+    navs.sort((p1, p2) => p1.position - p2.position);
+
+    for (let i = 0; i < navs.length; i++) {
+        navs[i].position = req.body.position[i];
+        navs[i].visible = false;
+        for (property in req.body) {
+            if (
+                property !== 'name' &&
+                property !== 'position' &&
+                navs[i].dir === property
+            ) {
+                navs[i].visible = true;
+            }
+        }
+
+        navs[i].name =
+            req.body.name[i] === '' ? navs[i].name : req.body.name[i];
+    }
+
+    navs.sort((p1, p2) => p1.position - p2.position);
+    for (let i = 0; i < navs.length; i++) {
+        navs[i].position = i + 1;
+        await navs[i].save();
+    }
+
+    res.redirect(`${page.dir}`);
 };
 
 const processCreate = async (req, res) => {

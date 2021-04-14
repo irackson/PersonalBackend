@@ -14,10 +14,10 @@
                 autocomplete="off"
             >
                 <ol>
-                    <% for( let i = 1; i < pages.length - 1; i++ ) { %>
+                    <% for( let i = 0; i < editableNavs.length; i++ ) { %>
                     <li>
                         <fieldset>
-                            <legend><%= pages[i].dir %></legend>
+                            <legend><%= editableNavs[i].dir %></legend>
                             <ul>
                                 <li>
                                     <label for="name">name</label>
@@ -25,23 +25,23 @@
                                         type="text"
                                         name="name"
                                         class="input"
-                                        placeholder="<%= pages[i].name %>"
+                                        placeholder="<%= editableNavs[i].name %>"
                                     />
                                 </li>
                                 <li>
-                                    <label for="<%= pages[i].dir %>"
+                                    <label for="<%= editableNavs[i].dir %>"
                                         >visible</label
                                     >
-                                    <% if (pages[i].visible) { %>
+                                    <% if (editableNavs[i].visible) { %>
                                     <input
                                         type="checkbox"
                                         checked
-                                        name="<%= pages[i].dir %>"
+                                        name="<%= editableNavs[i].dir %>"
                                     />
                                     <% } else { %>
                                     <input
                                         type="checkbox"
-                                        name="<%= pages[i].dir %>"
+                                        name="<%= editableNavs[i].dir %>"
                                     />
                                     <% } %>
                                 </li>
@@ -53,7 +53,7 @@
                                         min="1"
                                         max="98"
                                         step="1"
-                                        value="<%= pages[i].position %>"
+                                        value="<%= editableNavs[i].position %>"
                                     />
                                 </li>
                             </ul>

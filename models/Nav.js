@@ -12,7 +12,7 @@ const NavSchema = new Schema(
         name: { type: String, required: true, unique: true },
         dir: { type: String, required: true, unique: true },
         visible: { type: Boolean, default: true },
-        position: { type: Number, required: true, unique: true },
+        position: { type: Number, required: true },
     },
     { timestamps: true }
 );
