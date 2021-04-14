@@ -10,10 +10,10 @@ const Nav = require('../models/Nav');
 ///////////////////////////
 //! Controller Functions
 ///////////////////////////
-const pageName = 'webmaster';
+const pageDir = 'webmaster';
 
 const renderUpdate = async (req, res) => {
-    const page = await getNav(pageName);
+    const page = await getNav(pageDir);
     const pages = await buildNavbar(req.session.admin);
 
     res.render(`${page.dir}/update`, {
@@ -23,7 +23,7 @@ const renderUpdate = async (req, res) => {
 };
 
 const processUpdate = async (req, res) => {
-    // const page = await getNav(pageName);
+    // const page = await getNav(pageDir);
     // let blog = await Blog.findOne({ slug: req.params.slug });
     // const edits = req.body;
     // blog = await editsToBlog(Blog, edits, blog, repeatPrefix);
@@ -41,7 +41,7 @@ const processUpdate = async (req, res) => {
 //! Export Controller
 //////////////////////////////
 module.exports = {
-    pageName,
+    pageDir,
     renderUpdate,
     processUpdate,
 };

@@ -3,7 +3,7 @@ const { getNav } = require('../utils/nav');
 //! create our new router
 const router = require('express').Router();
 const {
-    pageName,
+    pageDir,
     renderUpdate,
     processUpdate,
 } = require('../controllers/webmaster');
@@ -28,7 +28,7 @@ router.put('/', processUpdate);
 //! CATCHALL
 router.get('/*', async (req, res) => {
     console.log('webmaster catchall invoked');
-    const page = await getNav(pageName);
+    const page = await getNav(pageDir);
     res.redirect(`/${page.dir}`);
 });
 ////////////////////////////////

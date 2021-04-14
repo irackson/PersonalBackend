@@ -18,10 +18,10 @@ router.use('/users', UsersRouter);
 ////////////////////////////////
 //! Router Specific Routes
 ////////////////////////////////
-const pageName = 'home';
+const pageDir = '/';
 
 router.get('/', async (req, res) => {
-    const page = await getNav(pageName);
+    const page = await getNav(pageDir);
     const pages = await buildNavbar(req.session.admin);
     res.render('home', {
         page,

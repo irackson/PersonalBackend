@@ -4,7 +4,7 @@ const { isActive, isAuthorized } = require('../utils/auth');
 //! create our new router
 const router = require('express').Router();
 const {
-    pageName,
+    pageDir,
     renderIndex,
     renderCreate,
     renderShow,
@@ -52,7 +52,7 @@ router.delete('/:slug', isAuthorized, processDestroy);
 //! CATCHALL
 router.get('/*', async (req, res) => {
     console.log('blog catchall invoked');
-    const page = await getNav(pageName);
+    const page = await getNav(pageDir);
     res.redirect(`/${page.dir}`);
 });
 ////////////////////////////////

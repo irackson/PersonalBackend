@@ -12,11 +12,11 @@ const Blog = require('../models/Blog');
 ///////////////////////////
 //! Controller Functions
 ///////////////////////////
-const pageName = 'blog';
+const pageDir = 'blog';
 const repeatPrefix = 'repeat=';
 
 const renderIndex = async (req, res) => {
-    const page = await getNav(pageName);
+    const page = await getNav(pageDir);
     let blogs = req.session.admin
         ? await Blog.find({})
         : await Blog.find({ visible: true });
@@ -35,7 +35,7 @@ const renderIndex = async (req, res) => {
 };
 
 const renderCreate = async (req, res) => {
-    const page = await getNav(pageName);
+    const page = await getNav(pageDir);
     const existingTags = await getExistingTags(Blog);
 
     res.render(`${page.dir}/create`, {
@@ -47,7 +47,7 @@ const renderCreate = async (req, res) => {
 };
 
 const renderShow = async (req, res) => {
-    const page = await getNav(pageName);
+    const page = await getNav(pageDir);
     const blog = await Blog.findOne({ slug: req.params.slug });
     if (blog === null) {
         res.redirect(`/${page.dir}`);
@@ -79,7 +79,7 @@ const renderShow = async (req, res) => {
 };
 
 const renderUpdate = async (req, res) => {
-    const page = await getNav(pageName);
+    const page = await getNav(pageDir);
     const blog = await Blog.findOne({ slug: req.params.slug });
     const existingTags = await getExistingTags(Blog);
 
@@ -93,7 +93,7 @@ const renderUpdate = async (req, res) => {
 };
 
 const processCreate = async (req, res) => {
-    const page = await getNav(pageName);
+    const page = await getNav(pageDir);
     const tempTitle = Math.random().toString();
     let blog = await Blog.create(
         new Blog({
@@ -118,7 +118,7 @@ const processCreate = async (req, res) => {
 };
 
 const processUpdate = async (req, res) => {
-    const page = await getNav(pageName);
+    const page = await getNav(pageDir);
     let blog = await Blog.findOne({ slug: req.params.slug });
     const edits = req.body;
     blog = await editsToBlog(Blog, edits, blog, repeatPrefix);
@@ -134,7 +134,7 @@ const processUpdate = async (req, res) => {
 };
 
 const processToggle = async (req, res) => {
-    const page = await getNav(pageName);
+    const page = await getNav(pageDir);
 
     const blog = await Blog.findOne({ slug: req.params.slug });
     blog.visible = !blog.visible;
@@ -145,7 +145,7 @@ const processToggle = async (req, res) => {
 };
 
 const processDestroy = async (req, res) => {
-    const page = await getNav(pageName);
+    const page = await getNav(pageDir);
     await Blog.findOneAndDelete({ slug: req.params.slug });
 
     res.redirect(`/${page.dir}`);
@@ -155,7 +155,7 @@ const processDestroy = async (req, res) => {
 //! Export Controller
 //////////////////////////////
 module.exports = {
-    pageName,
+    pageDir,
     renderIndex,
     renderCreate,
     renderShow,

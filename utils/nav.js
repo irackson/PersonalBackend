@@ -12,8 +12,8 @@ const buildNavbar = async (admin) => {
     });
 };
 
-const getNav = async (currentPageName) => {
-    const page = await Nav.findOne({ name: currentPageName });
+const getNav = async (pageDir) => {
+    const page = await Nav.findOne({ dir: pageDir });
     return new Promise(function (myResolve) {
         myResolve(page);
     });
