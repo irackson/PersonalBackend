@@ -5,8 +5,9 @@ const mongoose = require('./connection');
 // Import Your Models Below
 /////////////////////////////////
 
-const User = require('../models/User');
+// const User = require('../models/User');
 const Nav = require('../models/Nav');
+const Sub = require('../models/Sub');
 const Blog = require('../models/Blog');
 const Project = require('../models/Project');
 
@@ -17,6 +18,7 @@ const seed = async () => {
     //--- CODE GOES HERE
     //clear collections before seeding
     await Nav.deleteMany({}); // to clear cross-site linkage
+    await Sub.deleteMany({}); // to clear cross-site linkage
     await Blog.deleteMany({}); // to clear all blogs
     await Project.deleteMany({}); // to clear all blogs
 
@@ -102,6 +104,45 @@ const seed = async () => {
             thumbnail: 'https://i.imgur.com/OsYK1u2.png',
             featured: 'true',
             visible: 'true',
+        },
+    ]);
+
+    //* seed email lists
+    const projectsNav = await Nav.findOne({ dir: 'projects' });
+    const blogNav = await Nav.findOne({ dir: 'blog' });
+
+    await Sub.create([
+        {
+            contentType: projectsNav._id,
+            active: true,
+            subscribers: [
+                {
+                    first_name: 'IanP',
+                    email: 'nasirus@protonmail.com',
+                    confirmation: true,
+                },
+                {
+                    first_name: 'IanG',
+                    email: 'inasusr@gmail.com',
+                    confirmation: true,
+                },
+            ],
+        },
+        {
+            contentType: blogNav._id,
+            active: true,
+            subscribers: [
+                {
+                    first_name: 'IanP',
+                    email: 'nasirus@protonmail.com',
+                    confirmation: true,
+                },
+                {
+                    first_name: 'IanG',
+                    email: 'inasusr@gmail.com',
+                    confirmation: true,
+                },
+            ],
         },
     ]);
 };

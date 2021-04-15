@@ -1,6 +1,3 @@
-// admins will have access to editing things
-// VIPs will have access to the VIP page --> there will be no way to become a VIP other than to contact me and pay outside of the website until that feature is integrated. once payment is made, I will go into the database and turn the paying user into a VIP
-
 //! Destructure Schema and model from our connected mongoose
 const { Schema, model } = require('../db/connection');
 
@@ -10,8 +7,23 @@ const { Schema, model } = require('../db/connection');
 
 const SubSchema = new Schema(
     {
-        contentType: { type: String, required: true },
-        emails: [{ type: String, required: true }],
+        contentType: {
+            type: Schema.Types.ObjectId,
+            ref: 'Nav',
+            required: true,
+        },
+        subscribers: {
+            type: [
+                {
+                    first_name: { type: String },
+                    email: { type: String, required: true },
+                    confirmation: { type: Boolean, default: false },
+                    account: { type: Schema.Types.ObjectId, ref: 'User' },
+                },
+            ],
+            active: { type: Boolean, default: false },
+            default: [],
+        },
     },
     { timestamps: true }
 );

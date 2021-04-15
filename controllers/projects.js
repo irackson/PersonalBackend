@@ -1,5 +1,6 @@
 //! Import Utilities
 const { buildNavbar, getNav } = require('../utils/nav');
+const { sendSub } = require('../utils/sub');
 const { getExistingTags } = require('../utils/filter');
 const { editsToPost } = require('../utils/crud');
 const { formatDate } = require('../utils/format');
@@ -114,7 +115,7 @@ const processCreate = async (req, res) => {
     project = await editsToPost(Project, edits, project, repeatPrefix);
     try {
         project = await project.save();
-
+        await sendSub(page, project);
         res.redirect(`${page.dir}/${project.slug}`);
     } catch (error) {
         console.log(error);
