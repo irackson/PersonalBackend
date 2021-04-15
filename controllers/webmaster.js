@@ -5,7 +5,7 @@ const { seed } = require('../db/seed');
 //! Import Models
 ////////////////////////
 
-// const Nav = require('../models/Nav');
+const Nav = require('../models/Nav');
 const Sub = require('../models/Sub');
 
 ///////////////////////////
