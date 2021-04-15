@@ -11,6 +11,7 @@
             <h1 class="pageName"><%= page.name %></h1>
             <% if (project && (project.visible || admin)) { %>
             <div>
+                <h3>featured post</h3>
                 <article
                     class="<%= project.visible ? 'visible' : 'invisible' %>"
                 >
@@ -21,7 +22,10 @@
                             rel="noopener noreferrer"
                             aria-label="live link to <%= project.title %>"
                         >
-                            <img src="<%= project.thumbnail %>" alt="thumbnail"
+                            <img
+                                class="featured"
+                                src="<%= project.thumbnail %>"
+                                alt="thumbnail"
                         /></a>
                     </div>
                     <div>
@@ -36,9 +40,14 @@
             </div>
             <% } %> <% if (blog && (blog.visible || admin)) { %>
             <div>
+                <h3>featured blog</h3>
                 <article class="<%= blog.visible ? 'visible' : 'invisible' %>">
                     <div>
-                        <img src="<%= blog.thumbnail %>" alt="thumbnail" />
+                        <img
+                            class="featured"
+                            src="<%= blog.thumbnail %>"
+                            alt="thumbnail"
+                        />
                     </div>
                     <div>
                         <a

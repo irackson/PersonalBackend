@@ -1,1 +1,11 @@
 @use '../abstracts' as *;
+
+.thumbnail {
+    width: 8rem;
+    height: 8rem;
+}
+
+.featured {
+    width: 15rem;
+    height: 15rem;
+}

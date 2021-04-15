@@ -1,7 +1,19 @@
-<footer>
+<footer class="footer">
     <!-- load script at end of body -->
     <% if (admin) { %>
     <a href="/users/logout">logout</a>
     <% } %>
+    <div>
+        <i
+            id="github"
+            class="fab fa-github-square"
+            onclick="window.open('https://github.com/irackson')"
+        ></i>
+        <i
+            id="slack"
+            class="fab fa-slack"
+            onclick="window.open('https://ga-students.slack.com/team/U01GN8NP1C5')"
+        ></i>
+    </div>
     <script src="/all.js"></script>
 </footer>
