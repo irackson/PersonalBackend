@@ -1,5 +1,6 @@
 //! Import Utilities
 const { buildNavbar, getNav } = require('../utils/nav');
+const { sendSub } = require('../utils/sub');
 const { getExistingTags } = require('../utils/filter');
 const { editsToPost } = require('../utils/crud');
 const { formatDate } = require('../utils/format');
@@ -110,6 +111,10 @@ const processCreate = async (req, res) => {
     const edits = req.body;
     blog = await editsToPost(Blog, edits, blog, repeatPrefix);
     try {
+        if (blog.visible) {
+            await sendSub(page, blog);
+            blog.previouslySent = true;
+        }
         blog = await blog.save();
 
         res.redirect(`${page.dir}/${blog.slug}`);
@@ -123,10 +128,15 @@ const processCreate = async (req, res) => {
 const processUpdate = async (req, res) => {
     const page = await getNav(pageDir);
     let blog = await Blog.findOne({ slug: req.params.slug });
+    const sentStatus = blog.previouslySent;
     const edits = req.body;
     blog = await editsToPost(Blog, edits, blog, repeatPrefix);
     try {
-        blog = await blog.save();
+        if (sentStatus === false && blog.visible === true) {
+            await sendSub(page, blog);
+            blog.previouslySent = true;
+        }
+        await blog.save();
 
         res.redirect(`${blog.slug}`);
     } catch (error) {

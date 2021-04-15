@@ -114,8 +114,12 @@ const processCreate = async (req, res) => {
     const edits = req.body;
     project = await editsToPost(Project, edits, project, repeatPrefix);
     try {
+        if (project.visible) {
+            await sendSub(page, project);
+            project.previouslySent = true;
+        }
         project = await project.save();
-        await sendSub(page, project);
+
         res.redirect(`${page.dir}/${project.slug}`);
     } catch (error) {
         console.log(error);
@@ -127,10 +131,15 @@ const processCreate = async (req, res) => {
 const processUpdate = async (req, res) => {
     const page = await getNav(pageDir);
     let project = await Project.findOne({ slug: req.params.slug });
+    const sentStatus = project.previouslySent;
     const edits = req.body;
     project = await editsToPost(Project, edits, project, repeatPrefix);
     try {
-        project = await project.save();
+        if (sentStatus === false && project.visible === true) {
+            await sendSub(page, project);
+            project.previouslySent = true;
+        }
+        await project.save();
 
         res.redirect(`${project.slug}`);
     } catch (error) {

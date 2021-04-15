@@ -21,6 +21,7 @@ const auth = {
 let transporter = nodemailer.createTransport(nodemailMailgun(auth));
 
 const Sub = require('../models/Sub');
+const Project = require('../models/Project');
 
 const isolateEmails = (subscribers) => {
     let emails = [];
@@ -56,7 +57,7 @@ const sendSub = async (page, post) => {
         if (err) {
             console.log('Mail error: ', err);
         } else {
-            console.log('Message sent!!');
+            console.log('email successfully distributed');
         }
     });
 };

@@ -16,6 +16,7 @@ const BlogSchema = new Schema(
         description: { type: String, required: true },
         tags: { type: [String], required: true },
         visible: { type: Boolean, default: false },
+        previouslySent: { type: Boolean, default: false },
         markdown: { type: String, required: true },
         featured: { type: Boolean, default: false },
         thumbnail: {
