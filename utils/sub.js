@@ -8,20 +8,39 @@ const nodemailer = require('nodemailer');
 const nodemailMailgun = require('nodemailer-mailgun-transport');
 
 //! import modules;
+const Sub = require('../models/Sub');
 
-// Step 1
+//* config
 const auth = {
     auth: {
         api_key: process.env.MAILGUN_API,
         domain: process.env.MAILGUN_DOMAIN,
     },
 };
-
-// Step 2
 let transporter = nodemailer.createTransport(nodemailMailgun(auth));
 
-const Sub = require('../models/Sub');
-const Project = require('../models/Project');
+//* helper functions
+const composeSubject = (page, post) => {
+    let textString = '';
+
+    textString += `My new ${page.name}! Presenting... ${post.title}`;
+
+    return textString;
+};
+
+const composeMessage = (page, post) => {
+    let textString = '';
+
+    textString += `Please check out the new ${page.name} I just posted! \n`;
+    textString += `Here's a short description: ${post.description}\n`;
+
+    if (page.dir === 'projects') {
+        textString += `Live link: ${post.liveLink} \n`;
+        textString += `Code link: ${post.codeLink} \n`;
+    }
+
+    return textString;
+};
 
 const isolateEmails = (subscribers) => {
     let emails = [];
@@ -39,17 +58,14 @@ const sendSub = async (page, post) => {
         path: 'contentType',
     });
 
-    const sub = subs.filter((e) => e.contentType.dir === page.dir)[0];
-
     //! send email
-    // Step 3
-    const recipients = isolateEmails(sub.subscribers);
-    console.log(recipients);
     const mailOptions = {
         from: `Ian Rackson <${process.env.MAILGUN_FROM}>`,
-        to: recipients,
-        subject: `new ${page.name}! Check out ${post.title}`,
-        text: post.description,
+        to: isolateEmails(
+            subs.filter((e) => e.contentType.dir === page.dir)[0].subscribers
+        ),
+        subject: composeSubject(page, post),
+        text: composeMessage(page, post),
     };
 
     // Step 4
