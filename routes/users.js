@@ -6,6 +6,7 @@ const {
     getLogin,
     loginSubmit,
     logout,
+    subscriptionSubmit,
 } = require('../controllers/users');
 const { isAuthenticated, isAuthorized } = require('../utils/auth');
 
@@ -28,6 +29,9 @@ router.get('/login', getLogin);
 
 //* LOGIN SUBMIT
 router.post('/login', loginSubmit);
+
+//* SUB SUBMIT
+router.post('/subscribe', subscriptionSubmit);
 
 //* LOGOUT
 router.get('/logout', logout);

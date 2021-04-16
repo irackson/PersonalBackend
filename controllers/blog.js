@@ -30,6 +30,7 @@ const renderIndex = async (req, res) => {
         page,
         pages: await buildNavbar(req.session.admin),
         admin: req.session.admin,
+        sub: req.session.sub,
         blogs,
         filters,
     });
@@ -43,6 +44,7 @@ const renderCreate = async (req, res) => {
         page,
         pages: await buildNavbar(req.session.admin),
         admin: req.session.admin,
+        sub: req.session.sub,
         existingTags,
         repeatPrefix,
     });
@@ -73,6 +75,7 @@ const renderShow = async (req, res) => {
             page,
             pages: await buildNavbar(req.session.admin),
             admin: req.session.admin,
+            sub: req.session.sub,
             blog,
             displayPublished,
             displayUpdated,
@@ -89,7 +92,7 @@ const renderUpdate = async (req, res) => {
         page,
         pages: await buildNavbar(req.session.admin),
         admin: req.session.admin,
-
+        sub: req.session.sub,
         existingTags,
         repeatPrefix,
         blog,

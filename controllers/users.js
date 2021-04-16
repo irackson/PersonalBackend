@@ -8,6 +8,7 @@ const adminCode = process.env.ADMIN_CODE || '';
 //! Import Models
 ////////////////////////
 const User = require('../models/User');
+const Sub = require('../models/Sub');
 
 ///////////////////////////
 //! Controller Functions
@@ -56,8 +57,6 @@ const createSubmit = async (req, res) => {
 };
 
 const getLogin = async (req, res) => {
-    // req.session.user = undefined;
-    // req.session.admin = false;
     res.render('users/login');
 };
 
@@ -84,9 +83,41 @@ const loginSubmit = async (req, res) => {
     }
 };
 
+const subscriptionSubmit = async (req, res) => {
+    console.log(req.body);
+
+    if (req.body.projects === 'on' && req.body.blog === 'on') {
+        req.session.sub = {
+            projects: true,
+            blog: true,
+        };
+    } else if (req.body.projects === 'on') {
+        req.session.sub = {
+            projects: true,
+            blog: false,
+        };
+    } else if (req.body.blog === 'on') {
+        req.session.sub = {
+            projects: false,
+            blog: true,
+        };
+    }
+
+    console.log(req.session);
+    try {
+        res.redirect('back');
+    } catch (error) {
+        console.log('error');
+    }
+};
+
 const logout = (req, res) => {
     req.session.user = undefined;
     req.session.admin = false;
+    req.session.sub = {
+        projects: false,
+        blog: false,
+    };
     res.redirect('/');
 };
 
@@ -99,4 +130,5 @@ module.exports = {
     getLogin,
     loginSubmit,
     logout,
+    subscriptionSubmit,
 };

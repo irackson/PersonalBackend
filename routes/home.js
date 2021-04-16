@@ -40,6 +40,7 @@ router.get('/', async (req, res) => {
         page,
         pages,
         admin: req.session.admin,
+        sub: req.session.sub,
         blog: featuredBlog,
         project: featuredProject,
     });

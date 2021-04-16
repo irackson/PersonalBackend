@@ -2,23 +2,48 @@
     <!-- load script at end of body -->
     <% if (admin) { %>
     <a href="/users/logout">logout</a>
-    <% } %>
+    <% } %> <% if ((sub.projects === false) || (sub.blog === false)) { %>
     <section>
         <div>
-            <h4>Sign up to receive an email whenever I post a new...</h4>
+            <h4>Sign up to receive an email whenever I post to...</h4>
         </div>
-        <form action="">
+        <form action="/users/subscribe" method="POST" autocomplete="off">
             <div>
-                <!-- checkbox for projects -->
-                <!-- checkbox for blogs -->
+                <% if (sub.projects === false) { %>
+                <div>
+                    <label for="projects"
+                        ><%= pages.filter(e => e.dir === 'projects')[0].name %>
+                    </label>
+                    <input type="checkbox" name="projects" />
+                </div>
+                <% } %><%if (sub.blog === false) { %>
+                <div>
+                    <label for="blog"
+                        ><%= pages.filter(e => e.dir === 'blog')[0].name %>
+                    </label>
+                    <input type="checkbox" name="blog" />
+                </div>
+                <% } %>
             </div>
             <div>
-                <!-- textbox input for first name -->
-                <!-- textbox input for email -->
+                <input
+                    type="text"
+                    name="first_name"
+                    class="input"
+                    placeholder="first name"
+                />
+                <input
+                    type="email"
+                    name="email"
+                    required
+                    class="input"
+                    placeholder="your email address"
+                />
             </div>
-            <button></button>
+            <button class="button" type="submit">Subscribe</button>
         </form>
     </section>
+    <% } %>
     <div>
         <i
             id="github"
