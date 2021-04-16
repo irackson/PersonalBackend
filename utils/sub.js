@@ -21,25 +21,24 @@ let transporter = nodemailer.createTransport(nodemailMailgun(auth));
 
 //* helper functions
 const composeSubject = (page, post) => {
-    let textString = '';
-
-    textString += `My new ${page.name}! Presenting... ${post.title}`;
-
-    return textString;
+    if (page.dir === 'projects') {
+        return `My new project! Presenting... ${post.title}`;
+    }
+    if (page.dir === 'blog') {
+        return `My new article: '${post.title}'`;
+    }
+    return 'unintentional automated message definitely not from Ian Rackson';
 };
 
 const composeMessage = (page, post) => {
-    let textString = '';
-
-    textString += `Please check out the new ${page.name} I just posted! \n`;
-    textString += `Here's a short description: ${post.description}\n`;
-
     if (page.dir === 'projects') {
-        textString += `Live link: ${post.liveLink} \n`;
-        textString += `Code link: ${post.codeLink} \n`;
+        return `<h2>Please check out the new project I just posted!</h2><br><br><h3>Its called ${post.title}, and the <a href='${post.liveLink}'>live site</a> is up and running.<br><br>I would love for you to read more about the project on my <a href='http://ianrackson.herokuapp.com/${page.dir}/${post.slug}'>personal website</a>.<br><br>Or, if you are just interested in the code, here's a link to the <a href='${post.codeLink}'>github repo</a>.<br><br>Just to give you an idea of what the project is about, here is a brief description of ${post.title}:<br><br><em>${post.description}</em></h3><br><br><h2>Thanks so much for subscribing to my automated portfolio distribution list!</h2><br><h4>Best,<br>Ian Rackson</h4>`;
+    }
+    if (page.dir === 'blog') {
+        return `<h2>Please check out my latest blog post!</h2><br><br><h3>Its titled '${post.title},' and you can read it now on my <a href='http://ianrackson.herokuapp.com/${page.dir}/${post.slug}'>personal website</a>.<br><br>Just to give you an idea of what the article is about, here is a brief description:<br><br><em>${post.description}</em></h3><br><br><h2>Thanks so much for subscribing to my automated blog distribution list!</h2><br><h4>Best,<br>Ian Rackson</h4>`;
     }
 
-    return textString;
+    return '<h3>Please ignore this email as I have no idea why it was sent. Clearly, someone still have some work to do on his/her personal website.</h3><br><br><h4>Thanks and sorry,<br>- definitely not Ian Rackson</h4>';
 };
 
 const isolateEmails = (subscribers) => {
@@ -65,7 +64,7 @@ const sendSub = async (page, post) => {
             subs.filter((e) => e.contentType.dir === page.dir)[0].subscribers
         ),
         subject: composeSubject(page, post),
-        text: composeMessage(page, post),
+        html: composeMessage(page, post),
     };
 
     // Step 4
