@@ -150,13 +150,14 @@ const subscriptionSubmit = async (req, res) => {
 };
 
 const unsubscribeRender = async (req, res) => {
-    const url = req._parsedOriginalUrl._raw;
-    console.dir(url);
-    const contentType = 'temp';
-    const email = 'temp';
+    const params = req._parsedOriginalUrl._raw.split('/').pop().split('&');
+
+    const email = params[0].split('=').pop();
+    const contentType = params[1].split('=').pop();
+
     res.render('users/unsubscribe', {
-        contentType,
         email,
+        contentType,
     });
 };
 
