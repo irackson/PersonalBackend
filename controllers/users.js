@@ -154,10 +154,7 @@ const unsubscribeSubmit = async (req, res) => {};
 const logout = (req, res) => {
     req.session.user = undefined;
     req.session.admin = false;
-    req.session.sub = {
-        projects: false,
-        blog: false,
-    };
+    req.session.sub = undefined;
     res.redirect('/');
 };
 
