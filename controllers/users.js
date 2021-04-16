@@ -1,8 +1,9 @@
 require('dotenv').config();
-
 const bcrypt = require('bcryptjs');
 const saltRounds = parseInt(process.env.SALT_ROUNDS) || 10;
 const adminCode = process.env.ADMIN_CODE || '';
+
+const { sendWelcome } = require('../utils/sub');
 
 ////////////////////////
 //! Import Models
@@ -85,20 +86,57 @@ const loginSubmit = async (req, res) => {
 
 const subscriptionSubmit = async (req, res) => {
     console.log(req.body);
+    const subs = await Sub.find({}).populate({
+        path: 'contentType',
+    });
 
     if (req.body.projects === 'on' && req.body.blog === 'on') {
+        for (let i = 0; i < subs.length; i++) {
+            subs[i].subscribers.push({
+                first_name:
+                    req.body.first_name === ''
+                        ? 'Stranger'
+                        : req.body.first_name,
+                email: req.body.email,
+                confirmation: true,
+            });
+            await subs[i].save();
+        }
+        await sendWelcome('project post', req.body.first_name, req.body.email);
+        await sendWelcome('blog post', req.body.first_name, req.body.email);
+
         req.session.sub = {
             projects: true,
             blog: true,
         };
     } else if (req.body.projects === 'on') {
+        const projectSub = subs.filter(
+            (e) => e.contentType.dir === 'projects'
+        )[0];
+        projectSub.subscribers.push({
+            first_name:
+                req.body.first_name === '' ? 'Stranger' : req.body.first_name,
+            email: req.body.email,
+            confirmation: true,
+        });
+        await projectSub.save();
+        await sendWelcome('project post', req.body.first_name, req.body.email);
+
         req.session.sub = {
             projects: true,
-            blog: false,
         };
     } else if (req.body.blog === 'on') {
+        const blogSub = subs.filter((e) => e.contentType.dir === 'blog')[0];
+        blogSub.subscribers.push({
+            first_name:
+                req.body.first_name === '' ? 'Stranger' : req.body.first_name,
+            email: req.body.email,
+            confirmation: true,
+        });
+        await blogSub.save();
+        await sendWelcome('blog post', req.body.first_name, req.body.email);
+
         req.session.sub = {
-            projects: false,
             blog: true,
         };
     }
@@ -110,6 +148,8 @@ const subscriptionSubmit = async (req, res) => {
         console.log('error');
     }
 };
+
+const unsubscribeSubmit = async (req, res) => {};
 
 const logout = (req, res) => {
     req.session.user = undefined;
@@ -131,4 +171,5 @@ module.exports = {
     loginSubmit,
     logout,
     subscriptionSubmit,
+    unsubscribeSubmit,
 };

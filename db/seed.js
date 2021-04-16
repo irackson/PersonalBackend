@@ -86,7 +86,7 @@ const seed = async () => {
             thumbnail:
                 'https://cdn3.iconfinder.com/data/icons/software-development-filled-line/2048/5414_-_Hello_World_Program-512.png',
             featured: 'true',
-            visible: 'true',
+            visible: 'false',
         },
     ]);
 
@@ -103,7 +103,7 @@ const seed = async () => {
                 '### <pre><code class="language-js">console.log("Welcome to the Boilerplate Store!")</code></pre>',
             thumbnail: 'https://i.imgur.com/OsYK1u2.png',
             featured: 'true',
-            visible: 'true',
+            visible: 'false',
         },
     ]);
 

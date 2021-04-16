@@ -7,6 +7,7 @@ const {
     loginSubmit,
     logout,
     subscriptionSubmit,
+    unsubscribeSubmit,
 } = require('../controllers/users');
 const { isAuthenticated, isAuthorized } = require('../utils/auth');
 
@@ -32,6 +33,9 @@ router.post('/login', loginSubmit);
 
 //* SUB SUBMIT
 router.post('/subscribe', subscriptionSubmit);
+
+//* UNSUB SUBMIT
+router.post('/unsubscribe', unsubscribeSubmit);
 
 //* LOGOUT
 router.get('/logout', logout);

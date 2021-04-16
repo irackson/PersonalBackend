@@ -24,6 +24,7 @@ const renderUpdate = async (req, res) => {
             (e) => e.dir !== '/' && e.dir !== 'webmaster'
         ),
         admin: req.session.admin,
+        sub: req.session.sub,
     });
 };
 
