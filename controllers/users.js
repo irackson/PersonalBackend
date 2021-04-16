@@ -102,8 +102,8 @@ const subscriptionSubmit = async (req, res) => {
             });
             await subs[i].save();
         }
-        await sendWelcome('project post', req.body.first_name, req.body.email);
-        await sendWelcome('blog post', req.body.first_name, req.body.email);
+        await sendWelcome('projects', req.body.first_name, req.body.email);
+        await sendWelcome('blog', req.body.first_name, req.body.email);
 
         req.session.sub = {
             projects: true,
@@ -120,7 +120,7 @@ const subscriptionSubmit = async (req, res) => {
             confirmation: true,
         });
         await projectSub.save();
-        await sendWelcome('project post', req.body.first_name, req.body.email);
+        await sendWelcome('projects', req.body.first_name, req.body.email);
 
         req.session.sub = {
             projects: true,
@@ -134,7 +134,7 @@ const subscriptionSubmit = async (req, res) => {
             confirmation: true,
         });
         await blogSub.save();
-        await sendWelcome('blog post', req.body.first_name, req.body.email);
+        await sendWelcome('blog', req.body.first_name, req.body.email);
 
         req.session.sub = {
             blog: true,
@@ -149,7 +149,20 @@ const subscriptionSubmit = async (req, res) => {
     }
 };
 
-const unsubscribeSubmit = async (req, res) => {};
+const unsubscribeRender = async (req, res) => {
+    const url = req._parsedOriginalUrl._raw;
+    console.dir(url);
+    const contentType = 'temp';
+    const email = 'temp';
+    res.render('users/unsubscribe', {
+        contentType,
+        email,
+    });
+};
+
+const unsubscribeSubmit = async (req, res) => {
+    res.json({ message: 'you have successfully unsubscribed' });
+};
 
 const logout = (req, res) => {
     req.session.user = undefined;
@@ -168,5 +181,6 @@ module.exports = {
     loginSubmit,
     logout,
     subscriptionSubmit,
+    unsubscribeRender,
     unsubscribeSubmit,
 };

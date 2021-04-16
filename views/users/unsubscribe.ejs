@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Unsubscribe</title>
+    </head>
+    <body>
+        <main class="users-unsubscribe">
+            <form action="/users/unsubscribe" method="POST" autocomplete="off">
+                <p>
+                    Are you sure you would like to unsubscribe the email <%=
+                    email %> from the new <%= contentType %> mailing list?
+                </p>
+                <button class="button" type="submit">Unsubscribe</button>
+            </form>
+        </main>
+    </body>
+</html>
