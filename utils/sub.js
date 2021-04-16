@@ -63,7 +63,7 @@ const attachUnsubscribe = (messageBody, recipient, contentType) => {
         contentType === 'projects' ? 'portfolio project' : 'blog post';
 
     return (
-        message +
+        messageBody +
         styleBreak +
         `<h5>If you would no longer like to receive a email every time I add a new ${content} to my website, you may <a href='${unsubLink}'>unsubscribe here</a></5>`
     );

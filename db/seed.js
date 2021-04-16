@@ -132,11 +132,11 @@ const seed = async () => {
             contentType: blogNav._id,
             active: true,
             subscribers: [
-                {
-                    first_name: 'IanP',
-                    email: 'nasirus@protonmail.com',
-                    confirmation: true,
-                },
+                // {
+                //     first_name: 'IanP',
+                //     email: 'nasirus@protonmail.com',
+                //     confirmation: true,
+                // },
                 {
                     first_name: 'IanG',
                     email: 'inasusr@gmail.com',
