@@ -9,16 +9,42 @@
         <main class="metrics-index">
             <h1 class="pageName"><%= page.name %></h1>
             <section>
+                <!-- https://github.com/Bloggify/github-calendar#installation -->
+                <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+                <link
+                    rel="stylesheet"
+                    href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css"
+                />
+
+                <div class="calendar">
+                    <!-- Loading stuff -->
+                    My Github contributions graph is now loading...
+                </div>
+                <script>
+                    // or enable responsive functionality:
+                    GitHubCalendar('.calendar', 'irackson', {
+                        summary_text:
+                            'Summary of my Github pull requests, issues opened, and commits',
+                        responsive: true,
+                        tooltips: true,
+                    });
+                </script>
+            </section>
+            <section>
                 <!-- src: https://wakatime.com/share/embed -->
                 <!-- Coding Activity, Last 30 Days, Transparent, #3fbb81 -->
                 <figure>
                     <embed
+                        width="1000"
+                        height="700"
                         src="https://wakatime.com/share/@4c81cb27-377a-401f-b22b-0f0921763ea1/192f8a18-8f63-40c4-b7df-7afb3945b376.svg"
                     />
                 </figure>
                 <!-- Languages, All Time, Transparent, #3fbb81 -->
                 <figure>
                     <embed
+                        width="1000"
+                        height="700"
                         src="https://wakatime.com/share/@4c81cb27-377a-401f-b22b-0f0921763ea1/24573ca6-65ed-4336-bc5d-886b2e845097.svg"
                     />
                 </figure>
