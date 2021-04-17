@@ -121,9 +121,7 @@ const subscriptionSubmit = async (req, res) => {
         await projectSub.save();
         await sendWelcome('projects', req.body.first_name, req.body.email);
 
-        req.session.sub = {
-            projects: true,
-        };
+        req.session.sub.projects = true;
     } else if (req.body.blog === 'on') {
         const blogSub = subs.filter((e) => e.contentType.dir === 'blog')[0];
         blogSub.subscribers.push({
@@ -135,9 +133,7 @@ const subscriptionSubmit = async (req, res) => {
         await blogSub.save();
         await sendWelcome('blog', req.body.first_name, req.body.email);
 
-        req.session.sub = {
-            blog: true,
-        };
+        req.session.sub.blog = true;
     }
 
     console.log(req.session);
