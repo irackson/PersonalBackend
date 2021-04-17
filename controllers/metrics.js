@@ -1,6 +1,6 @@
 //! Import Utilities
 const { buildNavbar, getNav } = require('../utils/nav');
-const { formatDate } = require('../utils/format');
+
 ////////////////////////
 //! Import Models
 ////////////////////////
