@@ -21,7 +21,7 @@ const renderIndex = async (req, res) => {
     let projects = req.session.admin
         ? await Project.find({})
         : await Project.find({ visible: true });
-    const filters = await getExistingTags(Project);
+    const filters = await getExistingTags(Project, req.session.admin);
     projects.forEach((project) => {
         project.displayUpdated = formatDate(project.updatedAt);
         return project;

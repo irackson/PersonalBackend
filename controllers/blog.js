@@ -21,7 +21,7 @@ const renderIndex = async (req, res) => {
     let blogs = req.session.admin
         ? await Blog.find({})
         : await Blog.find({ visible: true });
-    const filters = await getExistingTags(Blog);
+    const filters = await getExistingTags(Blog, req.session.admin);
     blogs.forEach((blog) => {
         blog.displayUpdated = formatDate(blog.updatedAt);
         return blog;

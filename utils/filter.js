@@ -1,10 +1,15 @@
-const getExistingTags = async (Model) => {
+const getExistingTags = async (Model, admin) => {
     let existingTags = [];
+    const blogsWithTags = admin
+        ? await Model.find(
+              { tags: { $ne: ['other'] }, visible: true },
+              'tags -_id'
+          )
+        : await Model.find(
+              { tags: { $ne: ['other'] }, visible: false },
+              'tags -_id'
+          );
 
-    const blogsWithTags = await Model.find(
-        { tags: { $ne: ['other'] } },
-        'tags -_id'
-    );
     for (let b = 0; b < blogsWithTags.length; b++) {
         blogsWithTags[b]['tags'].forEach((t) => {
             if (!existingTags.includes(t)) {
