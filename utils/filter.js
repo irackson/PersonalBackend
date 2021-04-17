@@ -1,12 +1,9 @@
 const getExistingTags = async (Model, admin) => {
     let existingTags = [];
     const blogsWithTags = admin
-        ? await Model.find(
-              { tags: { $ne: ['other'] }, visible: true },
-              'tags -_id'
-          )
+        ? await Model.find({ tags: { $ne: ['other'] } }, 'tags -_id')
         : await Model.find(
-              { tags: { $ne: ['other'] }, visible: false },
+              { tags: { $ne: ['other'] }, visible: true },
               'tags -_id'
           );
 
