@@ -99,8 +99,10 @@ const sendSub = async (page, post) => {
     transporter.sendMail(mailOptions, (err, data) => {
         if (err) {
             console.log('Mail error: ', err);
+            return false;
         } else {
             console.log('email successfully distributed');
+            return true;
         }
     });
 };
@@ -120,10 +122,29 @@ const sendWelcome = async (contentType, firstName, recipient) => {
     transporter.sendMail(mailOptions, (err, data) => {
         if (err) {
             console.log('Mail error: ', err);
+            return false;
         } else {
             console.log(`welcome email successfully sent to ${recipient}`);
+            return true;
         }
     });
 };
 
-module.exports = { sendSub, sendWelcome };
+const doUnsubscribe = async (contentType, subscriberEmail) => {
+    const subs = await Sub.find({}).populate({
+        path: 'contentType',
+    });
+
+    for (let i = 0; i < subs.length; i++) {
+        if (subs[i].contentType.dir === contentType) {
+            console.log(subs[i]);
+            subs[i].subscribers = subs[i].subscribers.filter(
+                (e) => e.email !== subscriberEmail
+            );
+            console.log(subs[i]);
+        }
+    }
+    return true;
+};
+
+module.exports = { sendSub, sendWelcome, doUnsubscribe };

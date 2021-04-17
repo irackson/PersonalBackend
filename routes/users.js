@@ -39,7 +39,7 @@ router.post('/subscribe', subscriptionSubmit);
 router.get('/unsubscribe/*', unsubscribeRender);
 
 //* UNSUB PROCESS
-router.post('/unsubscribe', unsubscribeSubmit);
+router.post('/unsubscribe/*', unsubscribeSubmit);
 
 //* LOGOUT
 router.get('/logout', logout);

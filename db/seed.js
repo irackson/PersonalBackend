@@ -115,34 +115,10 @@ const seed = async () => {
         {
             contentType: projectsNav._id,
             active: true,
-            subscribers: [
-                // {
-                //     first_name: 'IanP',
-                //     email: 'nasirus@protonmail.com',
-                //     confirmation: true,
-                // },
-                {
-                    first_name: 'IanG',
-                    email: 'inasusr@gmail.com',
-                    confirmation: true,
-                },
-            ],
         },
         {
             contentType: blogNav._id,
             active: true,
-            subscribers: [
-                // {
-                //     first_name: 'IanP',
-                //     email: 'nasirus@protonmail.com',
-                //     confirmation: true,
-                // },
-                {
-                    first_name: 'IanG',
-                    email: 'inasusr@gmail.com',
-                    confirmation: true,
-                },
-            ],
         },
     ]);
 };

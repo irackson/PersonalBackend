@@ -5,7 +5,11 @@
     </head>
     <body>
         <main class="users-unsubscribe">
-            <form action="/users/unsubscribe" method="POST" autocomplete="off">
+            <form
+                action="/users/unsubscribe/address=<%= email %>&content=<%= contentType %>"
+                method="POST"
+                autocomplete="off"
+            >
                 <p>
                     Are you sure you would like to unsubscribe the email <%=
                     email %> from the new <%= contentType %> mailing list?

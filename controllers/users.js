@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const saltRounds = parseInt(process.env.SALT_ROUNDS) || 10;
 const adminCode = process.env.ADMIN_CODE || '';
 
-const { sendWelcome } = require('../utils/sub');
+const { sendWelcome, doUnsubscribe } = require('../utils/sub');
 
 ////////////////////////
 //! Import Models
@@ -85,7 +85,6 @@ const loginSubmit = async (req, res) => {
 };
 
 const subscriptionSubmit = async (req, res) => {
-    console.log(req.body);
     const subs = await Sub.find({}).populate({
         path: 'contentType',
     });
@@ -162,7 +161,24 @@ const unsubscribeRender = async (req, res) => {
 };
 
 const unsubscribeSubmit = async (req, res) => {
-    res.json({ message: 'you have successfully unsubscribed' });
+    const params = req.params[0].split('&');
+
+    const email = params[0].split('=').pop();
+    const contentType = params[1].split('=').pop();
+
+    let successfullyRemoved = false;
+    try {
+        successfullyRemoved = await doUnsubscribe(contentType, email);
+    } catch (error) {
+        res.json({
+            failure:
+                'Something went wrong when attempting to remove this email from the specified mailing list',
+            error: error,
+        });
+    }
+    if (successfullyRemoved) {
+        res.json({ success: 'You have been removed from the mailing list.' });
+    }
 };
 
 const logout = (req, res) => {
