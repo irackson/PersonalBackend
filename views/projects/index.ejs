@@ -16,6 +16,8 @@
             <section id="projectsFiltersContainer">
                 <% for( let i = 0; i < filters.length; i++ ) { %>
                 <button><%= filters[i] %></button>
+                <% } %> <% if (projects.length > 0) { %>
+                <button>other</button>
                 <% } %>
             </section>
             <section>

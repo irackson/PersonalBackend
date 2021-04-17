@@ -14,6 +14,8 @@
             <section id="blogFiltersContainer">
                 <% for( let i = 0; i < filters.length; i++ ) { %>
                 <button><%= filters[i] %></button>
+                <% } %> <% if (blogs.length > 0) { %>
+                <button>other</button>
                 <% } %>
             </section>
             <section>
