@@ -166,19 +166,7 @@ const unsubscribeSubmit = async (req, res) => {
     const email = params[0].split('=').pop();
     const contentType = params[1].split('=').pop();
 
-    let successfullyRemoved = false;
-    try {
-        successfullyRemoved = await doUnsubscribe(contentType, email);
-    } catch (error) {
-        res.json({
-            failure:
-                'Something went wrong when attempting to remove this email from the specified mailing list',
-            error: error,
-        });
-    }
-    if (successfullyRemoved) {
-        res.json({ success: 'You have been removed from the mailing list.' });
-    }
+    res.json(await doUnsubscribe(contentType, email));
 };
 
 const logout = (req, res) => {

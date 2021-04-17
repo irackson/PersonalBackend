@@ -137,14 +137,26 @@ const doUnsubscribe = async (contentType, subscriberEmail) => {
 
     for (let i = 0; i < subs.length; i++) {
         if (subs[i].contentType.dir === contentType) {
-            console.log(subs[i]);
             subs[i].subscribers = subs[i].subscribers.filter(
                 (e) => e.email !== subscriberEmail
             );
-            console.log(subs[i]);
+
+            try {
+                await subs[i].save();
+                return {
+                    success: `the email address ${subscriberEmail} will not receive notifications related to my ${contentType}`,
+                };
+            } catch (error) {
+                console.log(error);
+                return { failure: error };
+            }
+            continue;
         }
     }
-    return true;
+
+    return {
+        message: `the email address specified (${subscriberEmail}) was not found to be in the ${contentType} mailing list`,
+    };
 };
 
 module.exports = { sendSub, sendWelcome, doUnsubscribe };
