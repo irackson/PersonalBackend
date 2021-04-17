@@ -8,7 +8,7 @@ $footerBottomMethod: grid;
 $btnColor: #425ab4;
 $inputBorder: #8b8a8b;
 // $backgroundColor: hsla(229, 31%, 27%, 0.774);
-$backgroundColor: hsla(61, 67%, 77%, 0.774);
+$backgroundColor: hsla(random(100), 67%, 77%, (random(100) / 10));
 
 /// Regular font family
 /// @type List
