@@ -1,6 +1,4 @@
 //! Import Dependencies
-const fs = require('fs');
-require('dotenv').config();
 
 //! Import Utilities
 const { buildNavbar, getNav } = require('../utils/nav');
@@ -13,8 +11,6 @@ const { buildNavbar, getNav } = require('../utils/nav');
 //! Controller Functions
 ///////////////////////////
 const pageDir = 'resume';
-const resumePath = `${process.env.DOMAIN}/public/assets/resume/`;
-const resumeFileName = 'IanRackson-Resume.pdf';
 
 const renderIndex = async (req, res) => {
     const page = await getNav(pageDir);
@@ -27,17 +23,9 @@ const renderIndex = async (req, res) => {
 };
 
 const processDownload = (req, res) => {
-    res.download(resumePath + resumeFileName, resumeFileName, (err) => {
-        if (err) {
-            res.status(500).send({
-                message: 'Could not download the file. ' + err,
-            });
-        }
-    });
-};
-
-const processUpload = async (req, res) => {
-    console.log('processUpload invoked');
+    res.redirect(
+        'https://github.com/irackson/PortfolioWebsite/raw/42ec7dcb3a6689dce445cee77eb4180493be2a21/public/assets/resume/IanRackson-Resume.pdf'
+    );
 };
 
 //////////////////////////////
@@ -47,5 +35,4 @@ module.exports = {
     pageDir,
     renderIndex,
     processDownload,
-    processUpload,
 };

@@ -7,7 +7,6 @@ const {
     pageDir,
     renderIndex,
     processDownload,
-    processUpload,
 } = require('../controllers/resume');
 
 ///////////////////////////////
@@ -25,9 +24,6 @@ router.get('/', renderIndex);
 
 //* PROCESS RESUME DOWNLOAD
 router.get('/download', processDownload);
-
-//* PROCESS RESUME UPLOAD
-router.post('/upload', isAuthorized, processUpload);
 
 //! CATCHALL
 router.get('/*', async (req, res) => {
