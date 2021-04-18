@@ -134,8 +134,13 @@ const seed = async () => {
             active: true,
             subscribers: [
                 {
-                    first_name: 'Admin',
+                    first_name: 'ProjectsAdmin',
                     email: 'nasirus@protonmail.com',
+                    confirmation: true,
+                },
+                {
+                    first_name: 'projectsBounceTest',
+                    email: 'random1948238597@gmail.com',
                     confirmation: true,
                 },
             ],
@@ -145,8 +150,13 @@ const seed = async () => {
             active: true,
             subscribers: [
                 {
-                    first_name: 'Admin',
+                    first_name: 'BlogAdmin',
                     email: 'nasirus@protonmail.com',
+                    confirmation: true,
+                },
+                {
+                    first_name: 'blogBounceTest',
+                    email: 'random20583985912@gmail.com',
                     confirmation: true,
                 },
             ],
