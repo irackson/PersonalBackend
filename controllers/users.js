@@ -96,11 +96,6 @@ const subscriptionSubmit = async (req, res) => {
                 subs[i].subscribers.filter((e) => e.email === req.body.email)
                     .length === 0
             ) {
-                console.log(
-                    subs[i].subscribers.filter(
-                        (e) => e.email === req.body.email
-                    )
-                );
                 subs[i].subscribers.push({
                     first_name:
                         req.body.first_name === ''
@@ -109,26 +104,23 @@ const subscriptionSubmit = async (req, res) => {
                     email: req.body.email,
                     confirmation: true,
                 });
-                if (
-                    (await sendWelcome(
-                        'projects',
-                        req.body.first_name,
-                        req.body.email
-                    )) &&
-                    (await sendWelcome(
-                        'blog',
-                        req.body.first_name,
-                        req.body.email
-                    ))
-                ) {
-                    await subs[i].save();
-                    req.session.sub = {
-                        projects: true,
-                        blog: true,
-                    };
-                    console.log(req.session.sub);
-                }
             }
+        }
+        if (
+            (await sendWelcome(
+                'projects',
+                req.body.first_name,
+                req.body.email
+            )) &&
+            (await sendWelcome('blog', req.body.first_name, req.body.email))
+        ) {
+            for (let i = 0; i < subs.length; i++) {
+                await subs[i].save();
+            }
+            req.session.sub = {
+                projects: true,
+                blog: true,
+            };
         }
     } else if (req.body.projects === 'on') {
         const projectSub = subs.filter(
@@ -185,7 +177,7 @@ const subscriptionSubmit = async (req, res) => {
     try {
         res.redirect('back');
     } catch (error) {
-        console.log('error');
+        res.redirect('/');
     }
 };
 
