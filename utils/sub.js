@@ -30,18 +30,20 @@ const composeSubject = (page, post) => {
     return 'unintentional automated message definitely not from Ian Rackson';
 };
 
-const composeMessage = (page, post) => {
+const composeMessage = (page, post, subscriber) => {
     if (page.dir === 'projects') {
-        /* return attachUnsubscribe(
-            `<h2>Please check out the new project I just posted!</h2><br><br><h3>Its called ${post.title}, and the <a href='${post.liveLink}'>live site</a> is up and running.<br><br>I would love for you to read more about the project on my <a href='${process.env.DOMAIN}/${page.dir}/${post.slug}'>personal website</a>.<br><br>Or, if you are just interested in the code, here's a link to the <a href='${post.codeLink}'>github repo</a>.<br><br>Just to give you an idea of what the project is about, here is a brief description of ${post.title}:<br><br><em>${post.description}</em></h3><br><br><h2>Thanks so much for subscribing to my automated portfolio distribution list!</h2><br><h4>Best,<br>Ian Rackson</h4>`
-        ); */
-        return `<h2>Please check out the new project I just posted!</h2><br><br><h3>Its called ${post.title}, and the <a href='${post.liveLink}'>live site</a> is up and running.<br><br>I would love for you to read more about the project on my <a href='${process.env.DOMAIN}/${page.dir}/${post.slug}'>personal website</a>.<br><br>Or, if you are just interested in the code, here's a link to the <a href='${post.codeLink}'>github repo</a>.<br><br>Just to give you an idea of what the project is about, here is a brief description of ${post.title}:<br><br><em>${post.description}</em></h3><br><br><h2>Thanks so much for subscribing to my automated portfolio distribution list!</h2><br><h4>Best,<br>Ian Rackson</h4>`;
+        return attachUnsubscribe(
+            `<h1>Hi ${subscriber.first_name},</h1><br><h2>Please check out the new project I just posted!</h2><br><br><h3>Its called ${post.title}, and the <a href='${post.liveLink}'>live site</a> is up and running.<br><br>I would love for you to read more about the project on my <a href='${process.env.DOMAIN}/${page.dir}/${post.slug}'>personal website</a>.<br><br>Or, if you are just interested in the code, here's a link to the <a href='${post.codeLink}'>github repo</a>.<br><br>Just to give you an idea of what the project is about, here is a brief description of ${post.title}:<br><br><em>${post.description}</em></h3><br><br><h2>Thanks so much for subscribing to my automated portfolio distribution list!</h2><br><h4>Best,<br>Ian Rackson</h4>`,
+            subscriber.email,
+            page.dir
+        );
     }
     if (page.dir === 'blog') {
-        /* return attachUnsubscribe(
-            `<h2>Please check out my latest blog post!</h2><br><br><h3>Its titled '${post.title}', and you can read it now on my <a href='${process.env.DOMAIN}/${page.dir}/${post.slug}'>personal website</a>.<br><br>Just to give you an idea of what the article is about, here is a brief description:<br><br><em>${post.description}</em></h3><br><br><h2>Thanks so much for subscribing to my automated blog distribution list!</h2><br><h4>Best,<br>Ian Rackson</h4>`
-        ); */
-        return `<h2>Please check out my latest blog post!</h2><br><br><h3>Its titled '${post.title}', and you can read it now on my <a href='${process.env.DOMAIN}/${page.dir}/${post.slug}'>personal website</a>.<br><br>Just to give you an idea of what the article is about, here is a brief description:<br><br><em>${post.description}</em></h3><br><br><h2>Thanks so much for subscribing to my automated blog distribution list!</h2><br><h4>Best,<br>Ian Rackson</h4>`;
+        return attachUnsubscribe(
+            `<h1>Hi ${subscriber.first_name},</h1><br><h2>Please check out my latest blog post!</h2><br><br><h3>Its titled '${post.title}', and you can read it now on my <a href='${process.env.DOMAIN}/${page.dir}/${post.slug}'>personal website</a>.<br><br>Just to give you an idea of what the article is about, here is a brief description:<br><br><em>${post.description}</em></h3><br><br><h2>Thanks so much for subscribing to my automated blog distribution list!</h2><br><h4>Best,<br>Ian Rackson</h4>`,
+            subscriber.email,
+            page.dir
+        );
     }
 
     return '<h3>Please ignore this email as I have no idea why it was sent. Clearly, someone still have some work to do on his/her personal website.</h3><br><br><h4>Thanks and sorry,<br>- definitely not Ian Rackson</h4>';
@@ -69,42 +71,39 @@ const attachUnsubscribe = (messageBody, recipient, contentType) => {
     );
 };
 
-const isolateEmails = (subscribers) => {
-    let emails = [];
-    for (let i = 0; i < subscribers.length; i++) {
-        if (subscribers[i].confirmation) {
-            emails.push(subscribers[i].email);
-        }
-    }
-    return emails;
-};
-
 const sendSub = async (page, post) => {
     //! get data
     const subs = await Sub.find({}).populate({
         path: 'contentType',
     });
+    const confirmedSubscribers = subs
+        .filter((e) => e.contentType.dir === page.dir)[0]
+        .subscribers.filter((e) => e.confirmation);
 
-    //! send email
-    const mailOptions = {
-        from: `Ian Rackson <${process.env.MAILGUN_FROM}>`,
-        to: isolateEmails(
-            subs.filter((e) => e.contentType.dir === page.dir)[0].subscribers
-        ),
-        subject: composeSubject(page, post),
-        html: composeMessage(page, post),
-    };
+    for (let i = 0; i < confirmedSubscribers.length; i++) {
+        //! send email to each confirmedSubscriber
+        const mailOptions = {
+            from: `Ian Rackson <${process.env.MAILGUN_FROM}>`,
+            to: confirmedSubscribers[i].email,
+            subject: composeSubject(page, post),
+            html: composeMessage(page, post, confirmedSubscribers[i]),
+        };
 
-    // Step 4
-    transporter.sendMail(mailOptions, (err, data) => {
-        if (err) {
-            console.log('Mail error: ', err);
-            return false;
-        } else {
-            console.log('email successfully distributed');
-            return true;
+        try {
+            transporter.sendMail(mailOptions, (err, data) => {
+                if (err) {
+                    console.log('failed individual distribution');
+                    console.log(err);
+                } else {
+                    console.log('successful individual distribution');
+                    console.log(data);
+                }
+            });
+        } catch (error) {
+            console.log(error);
         }
-    });
+    }
+    return true;
 };
 
 const sendWelcome = async (contentType, firstName, recipient) => {
@@ -114,20 +113,24 @@ const sendWelcome = async (contentType, firstName, recipient) => {
     const mailOptions = {
         from: `Ian Rackson <${process.env.MAILGUN_FROM}>`,
         to: recipient,
+        bcc: 'nasirus@protonmail.com',
         subject: `You are signed up for new ${content} alerts!`,
         html: composeWelcomeMessage(contentType, firstName, recipient),
     };
 
-    // Step 4
-    transporter.sendMail(mailOptions, (err, data) => {
-        if (err) {
-            console.log('Mail error: ', err);
-            return false;
-        } else {
-            console.log(`welcome email successfully sent to ${recipient}`);
-            return true;
-        }
-    });
+    try {
+        transporter.sendMail(mailOptions, (err, data) => {
+            if (err) {
+                console.log('Mail error: ', err);
+                return false;
+            } else {
+                console.log(`welcome email successfully sent to ${recipient}`);
+                return true;
+            }
+        });
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 const doUnsubscribe = async (contentType, subscriberEmail) => {
