@@ -59,11 +59,6 @@ const processUpdate = async (req, res) => {
     res.redirect(`${page.dir}`);
 };
 
-const processCreate = async (req, res) => {
-    console.log(req.body);
-    res.redirect('back');
-};
-
 const processSeed = async (req, res) => {
     await seed();
     res.redirect('back');
@@ -76,6 +71,5 @@ module.exports = {
     pageDir,
     renderUpdate,
     processUpdate,
-    processCreate,
     processSeed,
 };

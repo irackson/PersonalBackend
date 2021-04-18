@@ -44,6 +44,12 @@ router.post('/unsubscribe/*', unsubscribeSubmit);
 //* LOGOUT
 router.get('/logout', logout);
 
+//! CATCHALL
+router.get('/*', async (req, res) => {
+    console.log('users catchall invoked');
+    res.redirect(`/`);
+});
+
 ////////////////////////////////
 //! Export the Router
 ////////////////////////////////

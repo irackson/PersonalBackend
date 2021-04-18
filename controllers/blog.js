@@ -149,17 +149,6 @@ const processUpdate = async (req, res) => {
     }
 };
 
-const processToggle = async (req, res) => {
-    const page = await getNav(pageDir);
-
-    const blog = await Blog.findOne({ slug: req.params.slug });
-    blog.visible = !blog.visible;
-
-    await Blog.findOneAndUpdate({ slug: req.params.slug }, blog); //? or blog.save?
-
-    res.redirect(`${page.dir}`);
-};
-
 const processDestroy = async (req, res) => {
     const page = await getNav(pageDir);
     await Blog.findOneAndDelete({ slug: req.params.slug });
@@ -178,6 +167,5 @@ module.exports = {
     renderUpdate,
     processCreate,
     processUpdate,
-    processToggle,
     processDestroy,
 };

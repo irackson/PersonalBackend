@@ -11,7 +11,6 @@ const {
     renderUpdate,
     processCreate,
     processUpdate,
-    processToggle,
     processDestroy,
 } = require('../controllers/projects');
 
@@ -42,9 +41,6 @@ router.get('/:slug/update', isAuthorized, renderUpdate);
 
 //* PROCESS UPDATE
 router.put('/:slug', isAuthorized, processUpdate);
-
-//* PROCESS TOGGLE
-router.patch('/:id', isAuthorized, processToggle);
 
 //* PROCESS DESTROY
 router.delete('/:slug', isAuthorized, processDestroy);
