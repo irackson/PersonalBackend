@@ -125,6 +125,7 @@ const processCreate = async (req, res) => {
         if (project.visible) {
             await sendSub(page, project);
             project.previouslySent = true;
+            await project.save();
         }
 
         res.redirect(`${page.dir}/${project.slug}`);

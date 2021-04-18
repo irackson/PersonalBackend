@@ -118,6 +118,7 @@ const processCreate = async (req, res) => {
         if (blog.visible) {
             await sendSub(page, blog);
             blog.previouslySent = true;
+            await blog.save();
         }
 
         res.redirect(`${page.dir}/${blog.slug}`);
