@@ -1,7 +1,3 @@
-https://trello.com/b/VVhnA2Ep/porfoliowebsite
-
-<!-- //! boilerplate readme -->
-
 # My Portfolio Website [![wakatime](https://wakatime.com/badge/github/irackson/PortfolioWebsite.svg)](https://wakatime.com/badge/github/irackson/PortfolioWebsite)
 
 -   **Author:** Ian Rackson
