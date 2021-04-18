@@ -120,12 +120,12 @@ const processCreate = async (req, res) => {
     project = await Project.findOne({ title: tempTitle });
     const edits = req.body;
     project = await editsToPost(Project, edits, project, repeatPrefix);
+    project = await project.save();
     try {
         if (project.visible) {
             await sendSub(page, project);
             project.previouslySent = true;
         }
-        project = await project.save();
 
         res.redirect(`${page.dir}/${project.slug}`);
     } catch (error) {

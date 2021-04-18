@@ -96,7 +96,6 @@ const sendSub = async (page, post) => {
                     console.log(err);
                 } else {
                     console.log('successful individual distribution');
-                    console.log(data);
                 }
             });
         } catch (error) {

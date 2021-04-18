@@ -113,12 +113,12 @@ const processCreate = async (req, res) => {
     blog = await Blog.findOne({ title: tempTitle });
     const edits = req.body;
     blog = await editsToPost(Blog, edits, blog, repeatPrefix);
+    blog = await blog.save();
     try {
         if (blog.visible) {
             await sendSub(page, blog);
             blog.previouslySent = true;
         }
-        blog = await blog.save();
 
         res.redirect(`${page.dir}/${blog.slug}`);
     } catch (error) {
