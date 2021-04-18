@@ -132,10 +132,24 @@ const seed = async () => {
         {
             contentType: projectsNav._id,
             active: true,
+            subscribers: [
+                {
+                    first_name: 'Admin',
+                    email: 'nasirus@protonmail.com',
+                    confirmation: true,
+                },
+            ],
         },
         {
             contentType: blogNav._id,
             active: true,
+            subscribers: [
+                {
+                    first_name: 'Admin',
+                    email: 'nasirus@protonmail.com',
+                    confirmation: true,
+                },
+            ],
         },
     ]);
 };
