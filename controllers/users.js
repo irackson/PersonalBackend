@@ -91,7 +91,44 @@ const subscriptionSubmit = async (req, res) => {
 
     if (req.body.projects === 'on' && req.body.blog === 'on') {
         for (let i = 0; i < subs.length; i++) {
-            subs[i].subscribers.push({
+            if (
+                subs[i].subscribers.filter((e) => e.mail === req.body.email)
+                    .length === 0
+            ) {
+                subs[i].subscribers.push({
+                    first_name:
+                        req.body.first_name === ''
+                            ? 'Stranger'
+                            : req.body.first_name,
+                    email: req.body.email,
+                    confirmation: true,
+                });
+                if (
+                    (await sendWelcome(
+                        'projects',
+                        req.body.first_name,
+                        req.body.email
+                    )) &&
+                    (await sendWelcome(
+                        'blog',
+                        req.body.first_name,
+                        req.body.email
+                    ))
+                ) {
+                    await subs[i].save();
+                    req.session.sub = {
+                        projects: true,
+                        blog: true,
+                    };
+                }
+            }
+        }
+    } else if (req.body.projects === 'on') {
+        const projectSub = subs.filter(
+            (e) => e.contentType.dir === 'projects'
+        )[0];
+        if (projectSub.filter((e) => e.mail === req.body.email).length === 0) {
+            projectSub.subscribers.push({
                 first_name:
                     req.body.first_name === ''
                         ? 'Stranger'
@@ -99,44 +136,39 @@ const subscriptionSubmit = async (req, res) => {
                 email: req.body.email,
                 confirmation: true,
             });
-            await subs[i].save();
+
+            if (
+                await sendWelcome(
+                    'projects',
+                    req.body.first_name,
+                    req.body.email
+                )
+            ) {
+                await projectSub.save();
+                req.session.sub.projects = true;
+            }
         }
-        await sendWelcome('projects', req.body.first_name, req.body.email);
-        await sendWelcome('blog', req.body.first_name, req.body.email);
-
-        req.session.sub = {
-            projects: true,
-            blog: true,
-        };
-    } else if (req.body.projects === 'on') {
-        const projectSub = subs.filter(
-            (e) => e.contentType.dir === 'projects'
-        )[0];
-        projectSub.subscribers.push({
-            first_name:
-                req.body.first_name === '' ? 'Stranger' : req.body.first_name,
-            email: req.body.email,
-            confirmation: true,
-        });
-        await projectSub.save();
-        await sendWelcome('projects', req.body.first_name, req.body.email);
-
-        req.session.sub.projects = true;
     } else if (req.body.blog === 'on') {
         const blogSub = subs.filter((e) => e.contentType.dir === 'blog')[0];
-        blogSub.subscribers.push({
-            first_name:
-                req.body.first_name === '' ? 'Stranger' : req.body.first_name,
-            email: req.body.email,
-            confirmation: true,
-        });
-        await blogSub.save();
-        await sendWelcome('blog', req.body.first_name, req.body.email);
+        if (blogSub.filter((e) => e.mail === req.body.email).length === 0) {
+            blogSub.subscribers.push({
+                first_name:
+                    req.body.first_name === ''
+                        ? 'Stranger'
+                        : req.body.first_name,
+                email: req.body.email,
+                confirmation: true,
+            });
 
-        req.session.sub.blog = true;
+            if (
+                await sendWelcome('blog', req.body.first_name, req.body.email)
+            ) {
+                await blogSub.save();
+                req.session.sub.blog = true;
+            }
+        }
     }
 
-    console.log(req.session);
     try {
         res.redirect('back');
     } catch (error) {
