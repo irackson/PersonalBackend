@@ -89,12 +89,18 @@ const subscriptionSubmit = async (req, res) => {
         path: 'contentType',
     });
 
+    // TODO: refactor this trash
     if (req.body.projects === 'on' && req.body.blog === 'on') {
         for (let i = 0; i < subs.length; i++) {
             if (
-                subs[i].subscribers.filter((e) => e.mail === req.body.email)
+                subs[i].subscribers.filter((e) => e.email === req.body.email)
                     .length === 0
             ) {
+                console.log(
+                    subs[i].subscribers.filter(
+                        (e) => e.email === req.body.email
+                    )
+                );
                 subs[i].subscribers.push({
                     first_name:
                         req.body.first_name === ''
@@ -120,6 +126,7 @@ const subscriptionSubmit = async (req, res) => {
                         projects: true,
                         blog: true,
                     };
+                    console.log(req.session.sub);
                 }
             }
         }
@@ -127,7 +134,10 @@ const subscriptionSubmit = async (req, res) => {
         const projectSub = subs.filter(
             (e) => e.contentType.dir === 'projects'
         )[0];
-        if (projectSub.filter((e) => e.mail === req.body.email).length === 0) {
+        if (
+            projectSub.subscribers.filter((e) => e.email === req.body.email)
+                .length === 0
+        ) {
             projectSub.subscribers.push({
                 first_name:
                     req.body.first_name === ''
@@ -150,7 +160,10 @@ const subscriptionSubmit = async (req, res) => {
         }
     } else if (req.body.blog === 'on') {
         const blogSub = subs.filter((e) => e.contentType.dir === 'blog')[0];
-        if (blogSub.filter((e) => e.mail === req.body.email).length === 0) {
+        if (
+            blogSub.subscribers.filter((e) => e.email === req.body.email)
+                .length === 0
+        ) {
             blogSub.subscribers.push({
                 first_name:
                     req.body.first_name === ''

@@ -92,10 +92,14 @@ const sendSub = async (page, post) => {
         try {
             transporter.sendMail(mailOptions, (err, data) => {
                 if (err) {
-                    console.log('failed individual distribution');
+                    console.log(
+                        `failed distribution to ${confirmedSubscribers[i].email}`
+                    );
                     console.log(err);
                 } else {
-                    console.log('successful individual distribution');
+                    console.log(
+                        `successful distribution ${confirmedSubscribers[i].email}`
+                    );
                 }
             });
         } catch (error) {
@@ -123,13 +127,17 @@ const sendWelcome = async (contentType, firstName, recipient) => {
                 console.log('Mail error: ', err);
                 return false;
             } else {
-                console.log(`welcome email successfully sent to ${recipient}`);
+                console.log(
+                    `welcome to ${contentType} successfully sent to ${recipient}`
+                );
                 return true;
             }
         });
     } catch (error) {
         console.log(error);
+        return false;
     }
+    return true;
 };
 
 const doUnsubscribe = async (contentType, subscriberEmail) => {
