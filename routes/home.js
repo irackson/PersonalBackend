@@ -16,6 +16,7 @@ const BlogRouter = require('./blog');
 const ProjectsRouter = require('./projects');
 const MetricsRouter = require('./metrics');
 const ResumeRouter = require('./resume');
+const AboutRouter = require('./about');
 
 ///////////////////////////////
 //! Router Specific Middleware
@@ -26,6 +27,7 @@ router.use('/blog', BlogRouter);
 router.use('/projects', ProjectsRouter);
 router.use('/metrics', MetricsRouter);
 router.use('/resume', ResumeRouter);
+router.use('/about', AboutRouter);
 router.use('/users', UsersRouter);
 
 ////////////////////////////////

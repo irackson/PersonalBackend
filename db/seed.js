@@ -49,7 +49,6 @@ const seed = async () => {
         {
             name: 'about',
             dir: 'about',
-            visible: 'false',
             position: 3,
         },
         {
