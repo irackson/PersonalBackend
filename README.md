@@ -1,7 +1,7 @@
 # My Portfolio Website [![wakatime](https://wakatime.com/badge/github/irackson/PortfolioWebsite.svg)](https://wakatime.com/badge/github/irackson/PortfolioWebsite)
 
 -   **Author:** Ian Rackson
--   **Link to Live Site:** https://ianrackson.herokuapp.com/
+-   **Link to Live Site:** https://ianrackson.com/
 
 ##
 
