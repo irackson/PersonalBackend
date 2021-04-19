@@ -80,12 +80,12 @@ app.use(
 );
 
 //! Mount Middleware (app.use)
-app.use('/', (req, res, next) => {
+/* app.use('/', (req, res, next) => {
     req.time = new Date().toLocaleTimeString();
     // console.log(req.time);
     //* go to next middleware function
     next();
-});
+}); */
 
 //!   __   __       ___         __
 //! |__) /  \ |  |  |  | |\ | / _`

@@ -208,6 +208,13 @@ const SubSchema = new Schema(
 | GET    | "/"      | List all Metrics ("metrics/index.ejs") |
 | GET    | "/\*"    | Catch-all redirect to "/metrics"       |
 
+### About ("/about")
+
+| Method | Endpoint | Resource/View                          |
+| ------ | -------- | -------------------------------------- |
+| GET    | "/"      | List About content ("about/index.ejs") |
+| GET    | "/\*"    | Catch-all redirect to "/about"         |
+
 ### Resume ("/resume")
 
 | Method | Endpoint    | Resource/View                           |
