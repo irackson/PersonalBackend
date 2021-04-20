@@ -2,21 +2,21 @@
     <!-- load script at end of body -->
     <% if (admin) { %>
     <a href="/users/logout">logout</a>
-    <% } %> <% if ((!sub.projects || !sub.blog) && !admin) { %>
+    <% } %> <% if (!admin && (!sub.projects || !sub.blog)) { %>
     <section>
         <div>
             <h4>Sign up to receive an email whenever I post to...</h4>
         </div>
         <form action="/users/subscribe" method="POST" autocomplete="off">
             <div>
-                <% if (!sub.projects) { %>
+                <% if (sub.projects == false) { %>
                 <div>
                     <label for="projects"
                         ><%= pages.filter(e => e.dir === 'projects')[0].name %>
                     </label>
                     <input type="checkbox" name="projects" />
                 </div>
-                <% } %><%if (!sub.blog) { %>
+                <% } %><%if (sub.blog == false) { %>
                 <div>
                     <label for="blog"
                         ><%= pages.filter(e => e.dir === 'blog')[0].name %>

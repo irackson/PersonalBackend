@@ -81,11 +81,34 @@ app.use(
 
 //! Mount Middleware (app.use)
 /* app.use('/', (req, res, next) => {
-    req.time = new Date().toLocaleTimeString();
+    // req.time = new Date().toLocaleTimeString();
     // console.log(req.time);
     //* go to next middleware function
+    // console.log(req.session);
     next();
 }); */
+
+app.use('/', (req, res, next) => {
+    if (!req.session.admin) {
+        req.session.admin = false;
+    }
+
+    if (!req.session.user) {
+        req.session.user = false;
+    }
+    // console.clear();
+    // console.log('before');
+    // console.log(req.session.sub);
+    if (!req.session.sub) {
+        req.session.sub = {
+            projects: false,
+            blog: false,
+        };
+    }
+    // console.log('after');
+    // console.log(req.session.sub);
+    next();
+});
 
 //!   __   __       ___         __
 //! |__) /  \ |  |  |  | |\ | / _`

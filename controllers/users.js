@@ -121,6 +121,7 @@ const subscriptionSubmit = async (req, res) => {
                 projects: true,
                 blog: true,
             };
+            console.log(req.session.sub);
         }
     } else if (req.body.projects === 'on') {
         const projectSub = subs.filter(
@@ -148,6 +149,7 @@ const subscriptionSubmit = async (req, res) => {
             ) {
                 await projectSub.save();
                 req.session.sub.projects = true;
+                // console.log(req.session.sub);
             }
         }
     } else if (req.body.blog === 'on') {
@@ -170,6 +172,7 @@ const subscriptionSubmit = async (req, res) => {
             ) {
                 await blogSub.save();
                 req.session.sub.blog = true;
+                console.log(req.session.sub);
             }
         }
     }
@@ -204,7 +207,7 @@ const unsubscribeSubmit = async (req, res) => {
 
 const logout = (req, res) => {
     req.session.user = undefined;
-    req.session.admin = false;
+    req.session.admin = undefined;
     req.session.sub = undefined;
     res.redirect('/');
 };

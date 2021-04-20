@@ -42,13 +42,6 @@ router.get('/', async (req, res) => {
     const featuredBlog = await Blog.findOne({ featured: true });
     const featuredProject = await Project.findOne({ featured: true });
 
-    if (!req.session.sub) {
-        req.session.sub = {
-            projects: false,
-            blog: false,
-        };
-    }
-
     res.render('home', {
         page,
         pages,
