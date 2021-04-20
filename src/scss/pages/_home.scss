@@ -2,3 +2,41 @@
 // -----------------------------------------------------------------------------
 // This file contains styles that are specific to the home page.
 // -----------------------------------------------------------------------------
+
+main .home {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    &__featured-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    section {
+        width: 150px;
+    }
+
+    &__featured-container {
+        text-align: center;
+
+        article {
+            max-width: 30ch;
+        }
+    }
+
+    &__contact-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    &__author-container {
+        h1,
+        h2 {
+            text-align: center;
+        }
+    }
+}
