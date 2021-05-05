@@ -30,3 +30,9 @@
 -   Call to Action? Is it easy to find a way to contact you and view resume?
 -   Story-Telling Clearly? Have you been concise and precise with your working?
 -   Does it work?
+
+## Resources
+
+1. [what to include](https://www.springboard.com/blog/programmer-portfolio/)
+2. [PDF with basic UI tips](<https://drive.google.com/file/d/1N1eePT2I_rhpad2XfyTdENNAb5l1TGkD/view>
+3. )
