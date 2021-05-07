@@ -1,7 +1,7 @@
-# My Portfolio Website [![wakatime](https://wakatime.com/badge/github/irackson/PortfolioWebsite.svg)](https://wakatime.com/badge/github/irackson/PortfolioWebsite)
+# My Portfolio Website [![wakatime ejs](https://wakatime.com/badge/github/irackson/PortfolioWebsite.svg)](https://wakatime.com/badge/github/irackson/PortfolioWebsite) + [![wakatime api](https://wakatime.com/badge/github/irackson/PersonalBackend.svg)](https://wakatime.com/badge/github/irackson/PersonalBackend)
 
 -   **Author:** Ian Rackson
--   **Link to Live Site:** https://ianrackson.com/
+-   **Link to Live Site:** <https://ianrackson.com/>
 
 ##
 
@@ -58,7 +58,7 @@
 
 ## Models
 
-### User Model:
+### User Model
 
 ```javascript
 const UserSchema = new Schema(
@@ -72,7 +72,7 @@ const UserSchema = new Schema(
 );
 ```
 
-### Nav Model (Navigation):
+### Nav Model (Navigation)
 
 ```javascript
 const NavSchema = new Schema(
@@ -86,7 +86,7 @@ const NavSchema = new Schema(
 );
 ```
 
-### Project Model:
+### Project Model
 
 (same as Blog Model but with liveLink and codeLink properties added)
 
@@ -132,7 +132,7 @@ ProjectSchema.pre('validate', function (next) {
 });
 ```
 
-### Sub Model (Subscription):
+### Sub Model (Subscription)
 
 ```javascript
 const SubSchema = new Schema(

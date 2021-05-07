@@ -26,15 +26,17 @@ const renderIndex = async (req, res) => {
         project.displayUpdated = formatDate(project.updatedAt);
         return project;
     });
-    res.render(`${page.dir}/index`, {
-        page,
-        pages: await buildNavbar(req.session.admin),
-        admin: req.session.admin,
-        sub: req.session.sub,
+    req.session.admin
+        ? res.render(`${page.dir}/index`, {
+              page,
+              pages: await buildNavbar(req.session.admin),
+              admin: req.session.admin,
+              sub: req.session.sub,
 
-        projects,
-        filters,
-    });
+              projects,
+              filters,
+          })
+        : res.json({ projects, filters });
 };
 
 const renderCreate = async (req, res) => {
@@ -74,17 +76,18 @@ const renderShow = async (req, res) => {
             displayUpdated = formatDate(project.updatedAt);
         }
         displayPublished = formatDate(project.createdAt);
+        req.session.admin
+            ? res.render(`${page.dir}/show`, {
+                  page,
+                  pages: await buildNavbar(req.session.admin),
+                  admin: req.session.admin,
+                  sub: req.session.sub,
 
-        res.render(`${page.dir}/show`, {
-            page,
-            pages: await buildNavbar(req.session.admin),
-            admin: req.session.admin,
-            sub: req.session.sub,
-
-            project,
-            displayPublished,
-            displayUpdated,
-        });
+                  project,
+                  displayPublished,
+                  displayUpdated,
+              })
+            : res.json({ project, displayPublished, displayUpdated });
     }
 };
 

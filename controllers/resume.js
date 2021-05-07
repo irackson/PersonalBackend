@@ -14,12 +14,14 @@ const pageDir = 'resume';
 
 const renderIndex = async (req, res) => {
     const page = await getNav(pageDir);
-    res.render(`${page.dir}`, {
-        page,
-        pages: await buildNavbar(req.session.admin),
-        admin: req.session.admin,
-        sub: req.session.sub,
-    });
+    req.session.admin
+        ? res.render(`${page.dir}`, {
+              page,
+              pages: await buildNavbar(req.session.admin),
+              admin: req.session.admin,
+              sub: req.session.sub,
+          })
+        : res.json({ page, pages: await buildNavbar(req.session.admin) });
 };
 
 const processDownload = (req, res) => {

@@ -42,22 +42,25 @@ router.get('/', async (req, res) => {
     const featuredBlog = await Blog.findOne({ featured: true });
     const featuredProject = await Project.findOne({ featured: true });
 
-    /* res.render('home', {
-        page,
-        pages,
-        admin: req.session.admin,
-        sub: req.session.sub,
-        blog: featuredBlog,
-        project: featuredProject,
-    }); */
-    res.json({
-        page,
-        pages,
-        admin: req.session.admin,
-        sub: req.session.sub,
-        blog: featuredBlog,
-        project: featuredProject,
-    });
+    req.session.admin
+        ? res.render('home', {
+              page,
+              pages,
+              admin: req.session.admin,
+              sub: req.session.sub,
+              blog: featuredBlog,
+              project: featuredProject,
+          })
+        : res.json({
+              page,
+              pages,
+              admin: req.session.admin,
+              sub: req.session.sub,
+              blog: featuredBlog.visible ? featuredBlog : new Blog(),
+              project: featuredProject.visible
+                  ? featuredProject
+                  : new Project(),
+          });
 });
 
 ////////////////////////////////

@@ -176,11 +176,18 @@ const subscriptionSubmit = async (req, res) => {
             }
         }
     }
-
-    try {
-        res.redirect('back');
-    } catch (error) {
-        res.redirect('/');
+    //! TODO is this right!??!
+    if (req.session.admin) {
+        try {
+            res.redirect('back');
+        } catch (error) {
+            res.redirect('/');
+        }
+    } else {
+        req.json({
+            subscribedToProjects: req.session.sub.projects,
+            subscribedToBlog: req.session.sub.blog,
+        });
     }
 };
 

@@ -59,7 +59,12 @@ const composeWelcomeMessage = (contentType, firstName, recipient) => {
 
 const attachUnsubscribe = (messageBody, recipient, contentType) => {
     const styleBreak = '<br><br><br><br><br><hr>';
-    const unsubLink = `${process.env.DOMAIN}/users/unsubscribe/address=${recipient}&content=${contentType}`;
+    const unsubLink = `${process.env.DOMAIN.slice(
+        0,
+        8
+    )}api.${process.env.DOMAIN.slice(
+        8
+    )}/users/unsubscribe/address=${recipient}&content=${contentType}`;
 
     const content =
         contentType === 'projects' ? 'portfolio project' : 'blog post';
