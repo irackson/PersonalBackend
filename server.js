@@ -50,24 +50,24 @@ app.set('view engine', 'ejs');
 //     cors({ origin: 'https://www.ianrackson.com', optionsSuccessStatus: 200 })
 // ); // prevent cors errors
 
-let whitelist = [
-    'http://localhost:3000',
-    'https://ianrackson.com',
-    'https://www.ianrackson.com',
-    'https://epic-stonebraker-4f69d2.netlify.app',
-];
+// let whitelist = [
+//     'http://localhost:3000',
+//     'https://ianrackson.com',
+//     'https://www.ianrackson.com',
+//     'https://epic-stonebraker-4f69d2.netlify.app',
+// ];
 
-const corsOptions = {
-    origin: function (origin, callback) {
-        if (whitelist.indexOf(origin) !== -1) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    optionsSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//     origin: function (origin, callback) {
+//         if (whitelist.indexOf(origin) !== -1) {
+//             callback(null, true);
+//         } else {
+//             callback(new Error('Not allowed by CORS'));
+//         }
+//     },
+//     optionsSuccessStatus: 200,
+// };
+app.use(cors());
 //allow OPTIONS on all resources
 // app.options('*', cors());
 // credentials: true,
