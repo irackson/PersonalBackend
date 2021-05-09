@@ -46,9 +46,31 @@ app.set('view engine', 'ejs');
 //! |\/| | |  \ |  \ |    |__  |  |  /\  |__) |__
 //! |  | | |__/ |__/ |___ |___ |/\| /~~\ |  \ |___
 
+// app.use(
+//     cors({ origin: 'https://www.ianrackson.com', optionsSuccessStatus: 200 })
+// ); // prevent cors errors
+
+let whitelist = [
+    'http://localhost:3000',
+    'https://ianrackson.com/',
+    'https://www.ianrackson.com/',
+];
+
 app.use(
-    cors({ origin: 'https://www.ianrackson.com', optionsSuccessStatus: 200 })
-); // prevent cors errors
+    cors({
+        optionsSuccessStatus: 200,
+        origin: function (origin, callback) {
+            // allow requests with no origin
+            if (!origin) return callback(null, true);
+            if (whitelist.indexOf(origin) === -1) {
+                var message =
+                    "The CORS policy for this origin doesn't allow access from the particular origin.";
+                return callback(new Error(message), false);
+            }
+            return callback(null, true);
+        },
+    })
+);
 
 //! enable method override
 app.use(methodOverride('_method'));
