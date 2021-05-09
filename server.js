@@ -52,8 +52,9 @@ app.set('view engine', 'ejs');
 
 let whitelist = [
     'http://localhost:3000',
-    'https://ianrackson.com/',
-    'https://www.ianrackson.com/',
+    'https://ianrackson.com',
+    'https://www.ianrackson.com',
+    'https://epic-stonebraker-4f69d2.netlify.app',
 ];
 
 const corsOptions = {
@@ -68,7 +69,8 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 //allow OPTIONS on all resources
-// app.options('*', cors());
+app.options('*', cors());
+// credentials: true,
 
 //! enable method override
 app.use(methodOverride('_method'));
