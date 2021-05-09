@@ -56,21 +56,19 @@ let whitelist = [
     'https://www.ianrackson.com/',
 ];
 
-app.use(
-    cors({
-        optionsSuccessStatus: 200,
-        origin: function (origin, callback) {
-            // allow requests with no origin
-            if (!origin) return callback(null, true);
-            if (whitelist.indexOf(origin) === -1) {
-                var message =
-                    "The CORS policy for this origin doesn't allow access from the particular origin.";
-                return callback(new Error(message), false);
-            }
-            return callback(null, true);
-        },
-    })
-);
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
+//allow OPTIONS on all resources
+// app.options('*', cors());
 
 //! enable method override
 app.use(methodOverride('_method'));
