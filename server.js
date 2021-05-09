@@ -69,7 +69,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 //allow OPTIONS on all resources
-app.options('*', cors());
+// app.options('*', cors());
 // credentials: true,
 
 //! enable method override
