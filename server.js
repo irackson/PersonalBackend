@@ -47,7 +47,7 @@ app.set('view engine', 'ejs');
 //! |  | | |__/ |__/ |___ |___ |/\| /~~\ |  \ |___
 
 app.use(
-    cors({ origin: 'https://www.ianrackson.com/', optionsSuccessStatus: 200 })
+    cors({ origin: 'https://www.ianrackson.com', optionsSuccessStatus: 200 })
 ); // prevent cors errors
 
 //! enable method override
