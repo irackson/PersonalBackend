@@ -1,0 +1,24 @@
+{
+    "name": "Ian Rackson",
+    "title": "Full-Stack Web Dev",
+    "phone": "(917) 684-8443",
+    "address": {
+        "street": "2000 Broadway",
+        "apt": "22c",
+        "zip": "10023",
+        "city": "New York",
+        "state": "NY"
+    },
+    "email": {
+        "business": "ian@rackson.com",
+        "personal": "nasirus@protonmail.com",
+        "gmail": "inasusr@gmail.com"
+    },
+    "social": {
+        "twitter": "https://twitter.com/IanRacksonFSWD/",
+        "slack": "https://ga-students.slack.com/team/U01GN8NP1C5",
+        "github": "https://github.com/irackson/",
+        "linkedin": "https://www.linkedin.com/in/ianrackson/",
+        "youtube": "https://www.youtube.com/channel/UChtYvxQVNWgsySzDJRcv6SQ"
+    }
+}

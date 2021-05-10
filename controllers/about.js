@@ -1,6 +1,6 @@
 //! Import Utilities
 const { buildNavbar, getNav } = require('../utils/nav');
-
+const about = require('../public/assets/QA.json');
 ////////////////////////
 //! Import Models
 ////////////////////////
@@ -19,7 +19,7 @@ const renderIndex = async (req, res) => {
               admin: req.session.admin,
               sub: req.session.sub,
           })
-        : res.json({ page, pages: await buildNavbar(req.session.admin) });
+        : res.json(about);
 };
 
 //////////////////////////////

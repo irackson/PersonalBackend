@@ -1,7 +1,7 @@
 //! Import Utilities
 const { buildNavbar, getNav } = require('../utils/nav');
 const { isAuthorized } = require('../utils/auth');
-
+const contact = require('../public/assets/Contact.json');
 ////////////////////////
 //! Import Models
 ////////////////////////
@@ -52,10 +52,7 @@ router.get('/', async (req, res) => {
               project: featuredProject,
           })
         : res.json({
-              page,
-              pages,
-              admin: req.session.admin,
-              sub: req.session.sub,
+              contact,
               blog: featuredBlog.visible ? featuredBlog : new Blog(),
               project: featuredProject.visible
                   ? featuredProject
