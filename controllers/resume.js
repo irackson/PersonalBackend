@@ -26,7 +26,7 @@ const renderIndex = async (req, res) => {
 
 const processDownload = (req, res) => {
     res.redirect(
-        'https://github.com/irackson/PortfolioWebsite/raw/42ec7dcb3a6689dce445cee77eb4180493be2a21/public/assets/resume/IanRackson-Resume.pdf'
+        'https://github.com/irackson/PersonalBackend/raw/650b5101ef6c2cd4c9f05b76a1fc1c26a2605524/public/assets/resume/IanRackson-Resume.pdf'
     );
 };
 
