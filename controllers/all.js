@@ -1,6 +1,7 @@
 const { buildNavbar, getNav } = require('../utils/nav');
 const { getExistingTags } = require('../utils/filter');
 const contact = require('../public/assets/Contact.json');
+const about = require('../public/assets/QA.json');
 
 const Blog = require('../models/Blog');
 const Project = require('../models/Project');
@@ -19,6 +20,8 @@ const renderIndex = async (req, res) => {
     });
 
     res.json({
+        contact,
+        about,
         pages,
         blogs,
         blogs_filters,
