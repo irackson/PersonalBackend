@@ -54,10 +54,8 @@ router.get('/', async (req, res) => {
           })
         : res.json({
               contact,
-              blog: featuredBlog.visible ? featuredBlog : new Blog(),
-              project: featuredProject.visible
-                  ? featuredProject
-                  : new Project(),
+              blog: featuredBlog.visible ? featuredBlog : null,
+              project: featuredProject.visible ? featuredProject : null,
           });
 });
 
