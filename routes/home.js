@@ -1,6 +1,5 @@
 //! Import Utilities
 const { buildNavbar, getNav } = require('../utils/nav');
-const { isAuthorized } = require('../utils/auth');
 const contact = require('../public/assets/Contact.json');
 ////////////////////////
 //! Import Models
@@ -17,6 +16,7 @@ const ProjectsRouter = require('./projects');
 const MetricsRouter = require('./metrics');
 const ResumeRouter = require('./resume');
 const AboutRouter = require('./about');
+const AllRouter = require('./all');
 
 ///////////////////////////////
 //! Router Specific Middleware
@@ -29,6 +29,7 @@ router.use('/metrics', MetricsRouter);
 router.use('/resume', ResumeRouter);
 router.use('/about', AboutRouter);
 router.use('/users', UsersRouter);
+router.use('/all', AllRouter);
 
 ////////////////////////////////
 //! Router Specific Routes
