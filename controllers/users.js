@@ -88,7 +88,7 @@ const subscriptionSubmit = async (req, res) => {
     const subs = await Sub.find({}).populate({
         path: 'contentType',
     });
-
+    console.log(req.body);
     // TODO: refactor this trash
     if (req.body.projects === 'on' && req.body.blog === 'on') {
         for (let i = 0; i < subs.length; i++) {
@@ -184,12 +184,14 @@ const subscriptionSubmit = async (req, res) => {
             res.redirect('/');
         }
     } else {
-        res.json({
+        const apiResponse = {
             first_name: req.body.first_name,
             email: req.body.email,
-            subscribedToProjects: req.session.sub.projects,
+            projects: req.session.sub.projects,
             subscribedToBlog: req.session.sub.blog,
-        });
+        };
+        console.log(apiResponse);
+        res.json(apiResponse);
     }
 };
 
