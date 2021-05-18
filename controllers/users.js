@@ -149,7 +149,7 @@ const subscriptionSubmit = async (req, res) => {
             ) {
                 await projectSub.save();
                 req.session.sub.projects = true;
-                // console.log(req.session.sub);
+                console.log(req.session.sub);
             }
         }
     } else if (req.body.blog === 'on') {
@@ -184,7 +184,9 @@ const subscriptionSubmit = async (req, res) => {
             res.redirect('/');
         }
     } else {
-        req.json({
+        res.json({
+            first_name: req.body.first_name,
+            email: req.body.email,
             subscribedToProjects: req.session.sub.projects,
             subscribedToBlog: req.session.sub.blog,
         });
