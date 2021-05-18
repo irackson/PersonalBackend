@@ -188,7 +188,7 @@ const subscriptionSubmit = async (req, res) => {
             first_name: req.body.first_name,
             email: req.body.email,
             projects: req.session.sub.projects,
-            subscribedToBlog: req.session.sub.blog,
+            blog: req.session.sub.blog,
         };
         console.log(apiResponse);
         res.json(apiResponse);
