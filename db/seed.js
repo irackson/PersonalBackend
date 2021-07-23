@@ -134,7 +134,7 @@ const seed = async () => {
             subscribers: [
                 {
                     first_name: 'ProjectsAdmin',
-                    email: 'nasirus@protonmail.com',
+                    email: 'ian@rackson.com',
                     confirmation: true,
                 },
                 {
@@ -150,7 +150,7 @@ const seed = async () => {
             subscribers: [
                 {
                     first_name: 'BlogAdmin',
-                    email: 'nasirus@protonmail.com',
+                    email: 'ian@rackson.com',
                     confirmation: true,
                 },
                 {

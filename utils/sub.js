@@ -121,7 +121,7 @@ const sendWelcome = async (contentType, firstName, recipient) => {
     const mailOptions = {
         from: `Ian Rackson <${process.env.MAILGUN_FROM}>`,
         to: recipient,
-        bcc: 'nasirus@protonmail.com',
+        bcc: 'ian@rackson.com',
         subject: `You are signed up for new ${content} alerts!`,
         html: composeWelcomeMessage(contentType, firstName, recipient),
     };
