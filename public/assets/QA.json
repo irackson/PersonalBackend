@@ -5,13 +5,13 @@
             "qa": [
                 {
                     "question": "When were you first exposed to user experience design?",
-                    "answer": "I was first exposed to user experience design in the backseat of a car headed for Cooper’s Beach at the age of 6. The first iPod had just come out and my friend handed me one earphone to share a listening experience unlike anything I could have imagined. The notion that I could digitize our family CD collection and carry it everywhere I went changed my world. I was immediately inspired to start a CD ripping business, and within the year had been written up in Forbes magazine for being a young entrepreneur.",
-                    "visible": true
+                    "answer": "I was first exposed to user experience design in the backseat of a car headed for Cooper's Beach at the age of 6. The first iPod had just come out and my friend handed me one earphone to share a listening experience unlike anything I could have imagined. The notion that I could digitize our family CD collection and carry it everywhere I went changed my world. I was immediately inspired to start a CD ripping business, and within the year had been written up in Forbes magazine for being a young entrepreneur.",
+                    "visible": false
                 },
                 {
                     "question": "What first sparked your interest in the career you are studying for?",
-                    "answer": "I took my first programming class in freshman year of highschool. After learning the basics of web design I taught middle-schoolers at multiple youth development programs throughout the rest of my time in highschool. I’m not sure what first sparked my interest in coding as a career, but I do know that my senior yearbook quote was about becoming a software engineer.",
-                    "visible": true
+                    "answer": "I took my first programming class in freshman year of highschool. After learning the basics of web design I taught middle-schoolers at multiple youth development programs throughout the rest of my time in highschool. I'm not sure what first sparked my interest in coding as a career, but I do know that my senior yearbook quote was about becoming a software engineer.",
+                    "visible": false
                 },
                 {
                     "question": "Why are you passionate about this work?",
@@ -20,7 +20,7 @@
                 },
                 {
                     "question": "What are your greatest skills?",
-                    "answer": "I’m an exceptional creative problem solver. My code almost always has some hacky fix to a problem that someone with a deeper knowledge of the language could probably solve in one line; but despite not knowing every shortcut in the book I still manage to get the computer to do what I want it to do.\nWhen creativity fails me or I want to refactor at some point in the future and learn a better way, that determination to succeed takes over and I use another great talent of mine, resourcefulness, to seek out answers. I’m an expert at researching the web, which is actually a skill I honed throughout my time at an elite highschool, the University of Chicago, and NYU.",
+                    "answer": "I'm an exceptional creative problem solver. My code almost always has some hacky fix to a problem that someone with a deeper knowledge of the language could probably solve in one line; but despite not knowing every shortcut in the book I still manage to get the computer to do what I want it to do.\nWhen creativity fails me or I want to refactor at some point in the future and learn a better way, that determination to succeed takes over and I use another great talent of mine, resourcefulness, to seek out answers. I'm an expert at researching the web, which is actually a skill I honed throughout my time at an elite highschool, the University of Chicago, and NYU.",
                     "visible": true
                 }
             ]
@@ -30,7 +30,7 @@
             "qa": [
                 {
                     "question": "What did you gain from each of your previous roles? How did your previous roles help prepare you for your future desired role?",
-                    "answer": "Working in the service industry taught me how to deliver exceptional quality under often unfortunate and stressful conditions, and how to get along with coworkers who might not have the same goal in mind. I believe this experience has prepared me for a career in software development, where bugs often come up right before deadlines, and the ability to collaborate despite clashes in personality is required.\nWorking as a research analyst in finance helped teach me how to ask the right questions. I spent most of my time going through decks and deciding if they were worth presenting to the higher-ups as viable investment opportunities. These exercises in due diligence helped develop my critical thinking and research skills. What this means for a hiring manager looking at my application is that I’m not just valuable as a cog in the deployment machine. I’m also capable of contributing to the analysis of the potential value of implementing a new feature before being tasked with making it come to life.",
+                    "answer": "Working in the service industry taught me how to deliver exceptional quality under often unfortunate and stressful conditions, and how to get along with coworkers who might not have the same goal in mind. I believe this experience has prepared me for a career in software development, where bugs often come up right before deadlines, and the ability to collaborate despite clashes in personality is required.\nWorking as a research analyst in finance helped teach me how to ask the right questions. I spent most of my time going through decks and deciding if they were worth presenting to the higher-ups as viable investment opportunities. These exercises in due diligence helped develop my critical thinking and research skills. What this means for a hiring manager looking at my application is that I'm not just valuable as a cog in the deployment machine. I'm also capable of contributing to the analysis of the potential value of implementing a new feature before being tasked with making it come to life.",
                     "visible": true
                 }
             ]
@@ -50,23 +50,23 @@
             "qa": [
                 {
                     "question": "What type of help do people turn to you for, personally and professionally?",
-                    "answer": "Personally, I have served as a mentor and teacher to the number of pupils to whom I taught programming. They turned to me for help learning a valuable skill, and guidance when it came to navigating learning with impairments. Peers in my courses at GA also consistently ask me for help, as the extra work I have put to learning how to program has pushed me far ahead of the curriculum. Multiple peers come to me for tutoring when I am not doing my own homework because I am always happy to help and extremely patient. I always go out of my way to make sure they not only get the correct answer, but also learn how to arrive at correct answers themselves so that hopefully they will need less help in the future.\nMany friends of mine also come to me for advice on how to handle relationship troubles, mental health issues, and addiction issues. Since they know I have spent so much time and made so much progress learning healthy ways to deal with these aspects of life, they find unique value in my insights.\nAlso on the personal side, I have worked tirelessly to ensure that my Brazilian girlfriend maintains her F-1 visa status. Together, we have navigated the extremely complex and confusing bureaucracy that is the Department of State’s international student division. So far, in spite of many almost impossible challenges, we have been successful in ensuring that she may remain legally in the United States.",
+                    "answer": "Personally, I have served as a mentor and teacher to the number of pupils to whom I taught programming. They turned to me for help learning a valuable skill, and guidance when it came to navigating learning with impairments. Peers in my courses at GA also consistently ask me for help, as the extra work I have put to learning how to program has pushed me far ahead of the curriculum. Multiple peers come to me for tutoring when I am not doing my own homework because I am always happy to help and extremely patient. I always go out of my way to make sure they not only get the correct answer, but also learn how to arrive at correct answers themselves so that hopefully they will need less help in the future.\nMany friends of mine also come to me for advice on how to handle relationship troubles, mental health issues, and addiction issues. Since they know I have spent so much time and made so much progress learning healthy ways to deal with these aspects of life, they find unique value in my insights.\nAlso on the personal side, I have worked tirelessly to ensure that my Brazilian girlfriend maintains her F-1 visa status. Together, we have navigated the extremely complex and confusing bureaucracy that is the Department of State's international student division. So far, in spite of many almost impossible challenges, we have been successful in ensuring that she may remain legally in the United States.",
                     "visible": false
                 },
                 {
                     "question": "What sets you apart from your peers?",
-                    "answer": "As an employee, I always put the success of the company first. For instance, some people when tasked with work they cannot complete will dodge emails and wait until the last minute to surprise their team with an unfinished product. They will try to pin responsibility on their coworkers and act as if they hadn’t been delegated the assignment in the first place, or use any other number of methods to make things look as if nothing is their fault.\nMy priority is to make sure that things get done, not to avoid looking bad. If I don’t know how to do something or think I can’t get something done on time, I will communicate that immediately to my team. As long as everyone is on the same page, issues can get worked out and projects won’t be sabotaged by ego. In other words, I’m a team player.",
+                    "answer": "As an employee, I always put the success of the company first. For instance, some people when tasked with work they cannot complete will dodge emails and wait until the last minute to surprise their team with an unfinished product. They will try to pin responsibility on their coworkers and act as if they hadn't been delegated the assignment in the first place, or use any other number of methods to make things look as if nothing is their fault.\nMy priority is to make sure that things get done, not to avoid looking bad. If I don't know how to do something or think I can't get something done on time, I will communicate that immediately to my team. As long as everyone is on the same page, issues can get worked out and projects won't be sabotaged by ego. In other words, I'm a team player.",
                     "visible": true
                 },
                 {
-                    "question": "Are there any companies that you’re particularly interested in working for? Why?",
-                    "answer": "I’m not interested in companies that are extremely bureaucratic when it comes to feature deployment. If every line of code I write must be tested by 10 other people, and I have to spend a significant portion of time reviewing other peoples’ code instead of writing my own, I won’t be very happy. Countless meetings are not my thing. I love to code and want to work at a company that lets me code all day every day.",
-                    "visible": true
+                    "question": "Are there any companies that you're particularly interested in working for? Why?",
+                    "answer": "I'm not interested in companies that are extremely bureaucratic when it comes to feature deployment. If every line of code I write must be tested by 10 other people, and I have to spend a significant portion of time reviewing other peoples' code instead of writing my own, I won't be very happy. Countless meetings are not my thing. I love to code and want to work at a company that lets me code all day every day.",
+                    "visible": false
                 },
                 {
                     "question": "In what geographic region would like to find work? Are you open to relocation?",
                     "answer": "At the moment I am not open to relocation. My preference would be to work from home, even after the pandemic. However, if this is not possible, the company for which I work must have offices in New York City.",
-                    "visible": true
+                    "visible": false
                 }
             ]
         }
