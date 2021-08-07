@@ -43,7 +43,15 @@ BlogSchema.pre('validate', function (next) {
     }
 
     if (this.markdown) {
-        this.sanitizedHtml = dompurify.sanitize(marked(this.markdown));
+        // this.sanitizedHtml = dompurify.sanitize(marked(this.markdown));
+
+        //* less secure without dompurify, but necessary for Youtube embed to parse iframe script
+        //? https://stackoverflow.com/questions/60299226/how-to-allow-an-iframe-tag-in-dompurify-including-all-of-its-attributes
+
+        this.sanitizedHtml = dompurify.sanitize(marked(this.markdown), {
+            ADD_TAGS: ['iframe'],
+            ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'],
+        });
     }
 
     next();
