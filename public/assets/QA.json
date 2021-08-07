@@ -26,26 +26,6 @@
             ]
         },
         {
-            "heading": "Career Journey",
-            "qa": [
-                {
-                    "question": "What did you gain from each of your previous roles? How did your previous roles help prepare you for your future desired role?",
-                    "answer": "Working in the service industry taught me how to deliver exceptional quality under often unfortunate and stressful conditions, and how to get along with coworkers who might not have the same goal in mind. I believe this experience has prepared me for a career in software development, where bugs often come up right before deadlines, and the ability to collaborate despite clashes in personality is required.\nWorking as a research analyst in finance helped teach me how to ask the right questions. I spent most of my time going through decks and deciding if they were worth presenting to the higher-ups as viable investment opportunities. These exercises in due diligence helped develop my critical thinking and research skills. What this means for a hiring manager looking at my application is that I'm not just valuable as a cog in the deployment machine. I'm also capable of contributing to the analysis of the potential value of implementing a new feature before being tasked with making it come to life.",
-                    "visible": true
-                }
-            ]
-        },
-        {
-            "heading": "Achievements",
-            "qa": [
-                {
-                    "question": "What are your greatest professional accomplishments? What results did you achieve? For whom?",
-                    "answer": "Whist working as a research analyst, I was once tasked with reviewing an opportunity to invest in a crypto fund. My due diligence led me to the conclusion that our money would be unsafe with Virgil Capital based on their returns seeming way too high for the space they were occupying, amongst a number of other factors. My boss trusted my gut instinct and decided not to advise clients to invest. Just the other day, he reached out to me with a link to this article. It turns out I saved a bunch of people a bunch of money with that pass.\nOther than the achievement of earning my place at the prestigious group for which I conducted financial analysis, and learning to make some delicious drinks at the juice shop, my main professional accomplishments came from my time as a professional student. Getting into the University of Chicago and being accepted for transfer to NYU were difficult feats that required years of continuous dedication to achieving academic excellence. Though I never completed a degree, in my first year at UChicago I earned an almost perfect GPA. And though I never completed a semester at NYU after transferring, I do considerate the knowledge and experience that I accumulated over my short time there to be a significant achievement.",
-                    "visible": true
-                }
-            ]
-        },
-        {
             "heading": "Unique Value",
             "qa": [
                 {
@@ -67,6 +47,21 @@
                     "question": "In what geographic region would like to find work? Are you open to relocation?",
                     "answer": "At the moment I am not open to relocation. My preference would be to work from home, even after the pandemic. However, if this is not possible, the company for which I work must have offices in New York City.",
                     "visible": false
+                }
+            ]
+        },
+        {
+            "heading": "Career Journey",
+            "qa": [
+                {
+                    "question": "What did you gain from each of your previous roles? How did your previous roles help prepare you for your future desired role?",
+                    "answer": "Working in the service industry taught me how to deliver exceptional quality under often unfortunate and stressful conditions, and how to get along with coworkers who might not have the same goal in mind. I believe this experience has prepared me for a career in software development, where bugs often come up right before deadlines, and the ability to collaborate despite clashes in personality is required.\nWorking as a research analyst in finance helped teach me how to ask the right questions. I spent most of my time going through decks and deciding if they were worth presenting to the higher-ups as viable investment opportunities. These exercises in due diligence helped develop my critical thinking and research skills. What this means for a hiring manager looking at my application is that I'm not just valuable as a cog in the deployment machine. I'm also capable of contributing to the analysis of the potential value of implementing a new feature before being tasked with making it come to life.",
+                    "visible": true
+                },
+                {
+                    "question": "What are your greatest professional accomplishments prior to becoming a software developer?",
+                    "answer": "Whist working as a research analyst, I was once tasked with reviewing an opportunity to invest in a crypto fund. My due diligence led me to the conclusion that our money would be unsafe with Virgil Capital based on their returns seeming way too high for the space they were occupying, amongst a number of other factors. My boss trusted my gut instinct and decided not to advise clients to invest. It turns out I saved a bunch of people a bunch of money by passing on what turned out to be a $100 million crypto fraud...\nOther than the achievement of earning my place at the prestigious group for which I conducted financial analysis, and learning to make some delicious drinks at the juice shop, my main professional accomplishments came from my time as a professional student. Getting into the University of Chicago and being accepted for transfer to NYU were difficult feats that required years of continuous dedication to achieving academic excellence. Though I never completed a degree, in my first year at UChicago I earned an almost perfect GPA. And though I never completed a semester at NYU after transferring, I do considerate the knowledge and experience that I accumulated over my short time there to be a significant achievement.",
+                    "visible": true
                 }
             ]
         }
