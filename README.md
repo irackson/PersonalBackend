@@ -1,15 +1,17 @@
-# My Portfolio Website [![wakatime ejs](https://wakatime.com/badge/github/irackson/PortfolioWebsite.svg)](https://wakatime.com/badge/github/irackson/PortfolioWebsite) + [![wakatime api](https://wakatime.com/badge/github/irackson/PersonalBackend.svg)](https://wakatime.com/badge/github/irackson/PersonalBackend)
+# My Personal Website
 
--   **Author:** Ian Rackson
--   **Link to Live Site:** <https://ianrackson.com/>
-
-##
+**Author:** Ian Rackson
+**Link to Live Site:** <https://ianrackson.com/>
 
 ## Project Summary
 
--   This project serves as the backend of my personal website / portfolio / blog
+This project serves as the backend of my personal website / portfolio / blog
 
-##
+[![Netlify Status](https://api.netlify.com/api/v1/badges/de157e9e-6259-4033-8d07-f03a2f592f0f/deploy-status)](https://app.netlify.com/sites/epic-stonebraker-4f69d2/deploys)
+
+Frontend: [![wakatime](https://wakatime.com/badge/github/irackson/PersonalFrontend.svg)](https://wakatime.com/badge/github/irackson/PersonalFrontend)
+
+Backend: [![wakatime](https://wakatime.com/badge/github/irackson/PersonalBackend.svg)](https://wakatime.com/badge/github/irackson/PersonalBackend)
 
 ## Technology Used
 
