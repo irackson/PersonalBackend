@@ -10,7 +10,7 @@
                 },
                 {
                     "question": "What first sparked your interest in the career you are studying for?",
-                    "answer": "I took my first programming class in freshman year of highschool. After learning the basics of web design I taught middle-schoolers at multiple youth development programs throughout the rest of my time in highschool. I'm not sure what first sparked my interest in coding as a career, but I do know that my senior yearbook quote was about becoming a software engineer.",
+                    "answer": "I took my first programming class in freshman year of high school. After learning the basics of web design I taught middle-schoolers at multiple youth development programs throughout the rest of my time in high school. I'm not sure what first sparked my interest in coding as a career, but I do know that my senior yearbook quote was about becoming a software engineer.",
                     "visible": false
                 },
                 {
@@ -20,7 +20,7 @@
                 },
                 {
                     "question": "What are your greatest skills?",
-                    "answer": "I'm an exceptional creative problem solver. My code almost always has some hacky fix to a problem that someone with a deeper knowledge of the language could probably solve in one line; but despite not knowing every shortcut in the book I still manage to get the computer to do what I want it to do.\nWhen creativity fails me or I want to refactor at some point in the future and learn a better way, that determination to succeed takes over and I use another great talent of mine, resourcefulness, to seek out answers. I'm an expert at researching the web, which is actually a skill I honed throughout my time at an elite highschool, the University of Chicago, and NYU.",
+                    "answer": "I'm an exceptional creative problem solver. My code almost always has some hacky fix to a problem that someone with a deeper knowledge of the language could probably solve in one line; but despite not knowing every shortcut in the book I still manage to get the computer to do what I want it to do.\nWhen creativity fails me or I want to refactor at some point in the future and learn a better way, that determination to succeed takes over and I use another great talent of mine, resourcefulness, to seek out answers. I'm an expert at researching the web, which is actually a skill I honed throughout my time at an elite high school, the University of Chicago, and NYU.",
                     "visible": true
                 }
             ]
