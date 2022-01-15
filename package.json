@@ -29,7 +29,7 @@
         "express-session": "^1.17.1",
         "gulp-dart-sass": "^1.0.2",
         "jsdom": "^16.5.3",
-        "marked": "^2.0.2",
+        "marked": "^4.0.10",
         "mercedlogger": "^1.0.1",
         "method-override": "^3.0.0",
         "mongoose": "^5.12.1",
