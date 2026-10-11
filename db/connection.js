@@ -21,12 +21,14 @@ const mongoconfig = {
     useUnifiedTopology: true,
     useFindAndModify: false,
     useCreateIndex: true,
+    poolSize: 5,
+    serverSelectionTimeoutMS: 10000,
 };
 //* connect to the database
-mongoose.connect(MONGODB_URL, mongoconfig, () => {
+mongoose.connect(MONGODB_URL, mongoconfig).then(() => {
     log.cyan('STATUS', 'the connection with mongod is established');
     // console.log('the connection with mongod is established'.rainbow.bold);
-});
+}).catch(() => log.red('ERROR', 'Database connection failed'));
 
 //? alternate initial connect log command
 /* mongoose.connection.once("open", () => {
@@ -36,7 +38,7 @@ mongoose.connect(MONGODB_URL, mongoconfig, () => {
 //* Connection Error/Success
 // Define callback functions for various events
 db.on('error', (err) => {
-    log.red('ERROR', err.message);
+    log.red('ERROR', 'Database connection failed');
     // console.log(err.message + ' is mongod not running?'.red.bold)
 });
 db.on('connected', () => {

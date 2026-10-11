@@ -32,7 +32,7 @@ async function usernameFree(attempt) {
 const createSubmit = async (req, res) => {
     if (await usernameFree(req.body.username)) {
         if (req.body.admin === 'on') {
-            if (req.body.admin_code.toLowerCase() === adminCode.toLowerCase()) {
+            if (adminCode && String(req.body.admin_code || '').toLowerCase() === adminCode.toLowerCase()) {
                 req.body.admin = true;
             } else {
                 res.json({

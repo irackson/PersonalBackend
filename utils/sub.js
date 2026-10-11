@@ -9,6 +9,7 @@ const nodemailMailgun = require('nodemailer-mailgun-transport');
 
 //! import modules;
 const Sub = require('../models/Sub');
+const { deliverMail } = require('./mail-delivery');
 
 //* config
 const auth = {
@@ -95,20 +96,9 @@ const sendSub = async (page, post) => {
         };
 
         try {
-            transporter.sendMail(mailOptions, (err, data) => {
-                if (err) {
-                    console.log(
-                        `failed distribution to ${confirmedSubscribers[i].email}`
-                    );
-                    console.log(err);
-                } else {
-                    console.log(
-                        `successful distribution ${confirmedSubscribers[i].email}`
-                    );
-                }
-            });
+            await deliverMail(transporter, mailOptions);
         } catch (error) {
-            console.log(error);
+            throw new Error('Distribution email delivery failed');
         }
     }
     return true;
@@ -127,19 +117,9 @@ const sendWelcome = async (contentType, firstName, recipient) => {
     };
 
     try {
-        transporter.sendMail(mailOptions, (err, data) => {
-            if (err) {
-                console.log('Mail error: ', err);
-                return false;
-            } else {
-                console.log(
-                    `welcome to ${contentType} successfully sent to ${recipient}`
-                );
-                return true;
-            }
-        });
+        await deliverMail(transporter, mailOptions);
     } catch (error) {
-        console.log(error);
+        console.error('Welcome email delivery failed');
         return false;
     }
     return true;
